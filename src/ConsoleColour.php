@@ -25,15 +25,17 @@ class ConsoleColour extends ConsoleColor
         $this->throwOnError = true;
     }
 
+    public function force256Colors(): ConsoleColour
+    {
+        if (!$this->are256ColorsForced()) {
+            $this->force256Colors = $this->are256ColorsSupported() ? false : true;
+        }
+        return $this;
+    }
+
     public function are256ColorsForced(): bool
     {
         return $this->force256Colors;
-    }
-
-    public function force256Colors(): ConsoleColour
-    {
-        $this->force256Colors = $this->are256ColorsSupported() ? false : true;
-        return $this;
     }
 
     public function are256ColorsSupported()
@@ -49,7 +51,7 @@ class ConsoleColour extends ConsoleColor
 
     public function doNotThrowOnError(): ConsoleColour
     {
-        $this->throwOnError = true;
+        $this->throwOnError = false;
         return $this;
     }
 
@@ -71,6 +73,19 @@ class ConsoleColour extends ConsoleColor
                 $this->processException($e);
         }
         return $text;
+    }
+
+    /**
+     * @param array|string $style
+     * @param string $text
+     * @return string
+     * @throws \Throwable
+     */
+    public function applyEscaped($style, $text): string
+    {
+        $text = $this->apply($style, $text);
+        return
+            str_replace("\e", '\033', $text);
     }
 
     private function processException(\Throwable $e)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8fb45594e7cfc8242bc1798e56b784f",
+    "content-hash": "e1ed0a69782c65257177009067bc1de2",
     "packages": [
         {
             "name": "alecrabbit/php-helpers",
@@ -13,6 +13,12 @@
                 "type": "git",
                 "url": "/var/packages/helpers",
                 "reference": "edcac26f57c73495845a7f824defc3c9ee642c01"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alecrabbit/php-helpers/zipball/edcac26f57c73495845a7f824defc3c9ee642c01",
+                "reference": "edcac26f57c73495845a7f824defc3c9ee642c01",
+                "shasum": ""
             },
             "require": {
                 "krowinski/bcmath-extended": "^4.1",
@@ -34,11 +40,7 @@
                     "src/string/string.php"
                 ]
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],

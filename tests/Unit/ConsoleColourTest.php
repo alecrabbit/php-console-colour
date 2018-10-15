@@ -39,7 +39,7 @@ class ConsoleColorWithForceSupport extends ConsoleColour
 }
 
 
-class ConsoleColorTest extends TestCase
+class ConsoleColourTest extends TestCase
 {
     /** @var ConsoleColorWithForceSupport */
     private $uut;
@@ -215,9 +215,37 @@ class ConsoleColorTest extends TestCase
         $this->assertNotEmpty($this->uut->getPossibleStyles());
     }
 
+    /** @test */
+    public function Escaped()
+    {
+        $this->uut->addTheme('bold_green', ['bold', 'green']);
+
+        $this->assertEquals(
+            '\033[1;32mbold green text\033[0m',
+            $this->uut->applyEscaped('bold_green','bold green text')
+        );
+        $this->assertEquals(
+             "\033[1;32mbold green text\033[0m",
+            $this->uut->apply('bold_green','bold green text')
+        );
+    }
+
+    /** @test */
+    public function Separate()
+    {
+        $c = new ConsoleColour();
+        $this->assertFalse($c->are256ColorsForced());
+        $c->force256Colors();
+        $this->assertTrue($c->are256ColorsSupported());
+        $d = new ConsoleColour(true);
+        $this->assertTrue($d->are256ColorsForced());
+        $this->assertTrue($d->are256ColorsSupported());
+    }
+
     protected function setUp()
     {
         $this->uut = new ConsoleColorWithForceSupport();
+        $this->uut->doNotThrowOnError();
     }
 
 }
