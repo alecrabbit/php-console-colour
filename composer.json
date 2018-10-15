@@ -1,0 +1,35 @@
+{
+  "name": "alecrabbit/php-console-colour",
+  "description": "PHP package alecrabbit/php-console-colour",
+  "type": "library",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "/var/packages/helpers"
+    }
+  ],
+  "require": {
+    "php": ">=7.2",
+    "nesbot/carbon": "^2.3",
+    "alecrabbit/php-helpers": "dev-master",
+    "krowinski/bcmath-extended": "^4.1",
+    "jakub-onderka/php-console-color": "^0.2.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.4",
+    "nunomaduro/collision": "^2.0",
+    "symfony/var-dumper": "^4.1"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "AlecRabbit\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "prefer-stable": true
+}
