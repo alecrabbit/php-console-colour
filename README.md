@@ -1,4 +1,13 @@
-# helpers
-v.0.0.1
+# PHP Console Colour
+based on JakubOnderka/PHP-Console-Color
 
-PHP helpers
+changes related to usage in docker container on Linux systems
+
+```dockerfile
+...
+    environment:
+      DOCKER_TERM: "$TERM"  # Pass $TERM var to container
+...
+
+```
+
