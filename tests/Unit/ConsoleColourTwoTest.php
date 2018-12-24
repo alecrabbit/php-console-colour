@@ -20,7 +20,7 @@ class ConsoleColourTwoTest extends TestCase
     public function None()
     {
         $output = $this->uut->apply('none', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->uut->setIsSupported(false);
 
         $output = $this->uut->apply('bold', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -76,7 +76,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->uut->setAre256ColorsSupported(false);
 
         $output = $this->uut->apply('color_255', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */

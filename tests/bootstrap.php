@@ -16,13 +16,19 @@ use Symfony\Component\VarDumper\Dumper\ServerDumper;
 use Symfony\Component\VarDumper\VarDumper;
 
 // snippet
-if (!defined('APP_DEBUG'))
+if (!defined('APP_DEBUG')) {
     define('APP_DEBUG', true);
+}
 
 // snippet
-if (defined('APP_DEBUG') && APP_DEBUG)
-    if (!defined('DEBUG_DUMP_EXCEPTION_CLASS'))
-        define('DEBUG_DUMP_EXCEPTION_CLASS', false);
+if (defined('APP_DEBUG') && APP_DEBUG ) {
+    if (!defined('DEBUG_DUMP_EXCEPTION')) {
+        define('DEBUG_DUMP_EXCEPTION', false); // change to 'true' to dump exception message and trace
+    }
+    if (!defined('DEBUG_DUMP_EXCEPTION_CLASS')) {
+        define('DEBUG_DUMP_EXCEPTION_CLASS', false); // change to 'true' to dump exception class
+    }
+}
 
 $cloner = new VarCloner();
 $fallbackDumper = \in_array(\PHP_SAPI, array('cli', 'phpdbg')) ? new CliDumper() : new HtmlDumper();

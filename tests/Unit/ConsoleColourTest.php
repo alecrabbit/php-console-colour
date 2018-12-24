@@ -32,7 +32,7 @@ class ConsoleColorWithForceSupport extends ConsoleColour
         $this->are256ColorsSupportedForce = $are256ColorsSupported;
     }
 
-    public function are256ColorsSupported()
+    public function are256ColorsSupported(): bool
     {
         return $this->are256ColorsSupportedForce;
     }
@@ -48,7 +48,7 @@ class ConsoleColourTest extends TestCase
     public function None()
     {
         $output = $this->uut->apply('none', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -64,7 +64,7 @@ class ConsoleColourTest extends TestCase
         $this->uut->setIsSupported(false);
 
         $output = $this->uut->apply('bold', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -104,7 +104,7 @@ class ConsoleColourTest extends TestCase
         $this->uut->setAre256ColorsSupported(false);
 
         $output = $this->uut->apply('color_255', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -185,8 +185,9 @@ class ConsoleColourTest extends TestCase
     /** @test */
     public function ApplyInvalid256Color()
     {
-        if ($this->uut->doesThrowOnError())
+        if ($this->uut->doesThrowOnError()) {
             $this->expectException(\JakubOnderka\PhpConsoleColor\InvalidStyleException::class);
+        }
         $this->assertEquals(
             'text',
             $this->uut->apply('color_2134', 'text')

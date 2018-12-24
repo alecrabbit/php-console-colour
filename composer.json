@@ -5,11 +5,11 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2",
-    "alecrabbit/php-helpers": "^0",
+    "alecrabbit/php-helpers": "^0.1",
     "jakub-onderka/php-console-color": "^0.2.0"
   },
   "require-dev": {
-    "nunomaduro/collision": "^2.0",
+    "nunomaduro/collision": "^2.1",
     "phpunit/phpunit": "^7.4",
     "symfony/var-dumper": "^4.1"
   },

@@ -38,7 +38,7 @@ class ConsoleColour extends ConsoleColor
         return $this->force256Colors;
     }
 
-    public function are256ColorsSupported()
+    public function are256ColorsSupported(): bool
     {
         return
             $this->force256Colors ?: (parent::are256ColorsSupported() || $this->areInDocker256ColorsSupported());
@@ -61,18 +61,11 @@ class ConsoleColour extends ConsoleColor
      * @return string
      * @throws \Throwable
      */
-    public function apply($style, $text): string
+    public function applyEscaped($style, $text): string
     {
-        try {
-            return
-                parent::apply($style, $text);
-        } catch (\Throwable $e) {
-            if ($this->throwOnError)
-                throw $e;
-            else
-                $this->processException($e);
-        }
-        return $text;
+        $text = $this->apply($style, $text);
+        return
+            str_replace("\e", '\033', $text);
     }
 
     /**
@@ -81,19 +74,29 @@ class ConsoleColour extends ConsoleColor
      * @return string
      * @throws \Throwable
      */
-    public function applyEscaped($style, $text): string
+    public function apply($style, $text): string
     {
-        $text = $this->apply($style, $text);
-        return
-            str_replace("\e", '\033', $text);
+        try {
+            return
+                parent::apply($style, $text);
+        } catch (\Throwable $e) {
+            if (!$this->throwOnError) {
+                $this->processException($e);
+            } else {
+                throw $e;
+            }
+        }
+        return $text;
     }
 
-    private function processException(\Throwable $e)
+    private function processException(\Throwable $e): void
     {
-        if (defined('APP_DEBUG') && APP_DEBUG) {
-            dump(brackets(get_class($e)) . ' ' . $e->getMessage());
-            dump($e->getTraceAsString());
-            if (defined('DEBUG_DUMP_EXCEPTION_CLASS') && DEBUG_DUMP_EXCEPTION_CLASS) {
+        if (\defined('APP_DEBUG') && APP_DEBUG) {
+            if (\defined('DEBUG_DUMP_EXCEPTION') && DEBUG_DUMP_EXCEPTION) {
+                dump(brackets(\get_class($e)) . ' ' . $e->getMessage());
+                dump($e->getTraceAsString());
+            }
+            if (\defined('DEBUG_DUMP_EXCEPTION_CLASS') && DEBUG_DUMP_EXCEPTION_CLASS) {
                 dump($e);
             }
         }
