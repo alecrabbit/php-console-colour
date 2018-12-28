@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+start_time=`date +%s`
+script_dir="$(dirname "$0")"
+cd ${script_dir}
+
+. imports.sh "$@"
+
+
+if [[ ${PROPAGATE} == 1 ]]
+then
+    error "Using --propagate option on this script may lead to unexpected results. "
+    comment "Exiting..."
+    exit 1
+fi
+
+# reassign variables
+OPTION_ANALYZE=1
+OPTION_COVERAGE=1
+OPTION_ALL=1
+OPTION_NO_RESTART=1
+
+help_message
+
+header "Tests and coverage script"
+if [[ ${EXEC} == 0 ]]
+then
+    echo "No-Exec selected."
+else
+    options_enabled
+fi
+
+if [[ ${RESTART_CONTAINER} == 1 ]]
+then
+    ./restart-container.sh "$@"
+fi
+info "Processing..."
+
+./phpunit "$@"
+
+if [[ ${ANALYZE} == 1 ]]
+then
+  ./phpmetrics "$@"
+
+  ./phpstan "$@"
+
+  ./psalm "$@"
+
+  ./phpcs "$@"
+fi
+if [[ ${BEAUTY} == 1 ]]
+then
+  ./phpcbf "$@"
+fi
+
+
+end_time=`date +%s`
+run_time=$((end_time-start_time))
+info "Executed in ${run_time}s\nBye!"
+exit 0

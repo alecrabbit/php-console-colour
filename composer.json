@@ -5,7 +5,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.2",
-    "alecrabbit/php-helpers": "^0.1",
+    "alecrabbit/php-traits": "^0.0",
     "jakub-onderka/php-console-color": "^0.2.0"
   },
   "require-dev": {
@@ -29,5 +29,6 @@
       "url": "/var/packages/helpers"
     }
   ],
+  "minimum-stability": "beta",
   "prefer-stable": true
 }

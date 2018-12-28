@@ -7,16 +7,17 @@
 
 namespace AlecRabbit;
 
-
+use AlecRabbit\Exception\ColorException;
+use AlecRabbit\Exception\InvalidStyleException;
+use AlecRabbit\Traits\DoesProcessException;
 use JakubOnderka\PhpConsoleColor\ConsoleColor;
 
 class ConsoleColour extends ConsoleColor
 {
-    /** @var bool */
-    protected $force256Colors;
+    use DoesProcessException;
 
     /** @var bool */
-    protected $throwOnError;
+    protected $force256Colors;
 
     public function __construct(?bool $force256Colors = null)
     {
@@ -46,13 +47,7 @@ class ConsoleColour extends ConsoleColor
 
     protected function areInDocker256ColorsSupported(): bool
     {
-        return (strpos(getenv('DOCKER_TERM'), '256color') !== false);
-    }
-
-    public function doNotThrowOnError(): ConsoleColour
-    {
-        $this->throwOnError = false;
-        return $this;
+        return (strpos((string)getenv('DOCKER_TERM'), '256color') !== false);
     }
 
     /**
@@ -72,6 +67,7 @@ class ConsoleColour extends ConsoleColor
      * @param array|string $style
      * @param string $text
      * @return string
+     * @throws ColorException
      * @throws \Throwable
      */
     public function apply($style, $text): string
@@ -79,31 +75,25 @@ class ConsoleColour extends ConsoleColor
         try {
             return
                 parent::apply($style, $text);
+        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
+            throw new ColorException($e->getMessage(), $e->getCode(), $e);
         } catch (\Throwable $e) {
-            if (!$this->throwOnError) {
-                $this->processException($e);
-            } else {
-                throw $e;
-            }
+            $this->processException($e);
         }
         return $text;
     }
 
-    private function processException(\Throwable $e): void
+    /**
+     * @param string $name
+     * @param array|string $styles
+     * @throws InvalidStyleException
+     */
+    public function addTheme($name, $styles): void
     {
-        if (\defined('APP_DEBUG') && APP_DEBUG) {
-            if (\defined('DEBUG_DUMP_EXCEPTION') && DEBUG_DUMP_EXCEPTION) {
-                dump(brackets(\get_class($e)) . ' ' . $e->getMessage());
-                dump($e->getTraceAsString());
-            }
-            if (\defined('DEBUG_DUMP_EXCEPTION_CLASS') && DEBUG_DUMP_EXCEPTION_CLASS) {
-                dump($e);
-            }
+        try {
+            parent::addTheme($name, $styles);
+        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
+            throw new InvalidStyleException($e->getMessage(), $e->getCode(), $e);
         }
-    }
-
-    public function doesThrowOnError(): bool
-    {
-        return $this->throwOnError;
     }
 }
