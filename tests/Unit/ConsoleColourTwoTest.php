@@ -5,10 +5,12 @@
  * Time: 21:54
  */
 
-namespace Unit;
+namespace AlecRabbit\Tests\Unit;
 
 
 use AlecRabbit\ConsoleColour;
+use AlecRabbit\Exception\ColorException;
+use AlecRabbit\Exception\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTwoTest extends TestCase
@@ -20,7 +22,7 @@ class ConsoleColourTwoTest extends TestCase
     public function None()
     {
         $output = $this->uut->apply('none', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -36,7 +38,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->uut->setIsSupported(false);
 
         $output = $this->uut->apply('bold', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -76,7 +78,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->uut->setAre256ColorsSupported(false);
 
         $output = $this->uut->apply('color_255', 'text');
-        $this->assertEquals("text", $output);
+        $this->assertEquals('text', $output);
     }
 
     /** @test */
@@ -140,7 +142,7 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function ApplyInvalidArgument()
     {
-        if ($this->uut->doesThrowOnError())
+        if ($this->uut->doesThrowsOnError())
             $this->expectException(\InvalidArgumentException::class);
         $this->assertEquals('text', $this->uut->apply(new \stdClass(), 'text'));
     }
@@ -148,8 +150,8 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function ApplyInvalidStyleName()
     {
-        if ($this->uut->doesThrowOnError())
-            $this->expectException(\JakubOnderka\PhpConsoleColor\InvalidStyleException::class);
+        if ($this->uut->doesThrowsOnError())
+            $this->expectException(ColorException::class);
         $this->assertEquals('text', $this->uut->apply('invalid', 'text'));
 
     }
@@ -157,8 +159,8 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function ApplyInvalid256Color()
     {
-        if ($this->uut->doesThrowOnError())
-            $this->expectException(\JakubOnderka\PhpConsoleColor\InvalidStyleException::class);
+        if ($this->uut->doesThrowsOnError())
+            $this->expectException(ColorException::class);
         $this->assertEquals(
             'text',
             $this->uut->apply('color_2134', 'text')
@@ -168,7 +170,7 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function ThemeInvalidStyle()
     {
-        $this->expectException(\JakubOnderka\PhpConsoleColor\InvalidStyleException::class);
+        $this->expectException(InvalidStyleException::class);
         $this->uut->addTheme('invalid', array('invalid'));
     }
 

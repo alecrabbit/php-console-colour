@@ -23,14 +23,14 @@
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix="Test.php">./src</directory>
+            <directory suffix=".php">./src</directory>
         </whitelist>
     </filter>
     <listeners>
         <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />
     </listeners>
     <logging>
-        <log type="testdox-html" target="./tmp/testdox.html"/>
-        <log type="testdox-text" target="./tmp/testdox.txt"/>
+        <log type="testdox-html" target="./tests/tmp/testdox.html"/>
+        <log type="testdox-text" target="./tests/tmp/testdox.txt"/>
     </logging>
 </phpunit>

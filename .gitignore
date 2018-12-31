@@ -1,4 +1,6 @@
-/.idea/*
-/vendor/*
-/tmp/*
-/.eval/*
+/.idea/
+/vendor/
+/.eval/
+/tests/tmp/
+/tests/report.html
+/.dockerignore
