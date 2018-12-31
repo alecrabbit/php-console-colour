@@ -71,9 +71,13 @@ SOURCE_DIR="src"
 PHPSTAN_LEVEL=7
 PSALM_CONFIG="./../psalm.xml"
 PSALM_LEVEL=3
-PHPMETRICS_OUTPUT_DIR="./tests/phpmetrics"
-PHPUNIT_COVERAGE_HTML_REPORT="./tests/coverage/html"
-PHPUNIT_COVERAGE_CLOVER_REPORT="./tests/coverage/clover.xml"
+TMP_DIR="./tests/tmp"
+PHPMETRICS_DIR="phpmetrics"
+COVERAGE_DIR="coverage"
+PHPMETRICS_OUTPUT_DIR="${TMP_DIR}/${PHPMETRICS_DIR}"
+PHPUNIT_COVERAGE_HTML_REPORT="${TMP_DIR}/${COVERAGE_DIR}/html"
+PHPUNIT_COVERAGE_CLOVER_REPORT="${TMP_DIR}/${COVERAGE_DIR}/clover.xml"
+TEST_REPORT_INDEX="./../tests/tmp/index.html"
 
 if [[ ${COVERAGE} == 1 ]]
 then

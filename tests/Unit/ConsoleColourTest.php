@@ -5,7 +5,7 @@
  * Time: 21:54
  */
 
-namespace Unit;
+namespace AlecRabbit\Tests\Unit;
 
 
 use AlecRabbit\ConsoleColour;

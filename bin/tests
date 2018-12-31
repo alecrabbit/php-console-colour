@@ -47,6 +47,7 @@ then
 
   ./phpcs "$@"
 fi
+generate_report_file
 if [[ ${BEAUTY} == 1 ]]
 then
   ./phpcbf "$@"

@@ -20,13 +20,17 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "AlecRabbit\\Tests\\": "tests/"
     }
   },
   "repositories": [
     {
       "type": "vcs",
       "url": "/var/packages/helpers"
+    },
+    {
+      "type": "vcs",
+      "url": "/var/packages/php-traits"
     }
   ],
   "minimum-stability": "beta",
