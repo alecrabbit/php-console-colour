@@ -2,4 +2,5 @@
 /vendor/
 /.eval/
 /tests/tmp/
-.env
+/tests/report.html
+/.dockerignore

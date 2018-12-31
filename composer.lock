@@ -4,21 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "84831bd68ce14db13de624e1fe463fce",
+    "content-hash": "e6fef9abd7b4826e9ff8f590c23b03a0",
     "packages": [
         {
             "name": "alecrabbit/php-traits",
-            "version": "0.0.1-RC2",
+            "version": "0.0.1-RC3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/alecrabbit/php-traits.git",
-                "reference": "f3213a67dac186a8871511e9a1a6758f185ce757"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/f3213a67dac186a8871511e9a1a6758f185ce757",
-                "reference": "f3213a67dac186a8871511e9a1a6758f185ce757",
-                "shasum": ""
+                "url": "/var/packages/php-traits",
+                "reference": "f2cc6d3684ecc405be91236d7fc91095ac796f76"
             },
             "require": {
                 "php": ">=7.2"
@@ -38,12 +32,16 @@
                     "src/Constants/constants.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "AlecRabbit\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "PHP accessories Classes etc.",
-            "time": "2018-12-28T14:53:20+00:00"
+            "time": "2018-12-31T14:20:12+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
