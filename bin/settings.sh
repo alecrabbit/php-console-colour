@@ -77,8 +77,10 @@ PHPUNIT_COVERAGE_CLOVER_REPORT="./tests/coverage/clover.xml"
 
 if [[ ${COVERAGE} == 1 ]]
 then
-  DOCKER_COMPOSE_FILE="./../docker-compose-xdebug.yml"
+  DOCKER_COMPOSE_FILE="./../docker-compose-debug.yml"
 else
   DOCKER_COMPOSE_FILE="./../docker-compose.yml"
 fi
+
+DOCKER_ENV_FILE="./../.env"
 

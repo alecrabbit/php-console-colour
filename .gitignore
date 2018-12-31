@@ -1,4 +1,7 @@
-/.idea/*
-/vendor/*
-/tmp/*
-/.eval/*
+.idea/
+vendor/
+tmp/
+.eval/
+tests/coverage/
+tests/phpmetrics/
+.env

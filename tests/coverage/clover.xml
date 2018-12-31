@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1546012794">
-  <project timestamp="1546012794">
+<coverage generated="1546260897">
+  <project timestamp="1546260897">
     <package name="AlecRabbit">
       <file name="/var/www/src/ConsoleColour.php">
         <class name="AlecRabbit\ConsoleColour" namespace="AlecRabbit">

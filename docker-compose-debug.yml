@@ -4,7 +4,7 @@ volumes:
 
 services:
   &app-service app:
-    image: "${PHP_DEBUG_IMAGE}"
+    image: dralec/php-cli-alpine-debug
     hostname: *app-service
     user: "${USER_ID:-1000}:${GROUP_ID:-1000}"
     volumes:
