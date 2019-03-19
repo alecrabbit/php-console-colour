@@ -23,6 +23,7 @@ else
 fi
 
 info "Psalm..."
+docker-compose -f ${DOCKER_COMPOSE_FILE} exec app psalm --version
 if [[ ${EXEC} == 1 ]]
 then
     if [[ -z "$@" ]]

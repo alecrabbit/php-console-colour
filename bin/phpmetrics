@@ -11,6 +11,7 @@ help_message
 
 
 info "PhpMetrics..."
+docker-compose -f ${DOCKER_COMPOSE_FILE} exec app phpmetrics --version
 if [[ ${EXEC} == 1  ]]
 then
     if [[ -z "$@" ]]

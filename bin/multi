@@ -8,15 +8,17 @@ OPTION_PROPAGATE=1
 
 help_message
 
-info "PHP Code Sniffer..."
+info "Multi  tester..."
 if [[ ${EXEC} == 1 ]]
 then
     if [[ -z "$@" ]]
     then
-        docker-compose -f ${DOCKER_COMPOSE_FILE} exec app phpcs
+        docker-compose -f ${DOCKER_COMPOSE_FILE} exec app multi-tester
     else
-        docker-compose -f ${DOCKER_COMPOSE_FILE} exec app phpcs "$@"
+        docker-compose -f ${DOCKER_COMPOSE_FILE} exec app multi-tester "$@"
     fi
 else
   no-exec
 fi
+
+

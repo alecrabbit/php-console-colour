@@ -3,6 +3,9 @@ COVERAGE=0
 PROPAGATE=0
 ANALYZE=0
 BEAUTY=0
+PHPUNIT=0
+METRICS=0
+MULTI_TEST=0
 EXEC=1
 HELP=0
 RESTART_CONTAINER=1
@@ -14,7 +17,7 @@ do
         --propagate)
             PROPAGATE=1
             ;;
-     esac
+    esac
 done
 
 for arg
@@ -33,10 +36,14 @@ do
         --no-restart)
             RESTART_CONTAINER=0
             ;;
+        --unit)
+            PHPUNIT=1
+            ;;
         --analyze)
             ANALYZE=1
             ;;
         --coverage)
+            PHPUNIT=1
             COVERAGE=1
             ;;
         --propagate)
@@ -51,7 +58,14 @@ do
         --all)
             ANALYZE=1
             COVERAGE=1
+            PHPUNIT=1
             BEAUTY=1
+            ;;
+        --metrics)
+            METRICS=1
+            ;;
+        --multi)
+            MULTI_TEST=1
             ;;
         *)
             if [[ ${PROPAGATE} == 1 ]]
@@ -70,15 +84,17 @@ set -- "${params[@]}"  # overwrites the original positional params
 SOURCE_DIR="src"
 PHPSTAN_LEVEL=7
 PSALM_CONFIG="./../psalm.xml"
+PHPSTAN_CONFIG="./../phpstan.neon"
 PSALM_LEVEL=3
 TESTS_DIR="tests"
 TMP_DIR_PARTIAL="tmp"
-TMP_DIR="./${TESTS_DIR}/${TMP_DIR_PARTIAL}"
+TMP_DIR="${TESTS_DIR}/${TMP_DIR_PARTIAL}"
 PHPMETRICS_DIR="phpmetrics"
 COVERAGE_DIR="coverage"
 PHPMETRICS_OUTPUT_DIR="${TMP_DIR}/${PHPMETRICS_DIR}"
 PHPUNIT_COVERAGE_HTML_REPORT="${TMP_DIR}/${COVERAGE_DIR}/html"
 PHPUNIT_COVERAGE_CLOVER_REPORT="${TMP_DIR}/${COVERAGE_DIR}/clover.xml"
+XDEBUG_FILTER_FILE="${TMP_DIR}/xdebug-filter.php"
 TEST_REPORT_INDEX="./../${TESTS_DIR}/report.html"
 HEADER="$(basename $(dirname "$(pwd)"))"
 
