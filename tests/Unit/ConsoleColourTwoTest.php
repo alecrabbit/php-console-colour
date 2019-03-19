@@ -142,8 +142,9 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function ApplyInvalidArgument()
     {
-        if ($this->uut->doesThrowsOnError())
+        if ($this->uut->doesThrowsOnError()) {
             $this->expectException(\InvalidArgumentException::class);
+        }
         $this->assertEquals('text', $this->uut->apply(new \stdClass(), 'text'));
     }
 
@@ -185,7 +186,7 @@ class ConsoleColourTwoTest extends TestCase
     /** @test */
     public function GetPossibleStyles()
     {
-        $this->assertInternalType('array', $this->uut->getPossibleStyles());
+        $this->assertIsArray($this->uut->getPossibleStyles());
         $this->assertNotEmpty($this->uut->getPossibleStyles());
     }
 
@@ -216,7 +217,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->assertTrue($d->are256ColorsSupported());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->uut = new ConsoleColorWithForceSupport();
     }

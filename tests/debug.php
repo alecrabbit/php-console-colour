@@ -6,7 +6,7 @@
  */
 // snippet
 if (!defined('APP_DEBUG')) {
-    define('APP_DEBUG', true);
+    define('APP_DEBUG', false);
 }
 
 // snippet

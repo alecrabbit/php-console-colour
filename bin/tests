@@ -13,9 +13,12 @@ then
     exit 1
 fi
 
-# reassign variables
+# reassign variables for help message
 OPTION_ANALYZE=1
+OPTION_METRICS=1
+OPTION_MULTI_TEST=1
 OPTION_COVERAGE=1
+OPTION_PHPUNIT=1
 OPTION_ALL=1
 OPTION_NO_RESTART=1
 
@@ -25,32 +28,40 @@ header "Tests and coverage script"
 if [[ ${EXEC} == 0 ]]
 then
     echo "No-Exec selected."
-else
-    options_enabled
 fi
+options_enabled
 
 if [[ ${RESTART_CONTAINER} == 1 ]]
 then
     ./restart-container.sh "$@"
 fi
 info "Processing..."
-
-./phpunit "$@"
-
-if [[ ${ANALYZE} == 1 ]]
+if [[ ${PHPUNIT} == 1 ]]
+then
+  comment "PHP version:"
+  docker-compose -f ${DOCKER_COMPOSE_FILE} exec app php -v
+  ./phpunit "$@"
+fi
+if [[ ${METRICS} == 1 ]]
 then
   ./phpmetrics "$@"
-
+fi
+if [[ ${MULTI_TEST} == 1 ]]
+then
+  ./multi "$@"
+fi
+if [[ ${ANALYZE} == 1 ]]
+then
   ./phpstan "$@"
 
   ./psalm "$@"
 
-  ./phpcs "$@"
+  ./php-cs "$@"
 fi
 generate_report_file
 if [[ ${BEAUTY} == 1 ]]
 then
-  ./phpcbf "$@"
+  ./php-cbf "$@"
 fi
 
 

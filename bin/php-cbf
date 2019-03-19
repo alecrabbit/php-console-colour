@@ -9,6 +9,7 @@ OPTION_PROPAGATE=1
 help_message
 
 info "PHP Code Sniffer Beautifier..."
+docker-compose -f ${DOCKER_COMPOSE_FILE} exec app phpcbf --version
 if [[ ${EXEC} == 1 ]]
 then
     if [[ ${BEAUTY} == 1 ]]

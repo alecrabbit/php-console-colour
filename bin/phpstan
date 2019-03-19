@@ -10,6 +10,7 @@ help_message
 
 
 info "PHPStan..."
+docker-compose -f ${DOCKER_COMPOSE_FILE} exec app phpstan -V
 if [[ ${EXEC} == 1 ]]
 then
     if [[ -z "$@" ]]
