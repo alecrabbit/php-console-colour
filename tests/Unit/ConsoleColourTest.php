@@ -245,7 +245,7 @@ class ConsoleColourTest extends TestCase
         $this->assertTrue($d->are256ColorsSupported());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->uut = new ConsoleColorWithForceSupport();
         $this->uut->doNotThrowOnError();

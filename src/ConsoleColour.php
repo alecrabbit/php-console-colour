@@ -76,7 +76,7 @@ class ConsoleColour extends ConsoleColor
             return
                 parent::apply($style, $text);
         } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new ColorException($e->getMessage(), $e->getCode(), $e);
+            throw new ColorException($e->getMessage(), (int)$e->getCode(), $e);
         } catch (\Throwable $e) {
             $this->processException($e);
         }
@@ -93,7 +93,7 @@ class ConsoleColour extends ConsoleColor
         try {
             parent::addTheme($name, $styles);
         } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new InvalidStyleException($e->getMessage(), $e->getCode(), $e);
+            throw new InvalidStyleException($e->getMessage(), (int)$e->getCode(), $e);
         }
     }
 }

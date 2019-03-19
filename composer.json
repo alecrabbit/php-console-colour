@@ -9,8 +9,8 @@
     "jakub-onderka/php-console-color": "^0.2.0"
   },
   "require-dev": {
-    "nunomaduro/collision": "^2.1",
-    "phpunit/phpunit": "^7.5",
+    "nunomaduro/collision": "^3.0",
+    "phpunit/phpunit": "^8.0",
     "symfony/var-dumper": "^4.2"
   },
   "autoload": {
@@ -23,16 +23,6 @@
       "AlecRabbit\\Tests\\": "tests/"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "/var/packages/helpers"
-    },
-    {
-      "type": "vcs",
-      "url": "/var/packages/php-traits"
-    }
-  ],
   "minimum-stability": "beta",
   "prefer-stable": true
 }
