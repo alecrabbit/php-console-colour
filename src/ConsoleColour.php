@@ -7,8 +7,8 @@
 
 namespace AlecRabbit;
 
-use AlecRabbit\Exception\ColorException;
-use AlecRabbit\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\ColorException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Traits\DoesProcessException;
 use JakubOnderka\PhpConsoleColor\ConsoleColor;
 
@@ -86,7 +86,7 @@ class ConsoleColour extends ConsoleColor
     /**
      * @param string $name
      * @param array|string $styles
-     * @throws InvalidStyleException
+     * @throws \AlecRabbit\ConsoleColour\Exception\InvalidStyleException
      */
     public function addTheme($name, $styles): void
     {

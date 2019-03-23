@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Tests\Unit;
 
-use AlecRabbit\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Themed;
 use PHPUnit\Framework\TestCase;
 

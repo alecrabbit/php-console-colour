@@ -9,8 +9,8 @@ namespace AlecRabbit\Tests\Unit;
 
 
 use AlecRabbit\ConsoleColour;
-use AlecRabbit\Exception\ColorException;
-use AlecRabbit\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\ColorException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColorWithForceSupport extends ConsoleColour

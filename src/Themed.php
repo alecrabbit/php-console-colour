@@ -2,9 +2,9 @@
 
 namespace AlecRabbit;
 
+use AlecRabbit\ConsoleColour\Exception\ColorException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Contracts\ThemesInterface;
-use AlecRabbit\Exception\ColorException;
-use AlecRabbit\Exception\InvalidStyleException;
 
 class Themed extends ConsoleColour implements ThemesInterface
 {
@@ -24,7 +24,7 @@ class Themed extends ConsoleColour implements ThemesInterface
     }
 
     /**
-     * @throws Exception\InvalidStyleException
+     * @throws \AlecRabbit\ConsoleColour\Exception\InvalidStyleException
      */
     protected function setDefaultThemes(): void
     {

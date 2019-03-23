@@ -6,7 +6,7 @@
  */
 declare(strict_types=1);
 
-namespace AlecRabbit\Exception;
+namespace AlecRabbit\ConsoleColour\Exception;
 
 class InvalidStyleException extends \Exception
 {

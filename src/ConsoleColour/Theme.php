@@ -4,8 +4,8 @@ namespace AlecRabbit\Tools\Reports\Formatters\Colour;
 
 use AlecRabbit\ConsoleColour;
 use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
-use AlecRabbit\Exception\ColorException;
-use AlecRabbit\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\ColorException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**
  * @method italic(string $text)
