@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tools\Reports\Formatters\Colour;
+namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
@@ -70,20 +69,13 @@ class Theme implements DefaultThemes
     }
 
     /**
-     * @param array|string $style
-     * @param string $text
-     * @return string
-     * @throws \Throwable
+     * @param string $name
      */
-    protected function apply($style, $text): string
+    protected function assertMethodName(string $name): void
     {
-        try {
-            return
-                $this->doColorize ? $this->color->apply($style, $text) : $text;
-        } catch (ColorException $e) {
-            // do nothing
+        if (!\array_key_exists($name, static::THEMES)) {
+            throw new \BadMethodCallException('Unknown method call [' . $name . '] in [' . static::class . '].');
         }
-        return $text;
     }
 
     /**
@@ -98,12 +90,19 @@ class Theme implements DefaultThemes
     }
 
     /**
-     * @param string $name
+     * @param array|string $style
+     * @param string $text
+     * @return string
+     * @throws \Throwable
      */
-    protected function assertMethodName(string $name): void
+    protected function apply($style, $text): string
     {
-        if (!\array_key_exists($name, static::THEMES)) {
-            throw new \BadMethodCallException('Unknown method call [' . $name . '] in [' . static::class . '].');
+        try {
+            return
+                $this->doColorize ? $this->color->apply($style, $text) : $text;
+        } catch (ColorException $e) {
+            // do nothing
         }
+        return $text;
     }
 }
