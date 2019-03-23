@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit;
+namespace AlecRabbit\ConsoleColour;
 
+use AlecRabbit\ConsoleColour\Contracts\ThemesInterface;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\Contracts\ThemesInterface;
 
 class Themed extends ConsoleColour implements ThemesInterface
 {

@@ -5,7 +5,7 @@
  * Time: 21:33
  */
 
-namespace AlecRabbit;
+namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\Themed;
+use AlecRabbit\ConsoleColour\Themed;
 use PHPUnit\Framework\TestCase;
 
 class ThemedTest extends TestCase

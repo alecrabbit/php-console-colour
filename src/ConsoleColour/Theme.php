@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\Tools\Reports\Formatters\Colour;
 
-use AlecRabbit\ConsoleColour;
+use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
@@ -28,7 +28,7 @@ class Theme implements DefaultThemes
     /** @var bool */
     protected $doColorize;
 
-    /** @var ConsoleColour */
+    /** @var \AlecRabbit\ConsoleColour\ConsoleColour */
     protected $color;
 
     /**

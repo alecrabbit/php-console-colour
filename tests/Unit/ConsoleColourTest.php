@@ -8,7 +8,7 @@
 namespace AlecRabbit\Tests\Unit;
 
 
-use AlecRabbit\ConsoleColour;
+use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
