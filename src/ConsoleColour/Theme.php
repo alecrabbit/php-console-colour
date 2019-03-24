@@ -26,7 +26,7 @@ class Theme implements DefaultThemes
     /** @var bool */
     protected $doColorize;
 
-    /** @var \AlecRabbit\ConsoleColour\ConsoleColour */
+    /** @var ConsoleColour */
     protected $color;
 
     /**
@@ -43,7 +43,6 @@ class Theme implements DefaultThemes
 
     /**
      * @throws InvalidStyleException
-     *
      */
     protected function setThemes(): void
     {

@@ -16,6 +16,8 @@ class ConsoleColour extends ConsoleColor
 {
     use DoesProcessException;
 
+    public const ESC_CHAR = "\033";
+
     /** @var bool */
     protected $force256Colors;
 
@@ -23,7 +25,6 @@ class ConsoleColour extends ConsoleColor
     {
         parent::__construct();
         $this->force256Colors = $force256Colors ?? false;
-        $this->throwOnError = true;
     }
 
     public function force256Colors(): ConsoleColour
@@ -58,9 +59,12 @@ class ConsoleColour extends ConsoleColor
      */
     public function applyEscaped($style, $text): string
     {
-        $text = $this->apply($style, $text);
         return
-            str_replace("\e", '\033', $text);
+            str_replace(
+                self::ESC_CHAR,
+                '\033',
+                $this->apply($style, $text)
+            );
     }
 
     /**
@@ -73,8 +77,7 @@ class ConsoleColour extends ConsoleColor
     public function apply($style, $text): string
     {
         try {
-            return
-                parent::apply($style, $text);
+            return parent::apply($style, $text);
         } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
             throw new ColorException($e->getMessage(), (int)$e->getCode(), $e);
         } catch (\Throwable $e) {

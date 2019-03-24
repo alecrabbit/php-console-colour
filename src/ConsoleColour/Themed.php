@@ -9,7 +9,7 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 /**
  * Class Themed
  * @package AlecRabbit\ConsoleColour
- * @deprecated 
+ * @deprecated since 0.0.5
  */
 class Themed extends ConsoleColour implements ThemesInterface
 {
