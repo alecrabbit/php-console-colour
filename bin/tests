@@ -55,12 +55,19 @@ then
   ./phpstan "$@"
 
   ./psalm "$@"
-
-  ./php-cs "$@"
 fi
-generate_report_file
+if [[ -e "${TEST_REPORT_INDEX}" ]]
+then
+    info "Report file: ${TEST_REPORT_INDEX}"
+else
+    comment "Generating report file: ${TEST_REPORT_INDEX}"
+    generate_report_file
+fi
+
 if [[ ${BEAUTY} == 1 ]]
 then
+  ./php-cs "$@"
+
   ./php-cbf "$@"
 fi
 
