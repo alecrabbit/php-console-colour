@@ -4,7 +4,7 @@
   "description": "PHP package alecrabbit/php-console-colour",
   "license": "MIT",
   "require": {
-    "php": ">=7.2",
+    "php": "^7.2",
     "alecrabbit/php-traits": "^0.2",
     "jakub-onderka/php-console-color": "^0.2.0"
   },
