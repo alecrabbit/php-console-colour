@@ -6,6 +6,11 @@ use AlecRabbit\ConsoleColour\Contracts\ThemesInterface;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
+/**
+ * Class Themed
+ * @package AlecRabbit\ConsoleColour
+ * @deprecated 
+ */
 class Themed extends ConsoleColour implements ThemesInterface
 {
     /** @var bool */

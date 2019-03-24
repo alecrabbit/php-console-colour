@@ -3,7 +3,6 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
-use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**
@@ -74,7 +73,7 @@ class Theme implements DefaultThemes
     protected function assertMethodName(string $name): void
     {
         if (!\array_key_exists($name, static::THEMES)) {
-            throw new \BadMethodCallException('Unknown method call [' . $name . '] in [' . static::class . '].');
+            throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }
     }
 
@@ -85,7 +84,9 @@ class Theme implements DefaultThemes
     protected function assertArgs(string $name, array $arguments): void
     {
         if (1 !== \count($arguments)) {
-            throw new \ArgumentCountError('Method [' . $name . '] accepts only one argument.');
+            throw new \ArgumentCountError(
+                'Method [' . static::class . '::' . $name . '] accepts only one argument.'
+            );
         }
     }
 
@@ -97,12 +98,7 @@ class Theme implements DefaultThemes
      */
     protected function apply($style, $text): string
     {
-        try {
-            return
-                $this->doColorize ? $this->color->apply($style, $text) : $text;
-        } catch (ColorException $e) {
-            // do nothing
-        }
-        return $text;
+        return
+            $this->doColorize ? $this->color->apply($style, $text) : $text;
     }
 }
