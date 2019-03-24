@@ -1,0 +1,2 @@
+ - [ ] simplify `ConsoleColour::class`
+ - [ ] consider removing unnecessary `DOCKER_TERM` var

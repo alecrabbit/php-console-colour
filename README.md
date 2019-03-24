@@ -14,7 +14,7 @@
 <!--[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/alecrabbit/php-console-colour.svg)](http://isitmaintained.com/project/alecrabbit/php-console-colour "Average time to resolve an issue")-->
 <!--[![Percentage of issues still open](http://isitmaintained.com/badge/open/alecrabbit/php-console-colour.svg)](http://isitmaintained.com/project/alecrabbit/php-console-colour "Percentage of issues still open")-->
 
-based on JakubOnderka/PHP-Console-Color
+based on [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Console-Color)
 
 changes related to usage in docker container on Linux systems
 
