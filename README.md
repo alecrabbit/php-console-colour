@@ -23,6 +23,5 @@ changes related to usage in docker container on Linux systems
     environment:
       DOCKER_TERM: "$TERM"  # Pass $TERM var to container
 ...
-
 ```
 
