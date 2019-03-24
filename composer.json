@@ -6,7 +6,7 @@
   "require": {
     "php": "^7.2",
     "alecrabbit/php-traits": "^0.2",
-    "jakub-onderka/php-console-color": "^0.2.0"
+    "jakub-onderka/php-console-color": "^0.2"
   },
   "require-dev": {
     "nunomaduro/collision": "^3.0",
