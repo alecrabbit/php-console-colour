@@ -1,31 +1,31 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Unit;
+namespace AlecRabbit\Tests;
 
-use AlecRabbit\ConsoleColour\ConsoleColour;
+use AlecRabbit\ConsoleColour\ConsoleColor;
 
-class ConsoleColourWithForceSupport extends ConsoleColour
+class ConsoleColorWithForceSupport extends ConsoleColor
 {
     private $isSupportedForce = true;
 
     private $are256ColorsSupportedForce = true;
 
-    public function setIsSupported($isSupported): void
+    public function setIsSupported($isSupported)
     {
         $this->isSupportedForce = $isSupported;
     }
 
-    public function isSupported(): bool
+    public function isSupported()
     {
         return $this->isSupportedForce;
     }
 
-    public function setAre256ColorsSupported($are256ColorsSupported): void
+    public function setAre256ColorsSupported($are256ColorsSupported)
     {
         $this->are256ColorsSupportedForce = $are256ColorsSupported;
     }
 
-    public function are256ColorsSupported(): bool
+    public function are256ColorsSupported()
     {
         return $this->are256ColorsSupportedForce;
     }

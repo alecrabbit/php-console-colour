@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Tests\Unit;
 
+use AlecRabbit\Tests\ConsoleColorWithForceSupport;
 use JakubOnderka\PhpConsoleColor\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
 

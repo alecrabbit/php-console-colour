@@ -116,7 +116,7 @@ class ConsoleColor
         foreach ($style as $s) {
             if (isset($this->themes[$s])) {
                 $sequences[] = $this->themeSequence($s);
-            } else if ($this->isValidStyle($s)) {
+            } elseif ($this->isValidStyle($s)) {
                 $sequences[][] = $this->styleSequence($s);
             } else {
                 throw new InvalidStyleException($s);

@@ -5,6 +5,7 @@ namespace AlecRabbit\Tests\Unit;
 use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
+use AlecRabbit\Tests\ConsoleColourWithForceSupport;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTest extends TestCase
