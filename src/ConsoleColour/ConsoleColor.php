@@ -82,13 +82,13 @@ class ConsoleColor
         if (DIRECTORY_SEPARATOR === '\\') {
             if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
                 return true;
-            } elseif (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
+            }
+            if (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
                 return true;
             }
             return false;
-        } else {
-            return \function_exists('posix_isatty') && @\posix_isatty(STDOUT);
         }
+        return \function_exists('posix_isatty') && @\posix_isatty(STDOUT);
     }
 
     /**
@@ -111,19 +111,19 @@ class ConsoleColor
             throw new \InvalidArgumentException("Style must be string or array.");
         }
 
-        $sequences = [];
+        $sequences = array(array());
 
         foreach ($style as $s) {
             if (isset($this->themes[$s])) {
-                $sequences = \array_merge($sequences, $this->themeSequence($s));
+                $sequences[] = $this->themeSequence($s);
+            } else if ($this->isValidStyle($s)) {
+                $sequences[][] = $this->styleSequence($s);
             } else {
-                if ($this->isValidStyle($s)) {
-                    $sequences[] = $this->styleSequence($s);
-                } else {
-                    throw new InvalidStyleException($s);
-                }
+                throw new InvalidStyleException($s);
             }
         }
+
+        $sequences = array_merge(...$sequences);
 
         $sequences = \array_filter($sequences, function ($val) {
             return $val !== null;
@@ -194,9 +194,8 @@ class ConsoleColor
     {
         if (DIRECTORY_SEPARATOR === '\\') {
             return \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
-        } else {
-            return \strpos(\getenv('TERM'), '256color') !== false;
         }
+        return \strpos(\getenv('TERM'), '256color') !== false;
     }
 
     /**
