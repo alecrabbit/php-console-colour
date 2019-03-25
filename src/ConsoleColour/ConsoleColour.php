@@ -67,16 +67,16 @@ class ConsoleColour extends ConsoleColor
     }
 
     /**
-     * @param array|string $style
+     * @param array|string $styles
      * @param string $text
      * @return string
      * @throws ColorException
      * @throws \Throwable
      */
-    public function apply($style, $text): string
+    public function apply($styles, $text): string
     {
         try {
-            return parent::apply($style, $text);
+            return parent::apply($styles, $text);
         } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
             throw new ColorException($e->getMessage(), (int)$e->getCode(), $e);
         } catch (\Throwable $e) {
@@ -88,7 +88,7 @@ class ConsoleColour extends ConsoleColor
     /**
      * @param string $name
      * @param array|string $styles
-     * @throws \AlecRabbit\ConsoleColour\Exception\InvalidStyleException
+     * @throws InvalidStyleException
      */
     public function addTheme($name, $styles): void
     {

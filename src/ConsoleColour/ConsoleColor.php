@@ -1,5 +1,4 @@
-<?php /** @noinspection UnNecessaryDoubleQuotesInspection */
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace AlecRabbit\ConsoleColour;
 
@@ -80,60 +79,56 @@ class ConsoleColor
     public function checkIfTerminalColorIsSupported(): bool
     {
         if (DIRECTORY_SEPARATOR === '\\') {
-            if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
-                return true;
-            }
-            if (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
-                return true;
-            }
-            return false;
+            return $this->checkWindows();
         }
+        return $this->checkUnix();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkWindows(): bool
+    {
+        if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
+            return true;
+        }
+        if (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkUnix(): bool
+    {
         return \function_exists('posix_isatty') && @\posix_isatty(STDOUT);
     }
 
     /**
-     * @param string|array $style
+     * @param string|array $styles
      * @param string $text
      * @return string
      * @throws InvalidStyleException
      * @throws \InvalidArgumentException
      */
-    public function apply($style, $text): string
+    public function apply($styles, $text): string
     {
         if (!$this->isStyleForced() && !$this->isSupported()) {
             return $text;
         }
 
-        if (\is_string($style)) {
-            $style = [$style];
-        }
-        if (!\is_array($style)) {
-            throw new \InvalidArgumentException("Style must be string or array.");
-        }
-
-        $sequences = array(array());
-
-        foreach ($style as $s) {
-            if (isset($this->themes[$s])) {
-                $sequences[] = $this->themeSequence($s);
-            } elseif ($this->isValidStyle($s)) {
-                $sequences[][] = $this->styleSequence($s);
-            } else {
-                throw new InvalidStyleException($s);
-            }
-        }
-
-        $sequences = array_merge(...$sequences);
-
-        $sequences = \array_filter($sequences, function ($val) {
-            return $val !== null;
-        });
+        $sequences =
+            $this->getSequencesFrom(
+                $this->refineStyles($styles)
+            );
 
         if (empty($sequences)) {
             return $text;
         }
 
-        return $this->escSequence(\implode(';', $sequences)) . $text . $this->escSequence(self::RESET_STYLE);
+        return $this->applySequences($text, $sequences);
     }
 
     /**
@@ -147,14 +142,49 @@ class ConsoleColor
     /**
      * @return bool
      */
-    public function isSupported()/*: bool*/ // todo fix this
+    public function isSupported(): bool
     {
         return $this->isSupported;
     }
 
     /**
+     * @param array $styles
+     * @return array
+     * @throws InvalidStyleException
+     */
+    protected function getSequencesFrom(array $styles): array
+    {
+        $sequences = [[]];
+
+        foreach ($styles as $s) {
+            if (isset($this->themes[$s])) {
+                $sequences[] = $this->themeSequence($s);
+            } elseif ($this->isValidStyle($s)) {
+                $sequences[][] = $this->styleSequence($s);
+            } else {
+                throw new InvalidStyleException($s);
+            }
+        }
+
+        $sequences =
+            \array_filter(
+                \array_merge(...$sequences),
+                /**
+                 * @param mixed $val
+                 * @return bool
+                 * @psalm-suppress MissingClosureParamType
+                 */
+                function ($val): bool {
+                    return $val !== null;
+                }
+            );
+
+        return $sequences;
+    }
+
+    /**
      * @param string $name
-     * @return string[]
+     * @return string[]|null[]
      */
     protected function themeSequence($name): array
     {
@@ -167,9 +197,9 @@ class ConsoleColor
 
     /**
      * @param string $style
-     * @return string
+     * @return null|string
      */
-    protected function styleSequence($style)/*: string*/
+    protected function styleSequence($style): ?string
     {
         if (\array_key_exists($style, static::STYLES)) {
             return static::STYLES[$style];
@@ -179,23 +209,41 @@ class ConsoleColor
             return null;
         }
 
-        \preg_match(self::COLOR256_REGEXP, $style, $matches);
-
-        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
-        $value = $matches[2];
-
-        return "$type;5;$value";
+        return
+            $this->process256ColorStyle($style);
     }
 
     /**
      * @return bool
      */
-    public function are256ColorsSupported()
+    public function are256ColorsSupported(): bool
     {
         if (DIRECTORY_SEPARATOR === '\\') {
-            return \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
+            return $this->are256ColorsWindows();
         }
-        return \strpos(\getenv('TERM'), '256color') !== false;
+        return $this->are256ColorsUnix();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function are256ColorsWindows(): bool
+    {
+        return
+            \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function are256ColorsUnix(): bool
+    {
+        if (!$terminal = \getenv('TERM')) {
+            // @codeCoverageIgnoreStart
+            return false;
+            // @codeCoverageIgnoreEnd
+        }
+        return \strpos($terminal, '256color') !== false;
     }
 
     /**
@@ -208,10 +256,46 @@ class ConsoleColor
     }
 
     /**
-     * @param string|int $value
+     * @param string|array $styles
+     * @return array
+     */
+    protected function refineStyles($styles): array
+    {
+        if (\is_string($styles)) {
+            $styles = [$styles];
+        }
+        $this->assertStyles($styles);
+        return $styles;
+    }
+
+    /**
+     * @param mixed $styles
+     */
+    protected function assertStyles($styles): void
+    {
+        if (!\is_array($styles)) {
+            throw new \InvalidArgumentException('Style must be string or array.');
+        }
+    }
+
+    /**
+     * @param string $text
+     * @param array $sequences
      * @return string
      */
-    protected function escSequence($value): string
+    protected function applySequences(string $text, array $sequences): string
+    {
+        return
+            $this->escSequence(\implode(';', $sequences)) .
+            $text .
+            $this->escSequence((string)self::RESET_STYLE);
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    protected function escSequence(string $value): string
     {
         return "\033[{$value}m";
     }
@@ -219,9 +303,9 @@ class ConsoleColor
     /**
      * @param bool $forceStyle
      */
-    public function setForceStyle($forceStyle): void
+    public function setForceStyle(bool $forceStyle): void
     {
-        $this->forceStyle = (bool)$forceStyle;
+        $this->forceStyle = $forceStyle;
     }
 
     /**
@@ -253,12 +337,7 @@ class ConsoleColor
      */
     public function addTheme($name, $styles): void
     {
-        if (\is_string($styles)) {
-            $styles = [$styles];
-        }
-        if (!\is_array($styles)) {
-            throw new \InvalidArgumentException("Style must be string or array.");
-        }
+        $styles = $this->refineStyles($styles);
 
         foreach ($styles as $style) {
             if (!$this->isValidStyle($style)) {
@@ -292,5 +371,19 @@ class ConsoleColor
     public function getPossibleStyles(): array
     {
         return \array_keys(static::STYLES);
+    }
+
+    /**
+     * @param string $style
+     * @return string
+     */
+    protected function process256ColorStyle(string $style): string
+    {
+        \preg_match(self::COLOR256_REGEXP, $style, $matches);
+
+        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
+        $value = $matches[2];
+
+        return "$type;5;$value";
     }
 }

@@ -15,7 +15,7 @@ class ConsoleColorWithForceSupport extends ConsoleColor
         $this->isSupportedForce = $isSupported;
     }
 
-    public function isSupported()
+    public function isSupported(): bool
     {
         return $this->isSupportedForce;
     }
@@ -25,7 +25,7 @@ class ConsoleColorWithForceSupport extends ConsoleColor
         $this->are256ColorsSupportedForce = $are256ColorsSupported;
     }
 
-    public function are256ColorsSupported()
+    public function are256ColorsSupported(): bool
     {
         return $this->are256ColorsSupportedForce;
     }
