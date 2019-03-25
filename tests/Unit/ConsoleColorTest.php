@@ -13,28 +13,31 @@ class ConsoleColorTest extends TestCase
     private $uut;
 
     /**
+     * @test
      * @throws InvalidStyleException
      * @throws \Throwable
      */
-    public function testNone(): void
+    public function None(): void
     {
         $output = $this->uut->apply('none', self::TEXT);
         $this->assertEquals(self::TEXT, $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testBold(): void
+    public function Bold(): void
     {
         $output = $this->uut->apply('bold', self::TEXT);
         $this->assertEquals("\033[1mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testBoldColorsAreNotSupported(): void
+    public function BoldColorsAreNotSupported(): void
     {
         $this->uut->setIsSupported(false);
 
@@ -43,9 +46,10 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testBoldColorsAreNotSupportedButAreForced(): void
+    public function BoldColorsAreNotSupportedButAreForced(): void
     {
         $this->uut->setIsSupported(false);
         $this->uut->setForceStyle(true);
@@ -55,36 +59,40 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testDark(): void
+    public function Dark(): void
     {
         $output = $this->uut->apply('dark', self::TEXT);
         $this->assertEquals("\033[2mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testBoldAndDark(): void
+    public function BoldAndDark(): void
     {
         $output = $this->uut->apply(['bold', 'dark'], self::TEXT);
         $this->assertEquals("\033[1;2mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function test256ColorForeground(): void
+    public function is256ColorForeground(): void
     {
         $output = $this->uut->apply('color_255', self::TEXT);
         $this->assertEquals("\033[38;5;255mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function test256ColorWithoutSupport(): void
+    public function is256ColorWithoutSupport(): void
     {
         $this->uut->setAre256ColorsSupported(false);
 
@@ -93,27 +101,30 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function test256ColorBackground(): void
+    public function is256ColorBackground(): void
     {
         $output = $this->uut->apply('bg_color_255', self::TEXT);
         $this->assertEquals("\033[48;5;255mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function test256ColorForegroundAndBackground(): void
+    public function is256ColorForegroundAndBackground(): void
     {
         $output = $this->uut->apply(['color_200', 'bg_color_255'], self::TEXT);
         $this->assertEquals("\033[38;5;200;48;5;255mtext\033[0m", $output);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testSetOwnTheme(): void
+    public function SetOwnTheme(): void
     {
         $this->uut->setThemes(['bold_dark' => ['bold', 'dark']]);
         $output = $this->uut->apply(['bold_dark'], self::TEXT);
@@ -121,9 +132,10 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testAddOwnTheme(): void
+    public function AddOwnTheme(): void
     {
         $this->uut->addTheme('bold_own', 'bold');
         $output = $this->uut->apply(['bold_own'], self::TEXT);
@@ -131,9 +143,10 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testAddOwnThemeArray(): void
+    public function AddOwnThemeArray(): void
     {
         $this->uut->addTheme('bold_dark', ['bold', 'dark']);
         $output = $this->uut->apply(['bold_dark'], self::TEXT);
@@ -141,9 +154,10 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testOwnWithStyle(): void
+    public function OwnWithStyle(): void
     {
         $this->uut->addTheme('bold_dark', ['bold', 'dark']);
         $output = $this->uut->apply(['bold_dark', 'italic'], self::TEXT);
@@ -151,9 +165,10 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testHasAndRemoveTheme(): void
+    public function HasAndRemoveTheme(): void
     {
         $this->assertFalse($this->uut->hasTheme('bold_dark'));
 
@@ -165,36 +180,40 @@ class ConsoleColorTest extends TestCase
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testApplyInvalidArgument(): void
+    public function ApplyInvalidArgument(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->uut->apply(new \stdClass(), self::TEXT);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testApplyInvalidStyleName(): void
+    public function ApplyInvalidStyleName(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->uut->apply('invalid', self::TEXT);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testApplyInvalid256Color(): void
+    public function ApplyInvalid256Color(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->uut->apply('color_2134', self::TEXT);
     }
 
     /**
+     * @test
      * @throws InvalidStyleException
      */
-    public function testThemeInvalidStyle(): void
+    public function ThemeInvalidStyle(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->uut->addTheme('invalid', ['invalid']);

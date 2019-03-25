@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bdec7835a1bb416cf5d895e31d10f6eb",
+    "content-hash": "633c66c34be462a04b80d49cad332e4a",
     "packages": [
         {
             "name": "alecrabbit/php-traits",
@@ -2117,7 +2117,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=7.2"
+        "php": "^7.2"
     },
     "platform-dev": []
 }
