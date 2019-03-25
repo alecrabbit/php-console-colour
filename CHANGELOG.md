@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
       - method `underlineBold(string $text)`
       - method `underlineItalic(string $text)`
       
-### Deprecated
+### Removed
  - `AlecRabbit\ConsoleColour\Themed::class`
  
 ## [0.0.4] - 2019-03-19
