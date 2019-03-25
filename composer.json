@@ -11,8 +11,7 @@
   "require-dev": {
     "nunomaduro/collision": "^3.0",
     "phpunit/phpunit": "^8.0",
-    "symfony/var-dumper": "^4.2",
-    "roave/no-leaks": "^1.1"
+    "symfony/var-dumper": "^4.2"
   },
   "autoload": {
     "psr-4": {
