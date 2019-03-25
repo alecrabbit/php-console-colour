@@ -10,7 +10,6 @@ namespace AlecRabbit\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Traits\DoesProcessException;
-use JakubOnderka\PhpConsoleColor\ConsoleColor;
 
 class ConsoleColour extends ConsoleColor
 {
