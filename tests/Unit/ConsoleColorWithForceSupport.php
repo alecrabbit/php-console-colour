@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\Tests\Unit;
 
-use JakubOnderka\PhpConsoleColor\ConsoleColor;
+use AlecRabbit\ConsoleColour\ConsoleColor;
 
 class ConsoleColorWithForceSupport extends ConsoleColor
 {
