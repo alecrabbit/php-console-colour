@@ -1,49 +1,15 @@
 <?php
-/**
- * User: alec
- * Date: 15.10.18
- * Time: 21:54
- */
 
 namespace AlecRabbit\Tests\Unit;
-
 
 use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
 
-class ConsoleColorWithForceSupport extends ConsoleColour
-{
-    private $isSupportedForce = true;
-
-    private $are256ColorsSupportedForce = true;
-
-    public function setIsSupported($isSupported): void
-    {
-        $this->isSupportedForce = $isSupported;
-    }
-
-    public function isSupported(): bool
-    {
-        return $this->isSupportedForce;
-    }
-
-    public function setAre256ColorsSupported($are256ColorsSupported): void
-    {
-        $this->are256ColorsSupportedForce = $are256ColorsSupported;
-    }
-
-    public function are256ColorsSupported(): bool
-    {
-        return $this->are256ColorsSupportedForce;
-    }
-}
-
-
 class ConsoleColourTest extends TestCase
 {
-    /** @var ConsoleColorWithForceSupport */
+    /** @var ConsoleColourWithForceSupport */
     private $uut;
 
     /** @test
@@ -288,7 +254,7 @@ class ConsoleColourTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->uut = new ConsoleColorWithForceSupport();
+        $this->uut = new ConsoleColourWithForceSupport();
         $this->uut->doNotThrowOnError();
     }
 
