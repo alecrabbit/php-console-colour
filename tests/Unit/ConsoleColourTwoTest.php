@@ -289,7 +289,7 @@ class ConsoleColourTwoTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->uut = new ConsoleColorWithForceSupport();
+        $this->uut = new ConsoleColourWithForceSupport();
     }
 
 }
