@@ -4,49 +4,27 @@ namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
 use JakubOnderka\PhpConsoleColor\InvalidStyleException;
+use Symfony\Terminal;
 
 class ConsoleColor implements ConsoleColorInterface
 {
     /** @var bool */
     protected $isSupported;
+
     /** @var bool */
     protected $forceStyle = false;
+
     /** @var array */
     protected $themes = [];
 
+    /** @var bool */
+    protected $are256ColorsSupported;
+
     public function __construct()
     {
-        $this->isSupported = $this->checkIfTerminalColorIsSupported();
-    }
-
-    protected function checkIfTerminalColorIsSupported(): bool
-    {
-        if (DIRECTORY_SEPARATOR === '\\') {
-            return $this->checkWindowsSupport();
-        }
-        return $this->checkUnixSupport();
-    }
-
-    /**
-     * @return bool
-     */
-    protected function checkWindowsSupport(): bool
-    {
-        if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
-            return true;
-        }
-        if (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @return bool
-     */
-    protected function checkUnixSupport(): bool
-    {
-        return \function_exists('posix_isatty') && @\posix_isatty(STDOUT);
+        $terminal = new Terminal();
+        $this->isSupported = $terminal->supportsColor();
+        $this->are256ColorsSupported = $terminal->supports256Color();
     }
 
     /** {@inheritdoc} */
@@ -149,32 +127,7 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function are256ColorsSupported(): bool
     {
-        if (DIRECTORY_SEPARATOR === '\\') {
-            return $this->are256ColorsWindows();
-        }
-        return $this->are256ColorsUnix();
-    }
-
-    /**
-     * @return bool
-     */
-    protected function are256ColorsWindows(): bool
-    {
-        return
-            \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
-    }
-
-    /**
-     * @return bool
-     */
-    protected function are256ColorsUnix(): bool
-    {
-        if (!$terminal = \getenv('TERM')) {
-            // @codeCoverageIgnoreStart
-            return false;
-            // @codeCoverageIgnoreEnd
-        }
-        return \strpos($terminal, '256color') !== false;
+        return $this->are256ColorsSupported;
     }
 
     /**

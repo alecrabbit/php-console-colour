@@ -227,13 +227,22 @@ class ConsoleColorTest extends TestCase
         $this->assertTrue($this->uut->isStyleForced());
     }
 
-    public function testGetPossibleStyles(): void
+    /** @test */
+    public function GetPossibleStyles(): void
     {
         $possibleStyles = $this->uut->getPossibleStyles();
         $this->assertIsArray($possibleStyles);
         $this->assertNotEmpty($possibleStyles);
         $this->assertCount(42, $possibleStyles);
     }
+
+    /** @test */
+    public function getThemes(): void
+    {
+        $output = $this->uut->getThemes();
+        $this->assertEquals([], $output);
+    }
+
 
     protected function setUp(): void
     {
