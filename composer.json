@@ -1,8 +1,17 @@
 {
   "name": "alecrabbit/php-console-colour",
   "type": "library",
-  "description": "PHP package alecrabbit/php-console-colour",
+  "description": "Helps to do colored console output.",
   "license": "MIT",
+  "keywords": [
+    "console",
+    "color",
+    "colour",
+    "terminal",
+    "width",
+    "height",
+    "output"
+  ],
   "require": {
     "php": "^7.2",
     "alecrabbit/php-traits": "^0.2",
@@ -11,11 +20,16 @@
   "require-dev": {
     "nunomaduro/collision": "^3.0",
     "phpunit/phpunit": "^8.0",
-    "symfony/var-dumper": "^4.2"
+    "symfony/var-dumper": "^4.2",
+    "ext-posix": "*"
+  },
+  "suggest": {
+    "ext-posix": ""
   },
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\": "src"
+      "AlecRabbit\\ConsoleColour\\": "src\\ConsoleColour",
+      "Symfony\\": "src\\Symfony"
     }
   },
   "autoload-dev": {
