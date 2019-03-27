@@ -31,11 +31,24 @@ class Terminal
     private static $supportsColor;
 
     /**
+     * @param bool $recheck
+     * @return int
+     */
+    public function width(bool $recheck = false): int
+    {
+        if (null !== static::$width && true !== $recheck) {
+            return static::$width;
+        }
+        return
+            static::$width = $this->getWidth();
+    }
+
+    /**
      * Gets the terminal width.
      *
      * @return int
      */
-    public function getWidth(): int
+    protected function getWidth(): int
     {
         $width = \getenv('COLUMNS');
         if (false !== $width) {
@@ -158,11 +171,24 @@ class Terminal
     }
 
     /**
+     * @param bool $recheck
+     * @return int
+     */
+    public function height(bool $recheck = false): int
+    {
+        if (null !== static::$height && true !== $recheck) {
+            return static::$height;
+        }
+        return
+            static::$height = $this->getHeight();
+    }
+
+    /**
      * Gets the terminal height.
      *
      * @return int
      */
-    public function getHeight(): int
+    protected function getHeight(): int
     {
         $height = \getenv('LINES');
         if (false !== $height) {
@@ -193,16 +219,15 @@ class Terminal
      */
     protected function check256ColorSupport(): bool
     {
-        if (static::onWindows()) {
-            return
-                \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
+        if (!$this->supportsColor()) {
+            return false;
         }
-        if (!$terminal = \getenv('TERM')) {
+        if (!$term = \getenv('TERM')) {
             // @codeCoverageIgnoreStart
             return false;
             // @codeCoverageIgnoreEnd
         }
-        return \strpos($terminal, '256color') !== false;
+        return \strpos($term, '256color') !== false;
     }
 
     /**
@@ -214,24 +239,49 @@ class Terminal
             return static::$supportsColor;
         }
         return
-            static::$supportsColor = $this->checkColorSupport();
+            static::$supportsColor = $this->hasColorSupport();
     }
 
     /**
-     * @return bool
+     * Returns true if the stream supports colorization.
+     *
+     * Colorization is disabled if not supported by the stream:
+     *
+     * This is tricky on Windows, because Cygwin, Msys2 etc emulate pseudo
+     * terminals via named pipes, so we can only check the environment.
+     *
+     * Reference: Composer\XdebugHandler\Process::supportsColor
+     * https://github.com/composer/xdebug-handler
+     *
+     * @return bool true if the stream supports colorization, false otherwise
+     *
+     * based on Symfony\Component\Console\Output\StreamOutput::hasColorSupport()
      */
-    protected function checkColorSupport(): bool
+    protected function hasColorSupport(): bool
     {
-        if (static::onWindows()) {
-            if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
-                return true;
-            }
-            if (\getenv('ANSICON') !== false || \getenv('ConEmuANSI') === 'ON') {
-                return true;
-            }
-            return false;
+        if ('Hyper' === \getenv('TERM_PROGRAM')) {
+            return true;
         }
-        /** @noinspection PhpComposerExtensionStubsInspection */
-        return \function_exists('posix_isatty') && @\posix_isatty(STDOUT);
+
+        if (static::onWindows()) {
+            return (\function_exists('sapi_windows_vt100_support')
+                    && @\sapi_windows_vt100_support(STDOUT))
+                || false !== \getenv('ANSICON')
+                || 'ON' === \getenv('ConEmuANSI')
+                || 'xterm' === \getenv('TERM');
+        }
+
+        if (\function_exists('stream_isatty')) {
+            return @\stream_isatty(STDOUT);
+        }
+
+        if (\function_exists('posix_isatty')) {
+            /** @noinspection PhpComposerExtensionStubsInspection */
+            return @\posix_isatty(STDOUT);
+        }
+
+        $stat = @\fstat(STDOUT);
+        // Check if formatted mode is S_IFCHR
+        return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
     }
 }

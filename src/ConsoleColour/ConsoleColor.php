@@ -9,7 +9,7 @@ use Symfony\Terminal;
 class ConsoleColor implements ConsoleColorInterface
 {
     /** @var bool */
-    protected $isSupported;
+    protected $supported;
 
     /** @var bool */
     protected $forceStyle = false;
@@ -23,7 +23,7 @@ class ConsoleColor implements ConsoleColorInterface
     public function __construct()
     {
         $terminal = new Terminal();
-        $this->isSupported = $terminal->supportsColor();
+        $this->supported = $terminal->supportsColor();
         $this->are256ColorsSupported = $terminal->supports256Color();
     }
 
@@ -55,7 +55,7 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function isSupported(): bool
     {
-        return $this->isSupported;
+        return $this->supported;
     }
 
     /**

@@ -13,14 +13,16 @@ class TerminalTest extends TestCase
         putenv('COLUMNS=100');
         putenv('LINES=50');
         $terminal = new Terminal();
-        $this->assertSame(100, $terminal->getWidth());
-        $this->assertSame(50, $terminal->getHeight());
+        $this->assertSame(100, $terminal->width());
+        $this->assertSame(50, $terminal->height());
 
         putenv('COLUMNS=120');
         putenv('LINES=60');
         $terminal = new Terminal();
-        $this->assertSame(120, $terminal->getWidth());
-        $this->assertSame(60, $terminal->getHeight());
+        $this->assertNotEquals(120, $terminal->width());
+        $this->assertNotEquals(60, $terminal->height());
+        $this->assertSame(120, $terminal->width(true));
+        $this->assertSame(60, $terminal->height(true));
     }
 
     /** @test */
@@ -30,9 +32,10 @@ class TerminalTest extends TestCase
         putenv('LINES=0');
 
         $terminal = new Terminal();
-
-        $this->assertSame(0, $terminal->getWidth());
-        $this->assertSame(0, $terminal->getHeight());
+        $this->assertNotEquals(0, $terminal->width());
+        $this->assertNotEquals(0, $terminal->height());
+        $this->assertSame(0, $terminal->width(true));
+        $this->assertSame(0, $terminal->height(true));
     }
 
     /** @test */
@@ -41,6 +44,10 @@ class TerminalTest extends TestCase
         $terminal = new Terminal();
 
         $this->assertTrue($terminal->supportsColor());
-        $this->assertFalse($terminal->supports256Color());
+        if(true === \strpos(getenv('TERM'), '256color')) {
+            $this->assertTrue($terminal->supports256Color());
+        } else {
+            $this->assertFalse($terminal->supports256Color());
+        }
     }
 }
