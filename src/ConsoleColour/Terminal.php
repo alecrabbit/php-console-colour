@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\ConsoleColour;
 
+use AlecRabbit\ConsoleColour\Contracts\TerminalInterface;
+
 /**
  * Class Terminal
  *
@@ -12,7 +14,7 @@ namespace AlecRabbit\ConsoleColour;
  *
  * @author AlecRabbit
  */
-class Terminal
+class Terminal implements TerminalInterface
 {
     public const DEFAULT_WIDTH = 80;
     public const DEFAULT_HEIGHT = 50;
@@ -29,10 +31,7 @@ class Terminal
     /** @var null|bool */
     protected static $supportsColor;
 
-    /**
-     * @param bool $recheck
-     * @return int
-     */
+    /** {@inheritdoc} */
     public function width(bool $recheck = false): int
     {
         if (null !== static::$width && true !== $recheck) {
@@ -186,10 +185,7 @@ class Terminal
         }
     }
 
-    /**
-     * @param bool $recheck
-     * @return int
-     */
+    /** {@inheritdoc} */
     public function height(bool $recheck = false): int
     {
         if (null !== static::$height && true !== $recheck) {
@@ -218,9 +214,7 @@ class Terminal
         // @codeCoverageIgnoreEnd
     }
 
-    /**
-     * @return bool
-     */
+    /** {@inheritdoc} */
     public function supports256Color(): bool
     {
         if (null !== static::$supports256Color) {
@@ -243,9 +237,7 @@ class Terminal
         return \strpos($term, '256color') !== false;
     }
 
-    /**
-     * @return bool
-     */
+    /** {@inheritdoc} */
     public function supportsColor(): bool
     {
         if (null !== static::$supportsColor) {
