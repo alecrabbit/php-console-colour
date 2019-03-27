@@ -4,10 +4,13 @@
  * `Symfony\Component\Console\Terminal::class`
  * from `symfony\console` package.
  *
+ * hasColorSupport() based on function
+ * `Symfony\Component\Console\Output\StreamOutput::hasColorSupport()`
+ *
  * @author Fabien Potencier <fabien@symfony.com>
  */
 
-namespace Symfony;
+namespace AlecRabbit\ConsoleColour;
 
 /**
  * Class Terminal
@@ -19,16 +22,16 @@ class Terminal
     public const DEFAULT_HEIGHT = 50;
 
     /** @var null|int */
-    private static $width;
+    protected static $width;
 
     /** @var null|int */
-    private static $height;
+    protected static $height;
 
     /** @var null|bool */
-    private static $supports256Color;
+    protected static $supports256Color;
 
     /** @var null|bool */
-    private static $supportsColor;
+    protected static $supportsColor;
 
     /**
      * @param bool $recheck
@@ -254,8 +257,6 @@ class Terminal
      * https://github.com/composer/xdebug-handler
      *
      * @return bool true if the stream supports colorization, false otherwise
-     *
-     * based on Symfony\Component\Console\Output\StreamOutput::hasColorSupport()
      */
     protected function hasColorSupport(): bool
     {

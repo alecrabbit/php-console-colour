@@ -4,7 +4,6 @@ namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
 use JakubOnderka\PhpConsoleColor\InvalidStyleException;
-use Symfony\Terminal;
 
 class ConsoleColor implements ConsoleColorInterface
 {

@@ -2,8 +2,8 @@
 
 namespace AlecRabbit\tests\Unit;
 
+use AlecRabbit\ConsoleColour\Terminal;
 use PHPUnit\Framework\TestCase;
-use Symfony\Terminal;
 
 class TerminalTest extends TestCase
 {
