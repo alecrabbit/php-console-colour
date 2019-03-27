@@ -26,7 +26,47 @@ changes related to usage in docker container on Linux systems
 ```
 
 ### Terminal::class
+```php
+    /**
+     * @return bool
+     */
+    public function supportsColor(): bool;
 
+    /**
+     * @return bool
+     */
+    public function supports256Color(): bool;
+
+    /**
+     * @param bool $recheck
+     * @return int
+     */
+    public function width(bool $recheck = false): int;
+
+    /**
+     * @param bool $recheck
+     * @return int
+     */
+    public function height(bool $recheck = false): int;
+```
 ### Theme::class
+```php
+/**
+ * @method italic(string $text)
+ * @method dark(string $text)
+ * @method darkItalic(string $text)
+ * @method white(string $text)
+ * @method whiteBold(string $text)
+ * @method comment(string $text)
+ * @method yellow(string $text)
+ * @method error(string $text)
+ * @method red(string $text)
+ * @method green(string $text)
+ * @method info(string $text)
+ * @method underline(string $text)
+ * @method underlineBold(string $text)
+ * @method underlineItalic(string $text)
+ */
+```
  [How to extend `Theme::class`](docs/howToExtendThemeClass.md)
 
