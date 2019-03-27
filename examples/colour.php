@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/functions.php';
 
 use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\ConsoleColour;
@@ -64,11 +65,4 @@ function display(ConsoleColor $consoleColor, string $stylePrefix = ''): int
     return $i;
 }
 
-/**
- * @param $e
- */
-function showException(\Throwable $e): void
-{
-    echo '[' . get_class($e) . ']' . $e->getMessage() . PHP_EOL;
-}
 

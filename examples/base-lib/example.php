@@ -1,5 +1,9 @@
 <?php
-
+/*
+ * Example from JakubOnderka/PHP-Console-Color
+ *
+ * https://github.com/JakubOnderka/PHP-Console-Color
+ */
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 $consoleColor = new JakubOnderka\PhpConsoleColor\ConsoleColor();

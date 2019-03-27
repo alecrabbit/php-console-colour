@@ -50,6 +50,13 @@ changes related to usage in docker container on Linux systems
     public function height(bool $recheck = false): int;
 ```
 ### Theme::class
+##### Usage 
+```php
+    $theme = new Theme();
+    echo $theme->red('This text is red.') . PHP_EOL;
+    echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
+```
+##### Methods
 ```php
 /**
  * @method italic(string $text)
@@ -68,5 +75,7 @@ changes related to usage in docker container on Linux systems
  * @method underlineItalic(string $text)
  */
 ```
+> Note: new methods will be added.
+##### Add your own methods
  [How to extend `Theme::class`](docs/howToExtendThemeClass.md)
 
