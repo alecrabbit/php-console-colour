@@ -28,8 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\ConsoleColour\\": "src\\ConsoleColour",
-      "Symfony\\": "src\\Symfony"
+      "AlecRabbit\\ConsoleColour\\": "src\\ConsoleColour"
     }
   },
   "autoload-dev": {

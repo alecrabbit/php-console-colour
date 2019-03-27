@@ -3,31 +3,19 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\ConsoleColour\Theme;
+use AlecRabbit\Tests\ExtendedTheme;
 use PHPUnit\Framework\TestCase;
 
-class ThemeTest extends TestCase
+class ExtendedThemeTest extends TestCase
 {
     public const THEMES = [
-        'italic' => "\033[3m",
-        'dark' => "\033[2m",
-        'darkItalic' => "\033[2;3m",
-        'white' => "\033[97m",
-        'whiteBold' => "\033[97;1m",
-        'comment' => "\033[33m",
-        'yellow' => "\033[33m",
-        'green' => "\033[32m",
-        'error' => "\033[97;1;41m",
-        'red' => "\033[31m",
-        'info' => "\033[32m",
-        'underline' => "\033[4m",
-        'underlineBold' => "\033[4;1m",
-        'underlineItalic' => "\033[4;3m",
+        'fire' => "\033[91;1;107;3m",
+        'new' => "\033[96;40;4m",
     ];
 
-    /** @var Theme */
+    /** @var ExtendedTheme */
     private $colorized;
-    /** @var Theme */
+    /** @var ExtendedTheme */
     private $nonColorized;
 
     /** @test */
@@ -35,25 +23,26 @@ class ThemeTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Theme::unknownMethod].');
-        $this->assertEquals($text, $this->nonColorized->unknownMethod($text));
+        $this->expectExceptionMessage('Unknown method call [AlecRabbit\Tests\ExtendedTheme::unknownMethod].');
+        $this->assertEquals($text, $this->colorized->unknownMethod($text));
     }
 
     /** @test */
     public function wrongArgumentCount(): void
     {
         $text = 'sample';
+        $this->assertEquals($text, $this->nonColorized->fire($text));
         $this->expectException(\ArgumentCountError::class);
-        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Theme::red] accepts only one argument.');
-        $this->assertEquals($text, $this->nonColorized->red($text, $text));
+        $this->expectExceptionMessage('Method [AlecRabbit\Tests\ExtendedTheme::red] accepts only one argument.');
+        $this->assertEquals($text, $this->colorized->red($text, $text));
     }
 
     /** @test */
     public function multi(): void
     {
         $text = 'SmPlTxT';
-        $this->assertInstanceOf(Theme::class, $this->colorized);
-        $this->assertInstanceOf(Theme::class, $this->nonColorized);
+        $this->assertInstanceOf(ExtendedTheme::class, $this->colorized);
+        $this->assertInstanceOf(ExtendedTheme::class, $this->nonColorized);
         foreach (self::THEMES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
@@ -78,8 +67,8 @@ class ThemeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new Theme(true);
-        $this->nonColorized = new Theme(false);
+        $this->colorized = new ExtendedTheme(true);
+        $this->nonColorized = new ExtendedTheme(false);
     }
 
 }

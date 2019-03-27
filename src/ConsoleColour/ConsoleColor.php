@@ -84,7 +84,7 @@ class ConsoleColor implements ConsoleColorInterface
                  * @return bool
                  * @psalm-suppress MissingClosureParamType
                  */
-                function ($val): bool {
+                static function ($val): bool {
                     return $val !== null;
                 }
             );

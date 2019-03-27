@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\ConsoleColour\Contracts;
 
+use AlecRabbit\ConsoleColour\Contracts\StylesInterface as Styles;
+
 interface DefaultThemes
 {
     // These strings are used as methods names
@@ -22,19 +24,19 @@ interface DefaultThemes
 
     public const THEMES = [
         // name => [styles],
-        self::ITALIC => 'italic',
-        self::DARK => 'dark',
-        self::DARK_ITALIC => ['dark', 'italic'],
-        self::WHITE => 'white',
-        self::WHITE_BOLD => ['white', 'bold'],
-        self::COMMENT => 'yellow',
-        self::YELLOW => 'yellow',
-        self::GREEN => 'green',
-        self::ERROR => ['white', 'bold', 'bg_red'],
-        self::RED => 'red',
-        self::INFO => 'green',
-        self::UNDERLINE => ['underline'],
-        self::UNDERLINE_BOLD => ['underline', 'bold'],
-        self::UNDERLINE_ITALIC => ['underline', 'italic'],
+        self::ITALIC => Styles::ITALIC,
+        self::DARK => Styles::DARK,
+        self::DARK_ITALIC => [Styles::DARK, Styles::ITALIC],
+        self::WHITE => Styles::WHITE,
+        self::WHITE_BOLD => [Styles::WHITE, Styles::BOLD],
+        self::COMMENT => Styles::YELLOW,
+        self::YELLOW => Styles::YELLOW,
+        self::GREEN => Styles::GREEN,
+        self::ERROR => [Styles::WHITE, Styles::BOLD, Styles::BG_RED],
+        self::RED => Styles::RED,
+        self::INFO => Styles::GREEN,
+        self::UNDERLINE => [Styles::UNDERLINE],
+        self::UNDERLINE_BOLD => [Styles::UNDERLINE, Styles::BOLD],
+        self::UNDERLINE_ITALIC => [Styles::UNDERLINE, Styles::ITALIC],
     ];
 }

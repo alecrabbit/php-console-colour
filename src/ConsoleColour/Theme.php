@@ -23,22 +23,39 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
  */
 class Theme implements DefaultThemes
 {
+    /** @var array */
+    protected static $themesArr;
+
     /** @var bool */
-    protected $doColorize;
+    protected $doColorize = false;
 
     /** @var ConsoleColour */
     protected $color;
 
     /**
      * Themed constructor.
-     * @param bool $colorize
+     * @param null|bool $colorize
      * @throws InvalidStyleException
      */
-    public function __construct(bool $colorize = true)
+    public function __construct(?bool $colorize = null)
     {
-        $this->doColorize = $colorize;
         $this->color = new ConsoleColour();
+        $this->doColorize = $this->refineColorize($colorize);
         $this->setThemes();
+    }
+
+    /**
+     * @param null|bool $colorize
+     * @return bool
+     */
+    protected function refineColorize(?bool $colorize): bool
+    {
+        if ($supported = $this->color->isSupported()) {
+            return $colorize ?? $supported;
+        }
+        // @codeCoverageIgnoreStart
+        return false;
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -46,9 +63,31 @@ class Theme implements DefaultThemes
      */
     protected function setThemes(): void
     {
-        foreach (static::THEMES as $name => $styles) {
+        foreach ($this->allThemes() as $name => $styles) {
             $this->color->addTheme($name, $styles);
         }
+    }
+
+    /**
+     * @return array
+     *
+     * @psalm-suppress RedundantConditionGivenDocblockType
+     */
+    public function allThemes(): array
+    {
+        if (null !== static::$themesArr) {
+            return static::$themesArr;
+        }
+        return
+            static::$themesArr = $this->prepareThemes();
+    }
+
+    /**
+     * @return array
+     */
+    protected function prepareThemes(): array
+    {
+        return static::THEMES;
     }
 
     /**
@@ -63,7 +102,7 @@ class Theme implements DefaultThemes
         $this->assertArgs($name, $arguments);
 
         return
-            $this->apply(static::THEMES[$name], $arguments[0]);
+            $this->apply(static::$themesArr[$name], $arguments[0]);
     }
 
     /**
@@ -71,7 +110,7 @@ class Theme implements DefaultThemes
      */
     protected function assertMethodName(string $name): void
     {
-        if (!\array_key_exists($name, static::THEMES)) {
+        if (!\array_key_exists($name, static::$themesArr)) {
             throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }
     }
