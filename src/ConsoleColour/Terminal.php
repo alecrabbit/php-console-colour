@@ -58,39 +58,39 @@ class Terminal
             return (int)\trim($width);
         }
         // @codeCoverageIgnoreStart
-        if (null === self::$width) {
-            self::initDimensions();
+        if (null === static::$width) {
+            static::initDimensions();
         }
-        return self::$width ?: static::DEFAULT_WIDTH;
+        return static::$width ?: static::DEFAULT_WIDTH;
         // @codeCoverageIgnoreEnd
     }
 
     /**
      * @codeCoverageIgnore
      */
-    private static function initDimensions(): void
+    protected static function initDimensions(): void
     {
         if (static::onWindows()) {
             if ((false !== $term = \getenv('ANSICON')) &&
                 \preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', \trim($term), $matches)) {
                 // extract [w, H] from "wxh (WxH)"
                 // or [w, h] from "wxh"
-                self::$width = (int)$matches[1];
-                self::$height = isset($matches[4]) ? (int)$matches[4] : (int)$matches[2];
-            } elseif (null !== $dimensions = self::getConsoleMode()) {
+                static::$width = (int)$matches[1];
+                static::$height = isset($matches[4]) ? (int)$matches[4] : (int)$matches[2];
+            } elseif (null !== $dimensions = static::getConsoleMode()) {
                 // extract [w, h] from "wxh"
-                self::$width = (int)$dimensions[0];
-                self::$height = (int)$dimensions[1];
+                static::$width = (int)$dimensions[0];
+                static::$height = (int)$dimensions[1];
             }
-        } elseif ($sttyString = self::getSttyColumns()) {
+        } elseif ($sttyString = static::getSttyColumns()) {
             if (\preg_match('/rows.(\d+);.columns.(\d+);/i', $sttyString, $matches)) {
                 // extract [w, h] from "rows h; columns w;"
-                self::$width = (int)$matches[2];
-                self::$height = (int)$matches[1];
+                static::$width = (int)$matches[2];
+                static::$height = (int)$matches[1];
             } elseif (\preg_match('/;.(\d+).rows;.(\d+).columns/i', $sttyString, $matches)) {
                 // extract [w, h] from "; h rows; w columns"
-                self::$width = (int)$matches[2];
-                self::$height = (int)$matches[1];
+                static::$width = (int)$matches[2];
+                static::$height = (int)$matches[1];
             }
         }
     }
@@ -110,7 +110,7 @@ class Terminal
      *
      * @return int[]|null An array composed of the width and the height or null if it could not be parsed
      */
-    private static function getConsoleMode(): ?array
+    protected static function getConsoleMode(): ?array
     {
         if (!\function_exists('proc_open')) {
             return null;
@@ -142,7 +142,7 @@ class Terminal
      *
      * @return string|null
      */
-    private static function getSttyColumns(): ?string
+    protected static function getSttyColumns(): ?string
     {
         if (!\function_exists('proc_open')) {
             return null;
@@ -198,10 +198,10 @@ class Terminal
             return (int)\trim($height);
         }
         // @codeCoverageIgnoreStart
-        if (null === self::$height) {
-            self::initDimensions();
+        if (null === static::$height) {
+            static::initDimensions();
         }
-        return self::$height ?: static::DEFAULT_HEIGHT;
+        return static::$height ?: static::DEFAULT_HEIGHT;
         // @codeCoverageIgnoreEnd
     }
 
