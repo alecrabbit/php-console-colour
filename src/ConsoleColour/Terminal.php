@@ -85,6 +85,9 @@ class Terminal
         return '\\' === \DIRECTORY_SEPARATOR;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     protected static function initDimensionsWindows(): void
     {
         if ((false !== $term = \getenv('ANSICON')) &&
@@ -171,6 +174,7 @@ class Terminal
     }
 
     /**
+     * @codeCoverageIgnore
      * @param string $sttyString
      */
     protected static function initDimensionsUnix(string $sttyString): void
@@ -235,10 +239,7 @@ class Terminal
      */
     protected function check256ColorSupport(): bool
     {
-        if (!$this->supportsColor()) {
-            return false;
-        }
-        if (!$term = \getenv('TERM')) {
+        if (!$this->supportsColor() || !$term = \getenv('TERM')) {
             // @codeCoverageIgnoreStart
             return false;
             // @codeCoverageIgnoreEnd
@@ -274,9 +275,12 @@ class Terminal
     protected function hasColorSupport(): bool
     {
         if ('Hyper' === \getenv('TERM_PROGRAM')) {
+            // @codeCoverageIgnoreStart
             return true;
+            // @codeCoverageIgnoreEnd
         }
 
+        // @codeCoverageIgnoreStart
         if (static::onWindows()) {
             return (\function_exists('sapi_windows_vt100_support')
                     && @\sapi_windows_vt100_support(STDOUT))
@@ -284,11 +288,13 @@ class Terminal
                 || 'ON' === \getenv('ConEmuANSI')
                 || 'xterm' === \getenv('TERM');
         }
+        // @codeCoverageIgnoreEnd
 
         if (\function_exists('stream_isatty')) {
             return @\stream_isatty(STDOUT);
         }
 
+        // @codeCoverageIgnoreStart
         if (\function_exists('posix_isatty')) {
             /** @noinspection PhpComposerExtensionStubsInspection */
             return @\posix_isatty(STDOUT);
@@ -297,5 +303,6 @@ class Terminal
         $stat = @\fstat(STDOUT);
         // Check if formatted mode is S_IFCHR
         return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
+        // @codeCoverageIgnoreEnd
     }
 }
