@@ -25,3 +25,8 @@ changes related to usage in docker container on Linux systems
 ...
 ```
 
+### Terminal::class
+
+### Theme::class
+ [How to extend `Theme::class`](docs/howToExtendThemeClass.md)
+
