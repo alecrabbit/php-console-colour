@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\Tests\ConsoleColorWithForceSupport;
-use JakubOnderka\PhpConsoleColor\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColorTest extends TestCase
@@ -15,7 +15,6 @@ class ConsoleColorTest extends TestCase
 
     /**
      * @test
-     * @throws InvalidStyleException
      * @throws \Throwable
      */
     public function None(): void

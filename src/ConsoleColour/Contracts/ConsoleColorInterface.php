@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\ConsoleColour\Contracts;
 
-use JakubOnderka\PhpConsoleColor\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 interface ConsoleColorInterface extends StylesInterface
 {

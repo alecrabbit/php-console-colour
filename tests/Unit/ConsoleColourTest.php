@@ -3,7 +3,6 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\ConsoleColour;
-use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColourWithForceSupport;
 use PHPUnit\Framework\TestCase;
@@ -181,7 +180,7 @@ class ConsoleColourTest extends TestCase
     public function ApplyInvalidStyleName(): void
     {
 //        if ($this->uut->doesThrowOnError())
-        $this->expectException(ColorException::class);
+        $this->expectException(InvalidStyleException::class);
         $this->assertEquals('text', $this->uut->apply('invalid', 'text'));
 
     }
@@ -192,7 +191,7 @@ class ConsoleColourTest extends TestCase
     public function ApplyInvalid256Color(): void
     {
 //        if ($this->uut->doesThrowOnError()) {
-        $this->expectException(ColorException::class);
+        $this->expectException(InvalidStyleException::class);
 //        }
         $this->assertEquals(
             'text',
@@ -256,7 +255,7 @@ class ConsoleColourTest extends TestCase
     protected function setUp(): void
     {
         $this->uut = new ConsoleColourWithForceSupport();
-        $this->uut->doNotThrowOnError();
+//        $this->uut->doNotThrowOnError();
     }
 
 }

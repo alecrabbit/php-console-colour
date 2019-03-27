@@ -7,7 +7,6 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Traits\DoesProcessException;
 
@@ -70,32 +69,16 @@ class ConsoleColour extends ConsoleColor
      * @param array|string $styles
      * @param string $text
      * @return string
-     * @throws ColorException
-     * @throws \Throwable
      */
     public function apply($styles, $text): string
     {
         try {
             return parent::apply($styles, $text);
-        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new ColorException($e->getMessage(), (int)$e->getCode(), $e);
-        } catch (\Throwable $e) {
-            $this->processException($e);
+        } catch (InvalidStyleException $e) {
+            // Do nothing
+            // or
+             $this->processException($e);
         }
         return $text;
-    }
-
-    /**
-     * @param string $name
-     * @param array|string $styles
-     * @throws InvalidStyleException
-     */
-    public function addTheme($name, $styles): void
-    {
-        try {
-            parent::addTheme($name, $styles);
-        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new InvalidStyleException($e->getMessage(), (int)$e->getCode(), $e);
-        }
     }
 }

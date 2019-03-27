@@ -3,7 +3,7 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
-use JakubOnderka\PhpConsoleColor\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 class ConsoleColor implements ConsoleColorInterface
 {
