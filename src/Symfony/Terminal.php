@@ -54,7 +54,7 @@ class Terminal
      */
     private static function initDimensions(): void
     {
-        if ('\\' === \DIRECTORY_SEPARATOR) {
+        if (static::onWindows()) {
             if ((false !== $term = \getenv('ANSICON')) &&
                 \preg_match('/^(\d+)x(\d+)(?: \((\d+)x(\d+)\))?$/', \trim($term), $matches)) {
                 // extract [w, H] from "wxh (WxH)"
@@ -77,6 +77,14 @@ class Terminal
                 self::$height = (int)$matches[1];
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    protected static function onWindows(): bool
+    {
+        return '\\' === \DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -183,21 +191,9 @@ class Terminal
     /**
      * @return bool
      */
-    public function supportsColor(): bool
-    {
-        if (null !== static::$supportsColor) {
-            return static::$supportsColor;
-        }
-        return
-            static::$supportsColor = $this->checkColorSupport();
-    }
-
-    /**
-     * @return bool
-     */
     protected function check256ColorSupport(): bool
     {
-        if (DIRECTORY_SEPARATOR === '\\') {
+        if (static::onWindows()) {
             return
                 \function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT);
         }
@@ -212,9 +208,21 @@ class Terminal
     /**
      * @return bool
      */
+    public function supportsColor(): bool
+    {
+        if (null !== static::$supportsColor) {
+            return static::$supportsColor;
+        }
+        return
+            static::$supportsColor = $this->checkColorSupport();
+    }
+
+    /**
+     * @return bool
+     */
     protected function checkColorSupport(): bool
     {
-        if (DIRECTORY_SEPARATOR === '\\') {
+        if (static::onWindows()) {
             if (\function_exists('sapi_windows_vt100_support') && @\sapi_windows_vt100_support(STDOUT)) {
                 return true;
             }
