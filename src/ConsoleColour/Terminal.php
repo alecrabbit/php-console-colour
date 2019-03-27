@@ -1,19 +1,15 @@
 <?php declare(strict_types=1);
-/*
- * This class based on
- * `Symfony\Component\Console\Terminal::class`
- * from `symfony\console` package.
- *
- * hasColorSupport() based on function
- * `Symfony\Component\Console\Output\StreamOutput::hasColorSupport()`
- *
- * @author Fabien Potencier <fabien@symfony.com>
- */
 
 namespace AlecRabbit\ConsoleColour;
 
 /**
  * Class Terminal
+ *
+ * Reference: Symfony\Component\Console\Terminal::class
+ * https://github.com/symfony/console
+ *
+ * @author Fabien Potencier <fabien@symfony.com>
+ *
  * @author AlecRabbit
  */
 class Terminal
@@ -269,6 +265,9 @@ class Terminal
      *
      * Reference: Composer\XdebugHandler\Process::supportsColor
      * https://github.com/composer/xdebug-handler
+     *
+     * Reference: Symfony\Component\Console\Output\StreamOutput::hasColorSupport()
+     * https://github.com/symfony/console
      *
      * @return bool true if the stream supports colorization, false otherwise
      */
