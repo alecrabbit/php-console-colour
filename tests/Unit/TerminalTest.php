@@ -4,6 +4,7 @@ namespace AlecRabbit\tests\Unit;
 
 use AlecRabbit\ConsoleColour\Terminal;
 use PHPUnit\Framework\TestCase;
+use function AlecRabbit\Helpers\callMethod;
 
 class TerminalTest extends TestCase
 {
@@ -49,6 +50,7 @@ class TerminalTest extends TestCase
         } else {
             $this->assertFalse($terminal->supports256Color());
         }
+        $this->assertFalse(callMethod($terminal, 'checkFor256ColorSupport', 'UNKNOWN_VAR'));
     }
 
     /**
