@@ -69,6 +69,7 @@ class ConsoleColour extends ConsoleColor
      * @param array|string $styles
      * @param string $text
      * @return string
+     * @throws \Throwable
      */
     public function apply($styles, $text): string
     {
@@ -77,7 +78,7 @@ class ConsoleColour extends ConsoleColor
         } catch (InvalidStyleException $e) {
             // Do nothing
             // or
-             $this->processException($e);
+            $this->processException($e);
         }
         return $text;
     }
