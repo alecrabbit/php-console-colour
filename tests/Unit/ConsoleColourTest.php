@@ -5,6 +5,7 @@ namespace AlecRabbit\Tests\Unit;
 use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColourWithForceSupport;
+use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTest extends TestCase
@@ -221,6 +222,7 @@ class ConsoleColourTest extends TestCase
     {
         $this->assertIsArray($this->uut->getPossibleStyles());
         $this->assertNotEmpty($this->uut->getPossibleStyles());
+        $this->assertCount(42, $this->uut->getPossibleStyles());
     }
 
     /** @test
@@ -230,14 +232,9 @@ class ConsoleColourTest extends TestCase
     {
         $this->uut->addTheme('bold_green', ['bold', 'green']);
 
-        $this->assertEquals(
-            '\033[1;32mbold green text\033[0m',
-            $this->uut->applyEscaped('bold_green', 'bold green text')
-        );
-        $this->assertEquals(
-            "\033[1;32mbold green text\033[0m",
-            $this->uut->apply('bold_green', 'bold green text')
-        );
+        $str = $this->uut->apply('bold_green', 'bold green text');
+        $this->assertEquals('\033[1;32mbold green text\033[0m', Helper::stripEscape($str));
+        $this->assertEquals("\033[1;32mbold green text\033[0m", $str);
     }
 
     /** @test */

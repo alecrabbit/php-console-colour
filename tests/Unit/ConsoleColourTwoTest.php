@@ -11,6 +11,7 @@ namespace AlecRabbit\Tests\Unit;
 use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColourWithForceSupport;
+use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTwoTest extends TestCase
@@ -261,16 +262,11 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function Escaped(): void
     {
-        $this->uut->addTheme('bold_green', ['bold', 'green']);
+        $this->uut->addTheme('bold_red', ['bold', 'red']);
 
-        $this->assertEquals(
-            '\033[1;32mbold green text\033[0m',
-            $this->uut->applyEscaped('bold_green', 'bold green text')
-        );
-        $this->assertEquals(
-            "\033[1;32mbold green text\033[0m",
-            $this->uut->apply('bold_green', 'bold green text')
-        );
+        $str = $this->uut->apply('bold_red', 'bold red text');
+        $this->assertEquals('\033[1;31mbold red text\033[0m', Helper::stripEscape($str));
+        $this->assertEquals("\033[1;31mbold red text\033[0m", $str);
     }
 
     /**

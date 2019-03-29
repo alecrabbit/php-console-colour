@@ -1,3 +1,4 @@
+ - [ ] unify tests
  - [ ] simplify `ConsoleColour::class`
  - [ ] simplify adding new theme
  

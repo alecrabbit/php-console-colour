@@ -45,22 +45,6 @@ class ConsoleColour extends ConsoleColor
     }
 
     /**
-     * @param array|string $style
-     * @param string $text
-     * @return string
-     * @throws \Throwable
-     */
-    public function applyEscaped($style, $text): string
-    {
-        return
-            str_replace(
-                self::ESC_CHAR,
-                '\033',
-                $this->apply($style, $text)
-            );
-    }
-
-    /**
      * @param array|string $styles
      * @param string $text
      * @return string
