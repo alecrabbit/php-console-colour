@@ -5,11 +5,12 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 interface StylesInterface
 {
-    public const FOREGROUND = 38;
-
-    public const BACKGROUND = 48;
+    public const BG = 'bg_';
 
     public const RESET_STYLE = 0;
+
+    public const FOREGROUND = 38;
+    public const BACKGROUND = 48;
 
     public const COLOR256_REGEXP = '~^(bg_)?color_(\d{1,3})$~';
 

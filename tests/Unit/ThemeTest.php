@@ -4,6 +4,7 @@ namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\ConsoleColour\Theme;
+use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
 class ThemeTest extends TestCase
@@ -58,18 +59,9 @@ class ThemeTest extends TestCase
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
-                $this->stripEscape(self::THEMES[$methodName]) . $text . '\033[0m', $this->stripEscape($result)
+                Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
             );
         }
-    }
-
-    /**
-     * @param string $str $str
-     * @return mixed
-     */
-    protected function stripEscape(string $str)
-    {
-        return str_replace("\033", '\033', $str);
     }
 
     /**
