@@ -1,7 +1,7 @@
 build:
-#  environment:
-#    php: 7.2.15
-#
+  environment:
+    php: 7.2.15
+
   nodes:
     analysis:
       tests:
