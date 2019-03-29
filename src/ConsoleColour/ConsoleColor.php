@@ -66,19 +66,19 @@ class ConsoleColor implements ConsoleColorInterface
     {
         $sequences = [[]];
 
-        foreach ($styles as $s) {
-            if (isset($this->themes[$s])) {
-                $sequences[] = $this->themeSequence($s);
-            } elseif ($this->isValidStyle($s)) {
-                $sequences[][] = $this->styleSequence($s);
+        foreach ($styles as $style) {
+            if (isset($this->themes[$style])) {
+                $sequences[] = $this->themeSequence($style);
+            } elseif ($this->isValidStyle($style)) {
+                $sequences[][] = $this->styleSequence($style);
             } else {
-                throw new InvalidStyleException($s);
+                throw new InvalidStyleException($style);
             }
         }
 
         $sequences =
-            \array_filter(
-                \array_merge(...$sequences),
+            array_filter(
+                array_merge(...$sequences),
                 /**
                  * @param mixed $val
                  * @return bool
@@ -131,11 +131,25 @@ class ConsoleColor implements ConsoleColorInterface
 
     /**
      * @param string $style
+     * @return string
+     */
+    protected function process256ColorStyle(string $style): string
+    {
+        preg_match(self::COLOR256_REGEXP, $style, $matches);
+
+        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
+        $value = $matches[2];
+
+        return "$type;5;$value";
+    }
+
+    /**
+     * @param string $style
      * @return bool
      */
     protected function isValidStyle($style): bool
     {
-        return \array_key_exists($style, static::STYLES) || \preg_match(self::COLOR256_REGEXP, $style);
+        return \array_key_exists($style, static::STYLES) || preg_match(self::COLOR256_REGEXP, $style);
     }
 
     /**
@@ -169,7 +183,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function applySequences(string $text, array $sequences): string
     {
         return
-            $this->escSequence(\implode(';', $sequences)) .
+            $this->escSequence(implode(';', $sequences)) .
             $text .
             $this->escSequence((string)self::RESET_STYLE);
     }
@@ -233,20 +247,6 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function getPossibleStyles(): array
     {
-        return \array_keys(static::STYLES);
-    }
-
-    /**
-     * @param string $style
-     * @return string
-     */
-    protected function process256ColorStyle(string $style): string
-    {
-        \preg_match(self::COLOR256_REGEXP, $style, $matches);
-
-        $type = $matches[1] === 'bg_' ? self::BACKGROUND : self::FOREGROUND;
-        $value = $matches[2];
-
-        return "$type;5;$value";
+        return array_keys(static::STYLES);
     }
 }

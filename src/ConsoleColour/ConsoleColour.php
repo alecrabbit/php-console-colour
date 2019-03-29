@@ -41,12 +41,7 @@ class ConsoleColour extends ConsoleColor
     public function are256ColorsSupported(): bool
     {
         return
-            $this->force256Colors ?: (parent::are256ColorsSupported() || $this->areInDocker256ColorsSupported());
-    }
-
-    protected function areInDocker256ColorsSupported(): bool
-    {
-        return (strpos((string)getenv('DOCKER_TERM'), '256color') !== false);
+            $this->force256Colors ?: parent::are256ColorsSupported();
     }
 
     /**
