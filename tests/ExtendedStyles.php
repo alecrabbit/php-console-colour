@@ -15,7 +15,7 @@ class ExtendedStyles extends Styles
     public const FIRE = 'fire';
     public const NEW = 'new';
 
-    public const EXTENDED_THEMES = [
+    public const EXTENDED_STYLES = [
         // name => [styles],
         self::FIRE => [Style::LIGHT_RED, Style::BOLD, Style::BG_WHITE, Style::ITALIC],
         self::NEW => [Style::LIGHT_CYAN, Style::BG_BLACK, Style::UNDERLINE],
@@ -26,6 +26,6 @@ class ExtendedStyles extends Styles
      */
     protected function prepareThemes(): array
     {
-        return \array_merge(self::EXTENDED_THEMES, parent::prepareThemes());
+        return \array_merge(self::EXTENDED_STYLES, parent::prepareThemes());
     }
 }

@@ -3,6 +3,7 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\DefaultStyles;
+use AlecRabbit\ConsoleColour\Contracts\StylesInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**

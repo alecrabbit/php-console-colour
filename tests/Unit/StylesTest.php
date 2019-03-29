@@ -7,7 +7,7 @@ use AlecRabbit\ConsoleColour\Styles;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
-class ThemeTest extends TestCase
+class StylesTest extends TestCase
 {
     public const THEMES = [
         'italic' => "\033[3m",
@@ -56,11 +56,11 @@ class ThemeTest extends TestCase
         $this->assertInstanceOf(Styles::class, $this->colorized);
         $this->assertInstanceOf(Styles::class, $this->nonColorized);
         foreach (self::THEMES as $methodName => $theme) {
-            $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
                 Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
             );
+            $this->assertEquals($text, $this->nonColorized->$methodName($text));
         }
     }
 

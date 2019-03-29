@@ -7,9 +7,9 @@ use AlecRabbit\Tests\ExtendedStyles;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
-class ExtendedThemeTest extends TestCase
+class ExtendedStylesTest extends TestCase
 {
-    public const THEMES = [
+    public const STYLES = [
         'fire' => "\033[91;1;107;3m",
         'new' => "\033[96;40;4m",
     ];
@@ -44,11 +44,11 @@ class ExtendedThemeTest extends TestCase
         $text = 'SmPlTxT';
         $this->assertInstanceOf(ExtendedStyles::class, $this->colorized);
         $this->assertInstanceOf(ExtendedStyles::class, $this->nonColorized);
-        foreach (self::THEMES as $methodName => $theme) {
+        foreach (self::STYLES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
-                Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
+                Helper::stripEscape(self::STYLES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
             );
         }
     }
