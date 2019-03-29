@@ -2,8 +2,6 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\TerminalInterface;
-
 /**
  * Class Terminal
  *
@@ -38,25 +36,6 @@ abstract class AbstractTerminal
 
     /** @var null|bool */
     protected static $supportsColor;
-
-    /**
-     * Gets the terminal width.
-     *
-     * @return int
-     */
-    protected function getWidth(): int
-    {
-        $width = getenv(static::ENV_COLUMNS);
-        if (false !== $width) {
-            return (int)trim($width);
-        }
-        // @codeCoverageIgnoreStart
-        if (null === static::$width) {
-            static::initDimensions();
-        }
-        return static::$width ?: static::DEFAULT_WIDTH;
-        // @codeCoverageIgnoreEnd
-    }
 
     /**
      * @codeCoverageIgnore
@@ -181,6 +160,27 @@ abstract class AbstractTerminal
             static::$width = (int)$matches[2];
             static::$height = (int)$matches[1];
         }
+    }
+
+    abstract public function supportsColor(bool $recheck = false): bool;
+
+    /**
+     * Gets the terminal width.
+     *
+     * @return int
+     */
+    protected function getWidth(): int
+    {
+        $width = getenv(static::ENV_COLUMNS);
+        if (false !== $width) {
+            return (int)trim($width);
+        }
+        // @codeCoverageIgnoreStart
+        if (null === static::$width) {
+            static::initDimensions();
+        }
+        return static::$width ?: static::DEFAULT_WIDTH;
+        // @codeCoverageIgnoreEnd
     }
 
     /**

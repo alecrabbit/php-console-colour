@@ -111,6 +111,7 @@ class Styles implements DefaultStyles
      */
     protected function assertMethodName(string $name): void
     {
+        dump( static::$stylesArr);
         if (!\array_key_exists($name, static::$stylesArr)) {
             throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }

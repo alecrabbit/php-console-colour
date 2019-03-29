@@ -43,9 +43,9 @@ class Terminal extends AbstractTerminal implements TerminalInterface
     }
 
     /** {@inheritdoc} */
-    public function supportsColor(): bool
+    public function supportsColor(bool $recheck = false): bool
     {
-        if (null !== static::$supportsColor) {
+        if (null !== static::$supportsColor && true !== $recheck) {
             return static::$supportsColor;
         }
         return
