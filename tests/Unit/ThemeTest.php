@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\ConsoleColour\Theme;
+use AlecRabbit\ConsoleColour\Styles;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
@@ -26,9 +26,9 @@ class ThemeTest extends TestCase
         'underlineItalic' => "\033[4;3m",
     ];
 
-    /** @var Theme */
+    /** @var Styles */
     private $colorized;
-    /** @var Theme */
+    /** @var Styles */
     private $nonColorized;
 
     /** @test */
@@ -36,7 +36,7 @@ class ThemeTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Theme::unknownMethod].');
+        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Styles::unknownMethod].');
         $this->assertEquals($text, $this->nonColorized->unknownMethod($text));
     }
 
@@ -45,7 +45,7 @@ class ThemeTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\ArgumentCountError::class);
-        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Theme::red] accepts only one argument.');
+        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Styles::red] accepts only one argument.');
         $this->assertEquals($text, $this->nonColorized->red($text, $text));
     }
 
@@ -53,8 +53,8 @@ class ThemeTest extends TestCase
     public function multi(): void
     {
         $text = 'SmPlTxT';
-        $this->assertInstanceOf(Theme::class, $this->colorized);
-        $this->assertInstanceOf(Theme::class, $this->nonColorized);
+        $this->assertInstanceOf(Styles::class, $this->colorized);
+        $this->assertInstanceOf(Styles::class, $this->nonColorized);
         foreach (self::THEMES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
@@ -70,8 +70,8 @@ class ThemeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new Theme(true);
-        $this->nonColorized = new Theme(false);
+        $this->colorized = new Styles(true);
+        $this->nonColorized = new Styles(false);
     }
 
 }

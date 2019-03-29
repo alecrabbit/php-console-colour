@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
+use AlecRabbit\ConsoleColour\Contracts\DefaultStyles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**
@@ -21,10 +21,10 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
  * @method underlineBold(string $text)
  * @method underlineItalic(string $text)
  */
-class Theme implements DefaultThemes
+class Styles implements DefaultStyles
 {
     /** @var array */
-    protected static $themesArr;
+    protected static $stylesArr;
 
     /** @var bool */
     protected $doColorize = false;
@@ -75,11 +75,11 @@ class Theme implements DefaultThemes
      */
     public function allThemes(): array
     {
-        if (null !== static::$themesArr) {
-            return static::$themesArr;
+        if (null !== static::$stylesArr) {
+            return static::$stylesArr;
         }
         return
-            static::$themesArr = $this->prepareThemes();
+            static::$stylesArr = $this->prepareThemes();
     }
 
     /**
@@ -102,7 +102,7 @@ class Theme implements DefaultThemes
         $this->assertArgs($name, $arguments);
 
         return
-            $this->apply(static::$themesArr[$name], $arguments[0]);
+            $this->apply(static::$stylesArr[$name], $arguments[0]);
     }
 
     /**
@@ -110,7 +110,7 @@ class Theme implements DefaultThemes
      */
     protected function assertMethodName(string $name): void
     {
-        if (!\array_key_exists($name, static::$themesArr)) {
+        if (!\array_key_exists($name, static::$stylesArr)) {
             throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }
     }

@@ -4,7 +4,7 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 use AlecRabbit\ConsoleColour\Contracts\StylesInterface as Styles;
 
-interface DefaultThemes
+interface DefaultStyles
 {
     // These strings are used as methods names
     public const ITALIC = 'italic';

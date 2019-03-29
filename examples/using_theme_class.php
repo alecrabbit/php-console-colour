@@ -1,12 +1,12 @@
 <?php
 
-use AlecRabbit\ConsoleColour\Theme;
+use AlecRabbit\ConsoleColour\Styles;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/functions.php';
 
 try {
-    $theme = new Theme();
+    $theme = new Styles();
     echo $theme->red('This text is red.') . PHP_EOL;
     echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
 } catch (\Throwable $e) {
