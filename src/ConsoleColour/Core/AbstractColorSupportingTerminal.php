@@ -2,10 +2,9 @@
 
 namespace AlecRabbit\ConsoleColour\Core;
 
-abstract class AbstractColorSupportingTerminal
+abstract class AbstractColorSupportingTerminal extends AbstractTerminal
 {
     protected const ENV_TERM = 'TERM';
-    protected const ENV_ANSICON = 'ANSICON';
     protected const ENV_CON_EMU_ANSI = 'ConEmuANSI';
     protected const ENV_DOCKER_TERM = 'DOCKER_TERM';
     protected const COLOR_NEEDLE = '256color';
@@ -86,14 +85,6 @@ abstract class AbstractColorSupportingTerminal
                 false !== strpos($t, static::COLOR_NEEDLE);
         }
         return false;
-    }
-
-    /**
-     * @return bool
-     */
-    protected static function onWindows(): bool
-    {
-        return '\\' === \DIRECTORY_SEPARATOR;
     }
 
     /**

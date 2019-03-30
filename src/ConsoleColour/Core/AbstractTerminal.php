@@ -12,13 +12,14 @@ namespace AlecRabbit\ConsoleColour\Core;
  *
  * @author AlecRabbit
  */
-abstract class AbstractTerminal extends AbstractColorSupportingTerminal
+abstract class AbstractTerminal
 {
     protected const DEFAULT_WIDTH = 80;
     protected const DEFAULT_HEIGHT = 50;
 
     protected const ENV_COLUMNS = 'COLUMNS';
     protected const ENV_LINES = 'LINES';
+    protected const ENV_ANSICON = 'ANSICON';
 
     /** @var null|int */
     protected static $width;
@@ -179,5 +180,13 @@ abstract class AbstractTerminal extends AbstractColorSupportingTerminal
         }
         return static::$height ?: static::DEFAULT_HEIGHT;
         // @codeCoverageIgnoreEnd
+    }
+
+    /**
+     * @return bool
+     */
+    protected static function onWindows(): bool
+    {
+        return '\\' === \DIRECTORY_SEPARATOR;
     }
 }

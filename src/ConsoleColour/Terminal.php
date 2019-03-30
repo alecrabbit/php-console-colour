@@ -3,13 +3,13 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\TerminalInterface;
-use AlecRabbit\ConsoleColour\Core\AbstractTerminal;
+use AlecRabbit\ConsoleColour\Core\AbstractColorSupportingTerminal;
 
 /**
  * Class Terminal
  * @author AlecRabbit
  */
-class Terminal extends AbstractTerminal implements TerminalInterface
+class Terminal extends AbstractColorSupportingTerminal implements TerminalInterface
 {
 
     /** {@inheritdoc} */
