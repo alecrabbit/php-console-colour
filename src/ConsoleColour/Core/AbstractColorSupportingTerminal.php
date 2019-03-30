@@ -43,11 +43,7 @@ abstract class AbstractColorSupportingTerminal
 
         // @codeCoverageIgnoreStart
         if (static::onWindows()) {
-            return (\function_exists('sapi_windows_vt100_support')
-                    && @sapi_windows_vt100_support(STDOUT))
-                || false !== getenv(static::ENV_ANSICON)
-                || 'ON' === getenv(static::ENV_CON_EMU_ANSI)
-                || 'xterm' === getenv(static::ENV_TERM);
+            return $this->checkWindowsColorSupport();
         }
         // @codeCoverageIgnoreEnd
 
@@ -61,9 +57,7 @@ abstract class AbstractColorSupportingTerminal
             return @posix_isatty(STDOUT);
         }
 
-        $stat = @fstat(STDOUT);
-        // Check if formatted mode is S_IFCHR
-        return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
+        return $this->checkStream();
         // @codeCoverageIgnoreEnd
     }
 
@@ -100,5 +94,27 @@ abstract class AbstractColorSupportingTerminal
     protected static function onWindows(): bool
     {
         return '\\' === \DIRECTORY_SEPARATOR;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkWindowsColorSupport(): bool
+    {
+        return (\function_exists('sapi_windows_vt100_support')
+                && @sapi_windows_vt100_support(STDOUT))
+            || false !== getenv(static::ENV_ANSICON)
+            || 'ON' === getenv(static::ENV_CON_EMU_ANSI)
+            || 'xterm' === getenv(static::ENV_TERM);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkStream(): bool
+    {
+        $stat = @fstat(STDOUT);
+        // Check if formatted mode is S_IFCHR
+        return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
     }
 }
