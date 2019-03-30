@@ -23,8 +23,6 @@ function perform(ConsoleColor $consoleColor): void
 {
     echo '[' . get_class($consoleColor) . ']' . PHP_EOL;
     echo 'Colors are supported: ' . ($consoleColor->isSupported() ? 'Yes' : 'No') . PHP_EOL;
-    echo '256 colors are supported: ' . ($consoleColor->are256ColorsSupported() ? 'Yes' : 'No') . PHP_EOL . PHP_EOL;
-
     if ($consoleColor->isSupported()) {
         echo 'Regular colors...' . PHP_EOL;
 
@@ -33,11 +31,9 @@ function perform(ConsoleColor $consoleColor): void
                 $consoleColor->apply($style, TEXT) . ' ' . $style . PHP_EOL;
         }
     }
-
     echo PHP_EOL;
-
+    echo '256 colors are supported: ' . ($consoleColor->are256ColorsSupported() ? 'Yes' : 'No') . PHP_EOL;
     if ($consoleColor->are256ColorsSupported()) {
-        echo '256 colors...' . PHP_EOL;
         echo 'Foreground colors:' . PHP_EOL;
         display($consoleColor);
         echo PHP_EOL . 'Background colors:' . PHP_EOL;
