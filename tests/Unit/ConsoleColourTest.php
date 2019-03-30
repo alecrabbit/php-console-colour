@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTest extends TestCase
 {
+    public const STYLES_COUNT = 43;
+    
     /** @var ConsoleColourWithForceSupport */
     private $color;
 
@@ -223,7 +225,7 @@ class ConsoleColourTest extends TestCase
     {
         $this->assertIsArray($this->color->getPossibleStyles());
         $this->assertNotEmpty($this->color->getPossibleStyles());
-        $this->assertCount(42, $this->color->getPossibleStyles());
+        $this->assertCount(self::STYLES_COUNT, $this->color->getPossibleStyles());
     }
 
     /** @test

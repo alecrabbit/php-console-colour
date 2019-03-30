@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 class ConsoleColorTest extends TestCase
 {
     public const TEXT = 'text';
+    const STYLES_COUNT = 43;
 
     /** @var ConsoleColorWithForceSupport */
     private $color;
@@ -233,7 +234,7 @@ class ConsoleColorTest extends TestCase
         $possibleStyles = $this->color->getPossibleStyles();
         $this->assertIsArray($possibleStyles);
         $this->assertNotEmpty($possibleStyles);
-        $this->assertCount(42, $possibleStyles);
+        $this->assertCount(self::STYLES_COUNT, $possibleStyles);
     }
 
     /** @test */
