@@ -1,6 +1,6 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit;
+namespace AlecRabbit\Tests\ConsoleColour;
 
 
 use AlecRabbit\ConsoleColour\ConsoleColour;

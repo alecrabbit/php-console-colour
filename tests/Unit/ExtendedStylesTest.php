@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\Tests\Unit;
+namespace AlecRabbit\Tests\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ExtendedThemes;

@@ -98,6 +98,7 @@ abstract class AbstractColorSupportingTerminal
 
     /**
      * @return bool
+     * @codeCoverageIgnore
      */
     protected function checkWindowsColorSupport(): bool
     {
@@ -110,6 +111,7 @@ abstract class AbstractColorSupportingTerminal
 
     /**
      * @return bool
+     * @codeCoverageIgnore
      */
     protected function checkStream(): bool
     {
