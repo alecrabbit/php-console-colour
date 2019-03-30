@@ -3,29 +3,30 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\DefaultStyles;
-use AlecRabbit\ConsoleColour\Contracts\StylesInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**
+ * @method comment(string $text)
+ * @method error(string $text)
+ * @method info(string $text)
+ *
  * @method italic(string $text)
+ * @method bold(string $text)
  * @method dark(string $text)
  * @method darkItalic(string $text)
  * @method white(string $text)
  * @method whiteBold(string $text)
- * @method comment(string $text)
  * @method yellow(string $text)
- * @method error(string $text)
  * @method red(string $text)
  * @method green(string $text)
- * @method info(string $text)
- * @method underline(string $text)
- * @method underlineBold(string $text)
- * @method underlineItalic(string $text)
+ * @method underlined(string $text)
+ * @method underlinedBold(string $text)
+ * @method underlinedItalic(string $text)
  */
-class Styles implements DefaultStyles
+class Themes implements DefaultStyles
 {
     /** @var array */
-    protected static $stylesArr;
+    protected $definedStyles;
 
     /** @var bool */
     protected $doColorize = false;
@@ -64,7 +65,7 @@ class Styles implements DefaultStyles
      */
     protected function setThemes(): void
     {
-        foreach ($this->allThemes() as $name => $styles) {
+        foreach ($this->getThemes() as $name => $styles) {
             $this->color->addTheme($name, $styles);
         }
     }
@@ -74,13 +75,13 @@ class Styles implements DefaultStyles
      *
      * @psalm-suppress RedundantConditionGivenDocblockType
      */
-    public function allThemes(): array
+    public function getThemes(): array
     {
-        if (null !== static::$stylesArr) {
-            return static::$stylesArr;
+        if (null !== $this->definedStyles) {
+            return $this->definedStyles;
         }
         return
-            static::$stylesArr = $this->prepareThemes();
+            $this->definedStyles = $this->prepareThemes();
     }
 
     /**
@@ -88,7 +89,7 @@ class Styles implements DefaultStyles
      */
     protected function prepareThemes(): array
     {
-        return static::THEMES;
+        return static::STYLES;
     }
 
     /**
@@ -103,7 +104,7 @@ class Styles implements DefaultStyles
         $this->assertArgs($name, $arguments);
 
         return
-            $this->apply(static::$stylesArr[$name], $arguments[0]);
+            $this->apply($this->definedStyles[$name], $arguments[0]);
     }
 
     /**
@@ -111,8 +112,7 @@ class Styles implements DefaultStyles
      */
     protected function assertMethodName(string $name): void
     {
-        dump( static::$stylesArr);
-        if (!\array_key_exists($name, static::$stylesArr)) {
+        if (!\array_key_exists($name, $this->definedStyles)) {
             throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }
     }

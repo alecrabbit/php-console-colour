@@ -1,14 +1,10 @@
 <?php
-/**
- * User: alec
- * Date: 15.10.18
- * Time: 21:54
- */
 
 namespace AlecRabbit\Tests\Unit;
 
 
 use AlecRabbit\ConsoleColour\ConsoleColour;
+use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColourWithForceSupport;
 use AlecRabbit\Tests\Helper;
@@ -25,7 +21,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function None(): void
     {
-        $output = $this->uut->apply('none', 'text');
+        $output = $this->uut->apply(Styles::NONE, 'text');
         $this->assertEquals('text', $output);
     }
 
@@ -35,7 +31,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function Bold(): void
     {
-        $output = $this->uut->apply('bold', 'text');
+        $output = $this->uut->apply(Styles::BOLD, 'text');
         $this->assertEquals("\033[1mtext\033[0m", $output);
     }
 
@@ -47,7 +43,7 @@ class ConsoleColourTwoTest extends TestCase
     {
         $this->uut->setIsSupported(false);
 
-        $output = $this->uut->apply('bold', 'text');
+        $output = $this->uut->apply(Styles::BOLD, 'text');
         $this->assertEquals('text', $output);
     }
 
@@ -60,7 +56,7 @@ class ConsoleColourTwoTest extends TestCase
         $this->uut->setIsSupported(false);
         $this->uut->setForceStyle(true);
 
-        $output = $this->uut->apply('bold', 'text');
+        $output = $this->uut->apply(Styles::BOLD, 'text');
         $this->assertEquals("\033[1mtext\033[0m", $output);
     }
 
@@ -70,7 +66,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function Dark(): void
     {
-        $output = $this->uut->apply('dark', 'text');
+        $output = $this->uut->apply(Styles::DARK, 'text');
         $this->assertEquals("\033[2mtext\033[0m", $output);
     }
 
@@ -80,7 +76,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function BoldAndDark(): void
     {
-        $output = $this->uut->apply(['bold', 'dark'], 'text');
+        $output = $this->uut->apply([Styles::BOLD, Styles::DARK], 'text');
         $this->assertEquals("\033[1;2mtext\033[0m", $output);
     }
 
@@ -132,7 +128,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function SetOwnTheme(): void
     {
-        $this->uut->setThemes(['bold_dark' => ['bold', 'dark']]);
+        $this->uut->setThemes(['bold_dark' => [Styles::BOLD, Styles::DARK]]);
         $output = $this->uut->apply(['bold_dark'], 'text');
         $this->assertEquals("\033[1;2mtext\033[0m", $output);
     }
@@ -143,7 +139,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function AddOwnTheme(): void
     {
-        $this->uut->addTheme('bold_own', 'bold');
+        $this->uut->addTheme('bold_own', Styles::BOLD);
         $output = $this->uut->apply(['bold_own'], 'text');
         $this->assertEquals("\033[1mtext\033[0m", $output);
     }
@@ -154,7 +150,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function AddOwnThemeArray(): void
     {
-        $this->uut->addTheme('bold_dark', ['bold', 'dark']);
+        $this->uut->addTheme('bold_dark', [Styles::BOLD, Styles::DARK]);
         $output = $this->uut->apply(['bold_dark'], 'text');
         $this->assertEquals("\033[1;2mtext\033[0m", $output);
     }
@@ -165,8 +161,8 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function OwnWithStyle(): void
     {
-        $this->uut->addTheme('bold_dark', ['bold', 'dark']);
-        $output = $this->uut->apply(['bold_dark', 'italic'], 'text');
+        $this->uut->addTheme('bold_dark', [Styles::BOLD, Styles::DARK]);
+        $output = $this->uut->apply(['bold_dark', Styles::ITALIC], 'text');
         $this->assertEquals("\033[1;2;3mtext\033[0m", $output);
     }
 
@@ -178,7 +174,7 @@ class ConsoleColourTwoTest extends TestCase
     {
         $this->assertFalse($this->uut->hasTheme('bold_dark'));
 
-        $this->uut->addTheme('bold_dark', ['bold', 'dark']);
+        $this->uut->addTheme('bold_dark', [Styles::BOLD, Styles::DARK]);
         $this->assertTrue($this->uut->hasTheme('bold_dark'));
 
         $this->uut->removeTheme('bold_dark');
@@ -262,7 +258,7 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function Escaped(): void
     {
-        $this->uut->addTheme('bold_red', ['bold', 'red']);
+        $this->uut->addTheme('bold_red', [Styles::BOLD, Styles::RED]);
 
         $str = $this->uut->apply('bold_red', 'bold red text');
         $this->assertEquals('\033[1;31mbold red text\033[0m', Helper::stripEscape($str));

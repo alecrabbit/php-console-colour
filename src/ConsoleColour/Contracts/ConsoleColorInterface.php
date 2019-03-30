@@ -4,7 +4,7 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
-interface ConsoleColorInterface extends StylesInterface
+interface ConsoleColorInterface extends Styles
 {
     /**
      * @param string|array $styles

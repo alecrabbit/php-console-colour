@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\Tests\ExtendedStyles;
+use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
@@ -14,9 +14,9 @@ class ExtendedStylesTest extends TestCase
         'new' => "\033[96;40;4m",
     ];
 
-    /** @var ExtendedStyles */
+    /** @var ExtendedThemes */
     private $colorized;
-    /** @var ExtendedStyles */
+    /** @var ExtendedThemes */
     private $nonColorized;
 
     /** @test */
@@ -24,7 +24,7 @@ class ExtendedStylesTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Unknown method call [AlecRabbit\Tests\ExtendedStyles::unknownMethod].');
+        $this->expectExceptionMessage('Unknown method call [AlecRabbit\Tests\ExtendedThemes::unknownMethod].');
         $this->assertEquals($text, $this->colorized->unknownMethod($text));
     }
 
@@ -34,7 +34,7 @@ class ExtendedStylesTest extends TestCase
         $text = 'sample';
         $this->assertEquals($text, $this->nonColorized->fire($text));
         $this->expectException(\ArgumentCountError::class);
-        $this->expectExceptionMessage('Method [AlecRabbit\Tests\ExtendedStyles::red] accepts only one argument.');
+        $this->expectExceptionMessage('Method [AlecRabbit\Tests\ExtendedThemes::red] accepts only one argument.');
         $this->assertEquals($text, $this->colorized->red($text, $text));
     }
 
@@ -42,8 +42,8 @@ class ExtendedStylesTest extends TestCase
     public function multi(): void
     {
         $text = 'SmPlTxT';
-        $this->assertInstanceOf(ExtendedStyles::class, $this->colorized);
-        $this->assertInstanceOf(ExtendedStyles::class, $this->nonColorized);
+        $this->assertInstanceOf(ExtendedThemes::class, $this->colorized);
+        $this->assertInstanceOf(ExtendedThemes::class, $this->nonColorized);
         foreach (self::STYLES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
@@ -59,8 +59,8 @@ class ExtendedStylesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new ExtendedStyles(true);
-        $this->nonColorized = new ExtendedStyles(false);
+        $this->colorized = new ExtendedThemes(true);
+        $this->nonColorized = new ExtendedThemes(false);
     }
 
 }

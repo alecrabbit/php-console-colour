@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests\Unit;
 
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\ConsoleColour\Styles;
+use AlecRabbit\ConsoleColour\Themes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
@@ -12,6 +12,7 @@ class StylesTest extends TestCase
     public const THEMES = [
         'italic' => "\033[3m",
         'dark' => "\033[2m",
+        'bold' => "\033[1m",
         'darkItalic' => "\033[2;3m",
         'white' => "\033[97m",
         'whiteBold' => "\033[97;1m",
@@ -21,14 +22,14 @@ class StylesTest extends TestCase
         'error' => "\033[97;1;41m",
         'red' => "\033[31m",
         'info' => "\033[32m",
-        'underline' => "\033[4m",
-        'underlineBold' => "\033[4;1m",
-        'underlineItalic' => "\033[4;3m",
+        'underlined' => "\033[4m",
+        'underlinedBold' => "\033[4;1m",
+        'underlinedItalic' => "\033[4;3m",
     ];
 
-    /** @var Styles */
+    /** @var Themes */
     private $colorized;
-    /** @var Styles */
+    /** @var Themes */
     private $nonColorized;
 
     /** @test */
@@ -36,7 +37,7 @@ class StylesTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Styles::unknownMethod].');
+        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Themes::unknownMethod].');
         $this->assertEquals($text, $this->nonColorized->unknownMethod($text));
     }
 
@@ -45,7 +46,7 @@ class StylesTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\ArgumentCountError::class);
-        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Styles::red] accepts only one argument.');
+        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Themes::red] accepts only one argument.');
         $this->assertEquals($text, $this->nonColorized->red($text, $text));
     }
 
@@ -53,8 +54,8 @@ class StylesTest extends TestCase
     public function multi(): void
     {
         $text = 'SmPlTxT';
-        $this->assertInstanceOf(Styles::class, $this->colorized);
-        $this->assertInstanceOf(Styles::class, $this->nonColorized);
+        $this->assertInstanceOf(Themes::class, $this->colorized);
+        $this->assertInstanceOf(Themes::class, $this->nonColorized);
         foreach (self::THEMES as $methodName => $theme) {
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
@@ -70,8 +71,8 @@ class StylesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new Styles(true);
-        $this->nonColorized = new Styles(false);
+        $this->colorized = new Themes(true);
+        $this->nonColorized = new Themes(false);
     }
 
 }

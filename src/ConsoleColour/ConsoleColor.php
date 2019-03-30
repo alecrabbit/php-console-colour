@@ -69,7 +69,7 @@ class ConsoleColor implements ConsoleColorInterface
         foreach ($styles as $style) {
             if (isset($this->themes[$style])) {
                 $sequences[] = $this->themeSequence($style);
-            } elseif ($this->isValidStyle($style)) {
+            } elseif ($this->isValid($style)) {
                 $sequences[][] = $this->styleSequence($style);
             } else {
                 throw new InvalidStyleException($style);
@@ -111,8 +111,8 @@ class ConsoleColor implements ConsoleColorInterface
      */
     protected function styleSequence($style): ?string
     {
-        if (\array_key_exists($style, static::STYLES)) {
-            return static::STYLES[$style];
+        if (\array_key_exists($style, static::CODES)) {
+            return static::CODES[$style];
         }
 
         if (!$this->are256ColorsSupported()) {
@@ -136,28 +136,33 @@ class ConsoleColor implements ConsoleColorInterface
     protected function process256ColorStyle(string $style): string
     {
         preg_match(self::COLOR256_REGEXP, $style, $matches);
-
-        $type = $matches[1] === self::BG ? self::BACKGROUND : self::FOREGROUND;
-        $value = $matches[2];
-
-        return "$type;5;$value";
+        return
+            sprintf(
+                '%s;5;%s',
+                $matches[1] === self::BG ? self::BACKGROUND : self::FOREGROUND,
+                $matches[2]
+            );
     }
 
     /**
      * @param string $style
      * @return bool
      */
-    protected function isValidStyle($style): bool
+    protected function isValid($style): bool
     {
-        return \array_key_exists($style, static::STYLES) || preg_match(self::COLOR256_REGEXP, $style);
+        return
+            \array_key_exists($style, static::CODES) || (bool)preg_match(self::COLOR256_REGEXP, $style);
     }
 
     /**
-     * @param string|array $styles
+     * @param int|string|array $styles
      * @return array
      */
     protected function refineStyles($styles): array
     {
+        if (\is_int($styles)) {
+            $styles = [$styles];
+        }
         if (\is_string($styles)) {
             $styles = [$styles];
         }
@@ -185,7 +190,7 @@ class ConsoleColor implements ConsoleColorInterface
         return
             $this->escSequence(implode(';', $sequences)) .
             $text .
-            $this->escSequence((string)self::RESET_STYLE);
+            $this->escSequence((string)self::RESET);
     }
 
     /**
@@ -224,7 +229,7 @@ class ConsoleColor implements ConsoleColorInterface
         $styles = $this->refineStyles($styles);
 
         foreach ($styles as $style) {
-            if (!$this->isValidStyle($style)) {
+            if (!$this->isValid($style)) {
                 throw new InvalidStyleException($style);
             }
         }
@@ -247,6 +252,6 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function getPossibleStyles(): array
     {
-        return array_keys(static::STYLES);
+        return array_keys(static::CODES);
     }
 }
