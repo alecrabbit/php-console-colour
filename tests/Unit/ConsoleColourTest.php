@@ -255,7 +255,6 @@ class ConsoleColourTest extends TestCase
     protected function setUp(): void
     {
         $this->color = new ConsoleColourWithForceSupport();
-//        $this->uut->doNotThrowOnError();
     }
 
 }
