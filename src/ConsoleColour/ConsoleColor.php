@@ -160,10 +160,7 @@ class ConsoleColor implements ConsoleColorInterface
      */
     protected function refineStyles($styles): array
     {
-        if (\is_int($styles)) {
-            $styles = [$styles];
-        }
-        if (\is_string($styles)) {
+        if (\is_int($styles) || \is_string($styles)) {
             $styles = [$styles];
         }
         $this->assertStyles($styles);

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTest extends TestCase
 {
-    public const STYLES_COUNT = 43;
+    public const STYLES_COUNT = 44;
 
     /** @var ConsoleColourWithForceSupport */
     private $color;

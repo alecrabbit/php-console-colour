@@ -5,6 +5,7 @@ require_once __DIR__ . '/__helper_functions.php';
 
 use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\ConsoleColour;
+use AlecRabbit\ConsoleColour\Contracts\Styles;
 
 const TEXT = '  *** Sample text ***  ';
 
@@ -27,8 +28,12 @@ function perform(ConsoleColor $consoleColor): void
         echo 'Regular colors...' . PHP_EOL;
 
         foreach ($consoleColor->getPossibleStyles() as $style) {
+            $name = Styles::NAMES[$style];
+            if($style === Styles::BLINK_FAST) {
+                $name .= ' (Not widely supported)';
+            }
             echo
-                $consoleColor->apply($style, TEXT) . ' ' . $style . PHP_EOL;
+                $consoleColor->apply($style, TEXT) . ' ' . $name . PHP_EOL;
         }
     }
     echo PHP_EOL;

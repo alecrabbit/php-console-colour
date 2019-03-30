@@ -14,4 +14,5 @@ interface Effect
     public const BLINK_FAST = 7; // Limited support
     public const REVERSE = 8;
     public const CONCEALED = 9;
+    public const CROSSED_OUT = 10;
 }
