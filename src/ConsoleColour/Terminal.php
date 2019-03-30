@@ -3,6 +3,7 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\TerminalInterface;
+use AlecRabbit\ConsoleColour\Core\AbstractTerminal;
 
 /**
  * Class Terminal
