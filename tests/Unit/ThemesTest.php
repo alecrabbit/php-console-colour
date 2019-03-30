@@ -7,7 +7,7 @@ use AlecRabbit\ConsoleColour\Themes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
-class StylesTest extends TestCase
+class ThemesTest extends TestCase
 {
     public const THEMES = [
         'italic' => "\033[3m",
@@ -54,6 +54,8 @@ class StylesTest extends TestCase
     public function multi(): void
     {
         $text = 'SmPlTxT';
+        $this->assertIsArray($this->colorized->getThemes());
+        $this->assertIsArray($this->nonColorized->getThemes());
         $this->assertInstanceOf(Themes::class, $this->colorized);
         $this->assertInstanceOf(Themes::class, $this->nonColorized);
         foreach (self::THEMES as $methodName => $theme) {
