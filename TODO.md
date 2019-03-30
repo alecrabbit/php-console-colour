@@ -1,2 +1,5 @@
+ - [ ] unify tests
  - [ ] simplify `ConsoleColour::class`
- - [ ] consider removing unnecessary `DOCKER_TERM` var
+ - [ ] simplify adding new theme
+ 
+ - [x] ~~consider removing unnecessary `DOCKER_TERM` var~~ still needed

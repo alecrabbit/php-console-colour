@@ -1,14 +1,15 @@
-<?php
-/**
- * User: alec
- * Date: 28.12.18
- * Time: 14:42
- */
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace AlecRabbit\ConsoleColour\Exception;
 
 class InvalidStyleException extends \Exception
 {
-
+    /**
+     * InvalidStyleException constructor.
+     * @param string $styleName
+     */
+    public function __construct(string $styleName)
+    {
+        parent::__construct("Style '$styleName' is not allowed.");
+    }
 }

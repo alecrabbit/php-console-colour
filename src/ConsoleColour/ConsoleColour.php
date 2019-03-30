@@ -7,7 +7,6 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Exception\ColorException;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Traits\DoesProcessException;
 
@@ -42,60 +41,24 @@ class ConsoleColour extends ConsoleColor
     public function are256ColorsSupported(): bool
     {
         return
-            $this->force256Colors ?: (parent::are256ColorsSupported() || $this->areInDocker256ColorsSupported());
-    }
-
-    protected function areInDocker256ColorsSupported(): bool
-    {
-        return (strpos((string)getenv('DOCKER_TERM'), '256color') !== false);
-    }
-
-    /**
-     * @param array|string $style
-     * @param string $text
-     * @return string
-     * @throws \Throwable
-     */
-    public function applyEscaped($style, $text): string
-    {
-        return
-            str_replace(
-                self::ESC_CHAR,
-                '\033',
-                $this->apply($style, $text)
-            );
+            $this->force256Colors ?: parent::are256ColorsSupported();
     }
 
     /**
      * @param array|string $styles
      * @param string $text
      * @return string
-     * @throws ColorException
      * @throws \Throwable
      */
     public function apply($styles, $text): string
     {
         try {
             return parent::apply($styles, $text);
-        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new ColorException($e->getMessage(), (int)$e->getCode(), $e);
-        } catch (\Throwable $e) {
+        } catch (InvalidStyleException $e) {
+            // Do nothing
+            // or
             $this->processException($e);
         }
         return $text;
-    }
-
-    /**
-     * @param string $name
-     * @param array|string $styles
-     * @throws InvalidStyleException
-     */
-    public function addTheme($name, $styles): void
-    {
-        try {
-            parent::addTheme($name, $styles);
-        } catch (\JakubOnderka\PhpConsoleColor\InvalidStyleException $e) {
-            throw new InvalidStyleException($e->getMessage(), (int)$e->getCode(), $e);
-        }
     }
 }
