@@ -84,6 +84,19 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
+    public function CheckPossibleStyles(): void
+    {
+        $this->color->setIsSupported(false);
+        $this->color->force(true);
+        foreach ($this->color->getPossibleStyles() as $style) {
+            $this->assertIsString($this->color->apply($style, self::TEXT));
+        }
+    }
+
+    /**
+     * @test
+     * @throws InvalidStyleException
+     */
     public function Dark(): void
     {
         $output = $this->color->apply(Styles::DARK, self::TEXT);
