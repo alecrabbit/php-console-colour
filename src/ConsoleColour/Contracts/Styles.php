@@ -7,10 +7,10 @@ interface Styles
     public const BG = 'bg_';
     public const COLOR256_REGEXP = '~^(bg_)?color_(\d{1,3})$~';
 
+    public const RESET = 0;
     public const FOREGROUND = 38;
     public const BACKGROUND = 48;
 
-    public const RESET = Effect::RESET;
     public const NONE = Effect::NONE;
     public const BOLD = Effect::BOLD;
     public const DARK = Effect::DARK;
@@ -21,6 +21,7 @@ interface Styles
     public const REVERSE = Effect::REVERSE;
     public const CONCEALED = Effect::CONCEALED;
     public const CROSSED_OUT = Effect::CROSSED_OUT;
+    public const DOUBLE_UNDERLINE = Effect::DOUBLE_UNDERLINE;
 
     public const DEFAULT = Color::DEFAULT;
     public const BLACK = Color::BLACK;
@@ -73,7 +74,8 @@ interface Styles
             self::CONCEALED => '8',
             self::CROSSED_OUT => '9',
 
-            self::DEFAULT => '39',
+            self::DOUBLE_UNDERLINE => '21',
+
             self::BLACK => '30',
             self::RED => '31',
             self::GREEN => '32',
@@ -82,6 +84,7 @@ interface Styles
             self::MAGENTA => '35',
             self::CYAN => '36',
             self::LIGHT_GRAY => '37',
+            self::DEFAULT => '39',
 
             self::DARK_GRAY => '90',
             self::LIGHT_RED => '91',
@@ -124,6 +127,7 @@ interface Styles
             self::REVERSE => 'REVERSE',
             self::CONCEALED => 'CONCEALED',
             self::CROSSED_OUT => 'CROSSED_OUT',
+            self::DOUBLE_UNDERLINE => 'DOUBLE_UNDERLINE',
             self::DEFAULT => 'DEFAULT',
             self::BLACK => 'BLACK',
             self::RED => 'RED',
