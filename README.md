@@ -72,7 +72,8 @@ echo $theme->underlinedBold('This text is underlined and bold.') . PHP_EOL;
 ```
 Basically methods of this class just applying corresponding escape sequences to `$text`
 ```php
-$colorized = $theme->darkItalic('This text is dark and italic.') // '\033[2;3mThis text is dark and italic.\033[0m'
+// "\033[2;3mThis text is dark and italic.\033[0m"
+$colorized = $theme->darkItalic('This text is dark and italic.')
 ```
 ##### Methods
 ```php
