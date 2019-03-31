@@ -13,5 +13,5 @@ services:
     - ./:/var/www
     - ./../../libraries:/var/packages
     environment:
-      DOCKER_TERM: "$TERM" // passed host $TERM variable
+      DOCKER_TERM: "$TERM" # passed host $TERM variable
     command: keep-alive.sh
