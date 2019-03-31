@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be922edf148650200a160710e0ddcf9e",
+    "content-hash": "d6ef41127f16e53dbe337546855c098a",
     "packages": [
         {
             "name": "alecrabbit/php-traits",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-traits.git",
-                "reference": "c7a78093258ea0e7ec1887cfbde855f0e849c138"
+                "reference": "a209692b6522baa069bd6571f78e9d68d89f5507"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/c7a78093258ea0e7ec1887cfbde855f0e849c138",
-                "reference": "c7a78093258ea0e7ec1887cfbde855f0e849c138",
+                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/a209692b6522baa069bd6571f78e9d68d89f5507",
+                "reference": "a209692b6522baa069bd6571f78e9d68d89f5507",
                 "shasum": ""
             },
             "require": {
@@ -43,7 +43,7 @@
                 "MIT"
             ],
             "description": "PHP traits to use in every project :)",
-            "time": "2019-03-09T11:15:59+00:00"
+            "time": "2019-03-24T22:59:59+00:00"
         }
     ],
     "packages-dev": [
@@ -2429,7 +2429,5 @@
     "platform": {
         "php": "^7.2"
     },
-    "platform-dev": {
-        "ext-posix": "*"
-    }
+    "platform-dev": []
 }

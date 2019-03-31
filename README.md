@@ -16,6 +16,10 @@
 
 based on [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Console-Color)
 
+### Installation 
+```bash
+composer require alecrabbit/php-console-colour
+```
 ### ConsoleColor::class
 
 // TODO 
@@ -23,8 +27,8 @@ based on [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Co
 ### Terminal::class
 ##### Usage 
 ```php
-    $term = new Terminal();
-    $width = $term->width(); 
+$term = new Terminal();
+$width = $term->width(); 
 ```
 This class is used as a part of a package to determine color support, also it can be used to determine width and height of terminal window.
 Checks performed on first call, if you want to check again use `$recheck` parameter. 
@@ -43,30 +47,28 @@ Checks performed on first call, if you want to check again use `$recheck` parame
 
 Class methods:
 ```php
-    public function supportsColor(bool $recheck = false): bool;
+public function supportsColor(bool $recheck = false): bool;
 
-    public function supports256Color(bool $recheck = false): bool;
+public function supports256Color(bool $recheck = false): bool;
 
-    public function width(bool $recheck = false): int;
+public function width(bool $recheck = false): int;
 
-    public function height(bool $recheck = false): int;
+public function height(bool $recheck = false): int;
 ```
 ##### Notes on Docker environment
 To ensure color support you can pass one(or both) env variables to container
 ```dockerfile
-...
-    environment:
-      TERM: "xterm"  # standard color support
-      DOCKER_TERM: "xterm-256color"  # 256 color support
-...
+environment:
+  TERM: "xterm"  # standard color support
+  DOCKER_TERM: "xterm-256color"  # 256 color support
 ```
 
 ### Theme::class
 ##### Usage 
 ```php
-    $theme = new Theme();
-    echo $theme->red('This text is red.') . PHP_EOL;
-    echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
+$theme = new Theme();
+echo $theme->red('This text is red.') . PHP_EOL;
+echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
 ```
 Basically methods of this class just applying corresponding escape sequences to `$text`
 ```php
@@ -75,23 +77,29 @@ $colorized = $theme->darkItalic('This text is dark and italic.') // '\033[2;3mTh
 ##### Methods
 ```php
 /**
+ * @method comment(string $text)
+ * @method error(string $text)
+ * @method info(string $text)
+ *
+ * @method yellow(string $text)
+ * @method red(string $text)
+ * @method green(string $text)
+ * @method cyan(string $text)
+ * @method magenta(string $text)
+
  * @method italic(string $text)
+ * @method bold(string $text)
  * @method dark(string $text)
  * @method darkItalic(string $text)
  * @method white(string $text)
  * @method whiteBold(string $text)
- * @method comment(string $text)
- * @method yellow(string $text)
- * @method error(string $text)
- * @method red(string $text)
- * @method green(string $text)
- * @method info(string $text)
- * @method underline(string $text)
- * @method underlineBold(string $text)
- * @method underlineItalic(string $text)
+ * @method underlined(string $text)
+ * @method underlinedBold(string $text)
+ * @method underlinedItalic(string $text)
  */
 ```
 > Note: new methods will be added.
+
 ##### Add your own methods
  [How to extend `Theme::class`](docs/howToExtendThemeClass.md)
 
