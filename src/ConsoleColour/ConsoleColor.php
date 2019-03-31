@@ -52,6 +52,9 @@ class ConsoleColor implements ConsoleColorInterface
         if (!$this->isForced() && !$this->isSupported()) {
             return $text;
         }
+//        if (!$this->isForced() && !$this->isSupported()) {
+//            return $text;
+//        }
 
         $sequences =
             $this->getSequencesFrom(

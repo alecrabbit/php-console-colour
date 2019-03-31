@@ -49,7 +49,7 @@ interface ConsoleColorInterface extends Styles
 
     /**
      * @param string $name
-     * @param array|string $styles
+     * @param int|string|array $styles
      * @throws \InvalidArgumentException
      * @throws InvalidStyleException
      */
