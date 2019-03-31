@@ -87,7 +87,7 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
  * @method green(string $text)
  * @method cyan(string $text)
  * @method magenta(string $text)
-
+ *
  * @method italic(string $text)
  * @method bold(string $text)
  * @method dark(string $text)
