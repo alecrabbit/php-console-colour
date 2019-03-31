@@ -30,7 +30,7 @@ composer require alecrabbit/php-console-colour
 $term = new Terminal();
 $width = $term->width(); 
 ```
-This class is used as a part of a package to determine color support, also it can be used to determine width and height of terminal window.
+This class is used by `ConsoleColor::class` to determine color support, also it can be used to determine width and height of terminal window.
 Checks performed on first call, if you want to check again use `$recheck` parameter. 
 > Note: Creating new instance of terminal object does not change width and height values(they are static). If you want to know resized terminal dimensions use `$recheck` parameter.
 > ```php
@@ -62,13 +62,13 @@ environment:
   TERM: "xterm"  # standard color support
   DOCKER_TERM: "xterm-256color"  # 256 color support
 ```
-
+> Example: [docker-compose.yml](docker-compose.yml)
 ### Theme::class
 ##### Usage 
 ```php
 $theme = new Theme();
 echo $theme->red('This text is red.') . PHP_EOL;
-echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
+echo $theme->underlinedBold('This text is underlined and bold.') . PHP_EOL;
 ```
 Basically methods of this class just applying corresponding escape sequences to `$text`
 ```php
@@ -98,8 +98,8 @@ $colorized = $theme->darkItalic('This text is dark and italic.') // '\033[2;3mTh
  * @method underlinedItalic(string $text)
  */
 ```
-> Note: new methods will be added.
+> Note: new methods will be added. Pull requests are welcomed.
 
-##### Add your own methods
- [How to extend `Theme::class`](docs/howToExtendThemeClass.md)
+##### Define your own themes
+ * [How to extend `Theme::class`?](docs/howToExtendThemeClass.md)
 
