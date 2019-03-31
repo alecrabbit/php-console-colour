@@ -3,15 +3,18 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
+use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 class ConsoleColor implements ConsoleColorInterface
 {
+    public const ESC_CHAR = "\033"; // "\e" or "\x01b"
+
     /** @var bool */
     protected $supported;
 
     /** @var bool */
-    protected $forceStyle = false;
+    protected $force;
 
     /** @var array */
     protected $themes = [];
@@ -19,19 +22,39 @@ class ConsoleColor implements ConsoleColorInterface
     /** @var bool */
     protected $are256ColorsSupported;
 
-    public function __construct()
+    /**
+     * ConsoleColor constructor.
+     * @param bool $force
+     * @param bool $force256Colors
+     */
+    public function __construct(bool $force = false, bool $force256Colors = false)
+    {
+        $this->force = $force;
+        $this->setColorSupport($force256Colors);
+    }
+
+    protected function setColorSupport(bool $force256Colors): void
     {
         $terminal = new Terminal();
-        $this->supported = $terminal->supportsColor();
-        $this->are256ColorsSupported = $terminal->supports256Color();
+        $this->supported = $this->isForced() || $terminal->supportsColor();
+        $this->are256ColorsSupported = $force256Colors || $terminal->supports256Color();
+    }
+
+    /** {@inheritdoc} */
+    public function isForced(): bool
+    {
+        return $this->force;
     }
 
     /** {@inheritdoc} */
     public function apply($styles, $text): string
     {
-        if (!$this->isStyleForced() && !$this->isSupported()) {
+        if (!$this->isForced() && !$this->isSupported()) {
             return $text;
         }
+//        if (!$this->isForced() && !$this->isSupported()) {
+//            return $text;
+//        }
 
         $sequences =
             $this->getSequencesFrom(
@@ -43,12 +66,6 @@ class ConsoleColor implements ConsoleColorInterface
         }
 
         return $this->applySequences($text, $sequences);
-    }
-
-    /** {@inheritdoc} */
-    public function isStyleForced(): bool
-    {
-        return $this->forceStyle;
     }
 
     /** {@inheritdoc} */
@@ -160,10 +177,7 @@ class ConsoleColor implements ConsoleColorInterface
      */
     protected function refineStyles($styles): array
     {
-        if (\is_int($styles)) {
-            $styles = [$styles];
-        }
-        if (\is_string($styles)) {
+        if (\is_int($styles) || \is_string($styles)) {
             $styles = [$styles];
         }
         $this->assertStyles($styles);
@@ -176,7 +190,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function assertStyles($styles): void
     {
         if (!\is_array($styles)) {
-            throw new \InvalidArgumentException('Style must be string or array.');
+            throw new \InvalidArgumentException('Styles must be int, string or array.');
         }
     }
 
@@ -199,13 +213,14 @@ class ConsoleColor implements ConsoleColorInterface
      */
     protected function escSequence(string $value): string
     {
-        return "\033[{$value}m";
+        return
+            static::ESC_CHAR . '[' . $value . 'm';
     }
 
     /** {@inheritdoc} */
-    public function setForceStyle(bool $forceStyle): void
+    public function force(bool $force): void
     {
-        $this->forceStyle = $forceStyle;
+        $this->force = $force;
     }
 
     /** {@inheritdoc} */
@@ -252,6 +267,6 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function getPossibleStyles(): array
     {
-        return array_keys(static::CODES);
+        return array_keys(Styles::NAMES);
     }
 }

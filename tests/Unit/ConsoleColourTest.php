@@ -1,6 +1,6 @@
 <?php
 
-namespace AlecRabbit\Tests\Unit;
+namespace AlecRabbit\Tests\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\ConsoleColour;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ConsoleColourTest extends TestCase
 {
-    public const STYLES_COUNT = 43;
+    public const STYLES_COUNT = 45;
 
     /** @var ConsoleColourWithForceSupport */
     private $color;
@@ -51,7 +51,7 @@ class ConsoleColourTest extends TestCase
     public function BoldColorsAreNotSupportedButAreForced(): void
     {
         $this->color->setIsSupported(false);
-        $this->color->setForceStyle(true);
+        $this->color->force(true);
 
         $output = $this->color->apply(Styles::BOLD, 'text');
         $this->assertEquals("\033[1mtext\033[0m", $output);
@@ -215,9 +215,9 @@ class ConsoleColourTest extends TestCase
     /** @test */
     public function ForceStyle(): void
     {
-        $this->assertFalse($this->color->isStyleForced());
-        $this->color->setForceStyle(true);
-        $this->assertTrue($this->color->isStyleForced());
+        $this->assertFalse($this->color->isForced());
+        $this->color->force(true);
+        $this->assertTrue($this->color->isForced());
     }
 
     /** @test */
@@ -255,7 +255,6 @@ class ConsoleColourTest extends TestCase
     protected function setUp(): void
     {
         $this->color = new ConsoleColourWithForceSupport();
-//        $this->uut->doNotThrowOnError();
     }
 
 }

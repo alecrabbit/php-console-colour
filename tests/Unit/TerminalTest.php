@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\tests\Unit;
+namespace AlecRabbit\Tests\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Terminal;
 use PHPUnit\Framework\TestCase;

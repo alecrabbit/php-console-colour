@@ -4,22 +4,22 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 interface Color
 {
-    public const DEFAULT = 11;
-    public const BLACK = 12;
-    public const RED = 13;
-    public const GREEN = 14;
-    public const YELLOW = 15;
-    public const BLUE = 16;
-    public const MAGENTA = 17;
-    public const CYAN = 18;
-    public const LIGHT_GRAY = 19;
+    public const DEFAULT = 39;
+    public const BLACK = 30;
+    public const RED = 31;
+    public const GREEN = 32;
+    public const YELLOW = 33;
+    public const BLUE = 34;
+    public const MAGENTA = 35;
+    public const CYAN = 36;
+    public const LIGHT_GRAY = 37;
 
-    public const DARK_GRAY = 21;
-    public const LIGHT_RED = 22;
-    public const LIGHT_GREEN = 23;
-    public const LIGHT_YELLOW = 24;
-    public const LIGHT_BLUE = 25;
-    public const LIGHT_MAGENTA = 26;
-    public const LIGHT_CYAN = 27;
-    public const WHITE = 28;
+    public const DARK_GRAY = 90;
+    public const LIGHT_RED = 91;
+    public const LIGHT_GREEN = 92;
+    public const LIGHT_YELLOW = 93;
+    public const LIGHT_BLUE = 94;
+    public const LIGHT_MAGENTA = 95;
+    public const LIGHT_CYAN = 96;
+    public const WHITE = 97;
 }

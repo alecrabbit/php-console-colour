@@ -14,18 +14,13 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
-    "alecrabbit/php-traits": "^0.2",
-    "jakub-onderka/php-console-color": "^0.2"
+    "alecrabbit/php-traits": "^0.2"
   },
   "require-dev": {
-    "ext-posix": "*",
     "nunomaduro/collision": "^3.0",
     "phpunit/phpunit": "^8.0",
     "symfony/var-dumper": "^4.2",
-    "alecrabbit/php-helpers": "^0.5.0"
-  },
-  "suggest": {
-    "ext-posix": ""
+    "alecrabbit/php-helpers": "^0.5.1"
   },
   "autoload": {
     "psr-4": {
@@ -34,7 +29,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "AlecRabbit\\Tests\\": "tests/"
+      "AlecRabbit\\Tests\\": "tests"
     }
   },
   "minimum-stability": "beta"
