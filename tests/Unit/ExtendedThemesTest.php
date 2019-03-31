@@ -7,7 +7,7 @@ use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
-class ExtendedStylesTest extends TestCase
+class ExtendedThemesTest extends TestCase
 {
     public const STYLES = [
         'fire' => "\033[91;1;107;3m",

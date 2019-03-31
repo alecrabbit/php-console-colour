@@ -34,7 +34,7 @@ class Themes implements DefaultStyles
     /** @var bool */
     protected $doColorize = false;
 
-    /** @var ConsoleColour */
+    /** @var ConsoleColor */
     protected $color;
 
     /**
@@ -44,7 +44,7 @@ class Themes implements DefaultStyles
      */
     public function __construct(?bool $colorize = null)
     {
-        $this->color = new ConsoleColour();
+        $this->color = new ConsoleColor();
         $this->doColorize = $this->refineColorize($colorize);
         $this->setThemes();
     }
