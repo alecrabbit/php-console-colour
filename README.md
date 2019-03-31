@@ -16,18 +16,32 @@
 
 based on [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Console-Color)
 
-changes related to usage in docker container on Linux systems
+### ConsoleColor::class
 
-```dockerfile
-...
-    environment:
-      DOCKER_TERM: "$TERM"  # Pass $TERM var to container
-...
-```
+// TODO 
 
 ### Terminal::class
+##### Usage 
+```php
+    $term = new Terminal();
+    $width = $term->width(); 
+```
 This class is used as a part of a package to determine color support, also it can be used to determine width and height of terminal window.
 Checks performed on first call, if you want to check again use `$recheck` parameter. 
+> Note: Creating new instance of terminal object does not change width and height values(they are static). If you want to know resized terminal dimensions use `$recheck` parameter.
+> ```php
+> $term = new Terminal();
+> $width = $term->width(); // width (e.g. 80)
+> 
+>    /* terminal resized by user */
+> 
+> $term2 = new Terminal();
+> $width = $term2->width(); // same width value (80)
+> $width = $term2->width(true); // new width value (e.g. 120)
+> ``` 
+> Same with color support but probability of changing it in runtime is practically zero.
+
+Class methods:
 ```php
     public function supportsColor(bool $recheck = false): bool;
 
@@ -37,10 +51,14 @@ Checks performed on first call, if you want to check again use `$recheck` parame
 
     public function height(bool $recheck = false): int;
 ```
-##### Usage 
-```php
-    $term = new Terminal();
-    $width = $term->width();
+##### Notes on Docker environment
+To ensure color support you can pass one(or both) env variables to container
+```dockerfile
+...
+    environment:
+      TERM: "xterm"  # standard color support
+      DOCKER_TERM: "xterm-256color"  # 256 color support
+...
 ```
 
 ### Theme::class
@@ -49,6 +67,10 @@ Checks performed on first call, if you want to check again use `$recheck` parame
     $theme = new Theme();
     echo $theme->red('This text is red.') . PHP_EOL;
     echo $theme->underlineBold('This text is underlined and bold.') . PHP_EOL;
+```
+Basically methods of this class just applying corresponding escape sequences to `$text`
+```php
+$colorized = $theme->darkItalic('This text is dark and italic.') // '\033[2;3mThis text is dark and italic.\033[0m'
 ```
 ##### Methods
 ```php
