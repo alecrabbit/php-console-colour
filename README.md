@@ -26,29 +26,23 @@ changes related to usage in docker container on Linux systems
 ```
 
 ### Terminal::class
+This class is used as a part of a package to determine color support, also it can be used to determine width and height of terminal window.
+Checks performed on first call, if you want to check again use `$recheck` parameter. 
 ```php
-    /**
-     * @return bool
-     */
-    public function supportsColor(): bool;
+    public function supportsColor(bool $recheck = false): bool;
 
-    /**
-     * @return bool
-     */
-    public function supports256Color(): bool;
+    public function supports256Color(bool $recheck = false): bool;
 
-    /**
-     * @param bool $recheck
-     * @return int
-     */
     public function width(bool $recheck = false): int;
 
-    /**
-     * @param bool $recheck
-     * @return int
-     */
     public function height(bool $recheck = false): int;
 ```
+##### Usage 
+```php
+    $term = new Terminal();
+    $width = $term->width();
+```
+
 ### Theme::class
 ##### Usage 
 ```php
