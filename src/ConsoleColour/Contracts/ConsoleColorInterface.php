@@ -18,7 +18,7 @@ interface ConsoleColorInterface extends Styles
     /**
      * @return bool
      */
-    public function isStyleForced(): bool;
+    public function isForced(): bool;
 
     /**
      * @return bool
@@ -33,7 +33,7 @@ interface ConsoleColorInterface extends Styles
     /**
      * @param bool $forceStyle
      */
-    public function setForceStyle(bool $forceStyle): void;
+    public function force(bool $forceStyle): void;
 
     /**
      * @return array

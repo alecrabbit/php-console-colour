@@ -14,8 +14,6 @@ class ConsoleColour extends ConsoleColor
 {
     use DoesProcessException;
 
-    public const ESC_CHAR = "\033";
-
     /** @var bool */
     protected $force256Colors;
 

@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Tests\ConsoleColour;
 
+use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColorWithForceSupport;
@@ -14,6 +15,25 @@ class ConsoleColorTest extends TestCase
 
     /** @var ConsoleColorWithForceSupport */
     private $color;
+
+    /**
+     * @test
+     * @throws \Throwable
+     */
+    public function instance(): void
+    {
+        $cc = new ConsoleColor(false, false);
+        $this->assertFalse($cc->isForced());
+        $cc = new ConsoleColor(true, false);
+        $this->assertTrue($cc->isForced());
+        $this->assertTrue($cc->isSupported());
+        $cc = new ConsoleColor(true, true);
+        $this->assertTrue($cc->isForced());
+        $this->assertTrue($cc->isSupported());
+        $this->assertTrue($cc->are256ColorsSupported());
+        $cc = new ConsoleColor(false, true);
+        $this->assertFalse($cc->isForced());
+    }
 
     /**
      * @test
@@ -54,7 +74,7 @@ class ConsoleColorTest extends TestCase
     public function BoldColorsAreNotSupportedButAreForced(): void
     {
         $this->color->setIsSupported(false);
-        $this->color->setForceStyle(true);
+        $this->color->force(true);
 
         $output = $this->color->apply(Styles::BOLD, self::TEXT);
         $this->assertEquals("\033[1mtext\033[0m", $output);
@@ -223,9 +243,9 @@ class ConsoleColorTest extends TestCase
 
     public function testForceStyle(): void
     {
-        $this->assertFalse($this->color->isStyleForced());
-        $this->color->setForceStyle(true);
-        $this->assertTrue($this->color->isStyleForced());
+        $this->assertFalse($this->color->isForced());
+        $this->color->force(true);
+        $this->assertTrue($this->color->isForced());
     }
 
     /** @test */

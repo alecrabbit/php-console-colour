@@ -54,7 +54,7 @@ class ConsoleColourTwoTest extends TestCase
     public function BoldColorsAreNotSupportedButAreForced(): void
     {
         $this->uut->setIsSupported(false);
-        $this->uut->setForceStyle(true);
+        $this->uut->force(true);
 
         $output = $this->uut->apply(Styles::BOLD, 'text');
         $this->assertEquals("\033[1mtext\033[0m", $output);
@@ -237,9 +237,9 @@ class ConsoleColourTwoTest extends TestCase
      */
     public function ForceStyle(): void
     {
-        $this->assertFalse($this->uut->isStyleForced());
-        $this->uut->setForceStyle(true);
-        $this->assertTrue($this->uut->isStyleForced());
+        $this->assertFalse($this->uut->isForced());
+        $this->uut->force(true);
+        $this->assertTrue($this->uut->isForced());
     }
 
     /**
