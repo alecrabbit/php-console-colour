@@ -36,13 +36,13 @@ class ThemesTest extends TestCase
         'blue' => self::ESC . '[34m',
         'lightGray' => self::ESC . '[37m',
         'darkGray' => self::ESC . '[90m',
-        'lightRed' => self::ESC . '[4;1m',
-        'lightGreen' => self::ESC . '[4;3m',
-        'lightYellow' => self::ESC . '[3m',
-        'lightBlue' => self::ESC . '[2m',
-        'lightMagenta' => self::ESC . '[1m',
-        'lightCyan' => self::ESC . '[2;3m',
-        'crossed' => self::ESC . '[32m',
+        'lightRed' => self::ESC . '[91m',
+        'lightGreen' => self::ESC . '[92m',
+        'lightYellow' => self::ESC . '[93m',
+        'lightBlue' => self::ESC . '[94m',
+        'lightMagenta' => self::ESC . '[95m',
+        'lightCyan' => self::ESC . '[96m',
+        'crossed' => self::ESC . '[9m',
     ];
 
     /** @var \AlecRabbit\ConsoleColour\Themes\Themes */
