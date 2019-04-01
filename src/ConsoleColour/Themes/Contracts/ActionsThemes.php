@@ -13,11 +13,13 @@ interface ActionsThemes
     public const COMMENT = 'comment';
     public const INFO = 'info';
     public const ERROR = 'error';
+    public const WARNING = 'warning';
 
     public const ACTIONS = [
         self::DEBUG => Effect::DARK,
         self::COMMENT => Color::YELLOW,
         self::ERROR => [Color::WHITE, Effect::BOLD, BG::RED],
+        self::WARNING => [Color::LIGHT_YELLOW],
         self::INFO => Color::GREEN,
     ];
 }

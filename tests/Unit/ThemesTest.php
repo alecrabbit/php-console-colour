@@ -23,6 +23,7 @@ class ThemesTest extends TestCase
         'yellow' => self::ESC . '[33m',
         'green' => self::ESC . '[32m',
         'error' => self::ESC . '[97;1;41m',
+        'warning' => self::ESC . '[93m',
         'red' => self::ESC . '[31m',
         'info' => self::ESC . '[32m',
         'underlined' => self::ESC . '[4m',
