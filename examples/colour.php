@@ -7,8 +7,11 @@ use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Contracts\Effect;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 
+const YES = 'Yes';
+const NO = 'No';
 const TEXT = '  *** Sample text ***  ';
-const UNSUPPORTED = [Styles::BLINK_FAST, Styles::DOUBLE_UNDERLINE, Styles::CROSSED_OUT];
+const NOT_WIDELY_SUPPORTED = ' (Not widely supported)';
+const RARELY_SUPPORTED = [Styles::BLINK_FAST, Styles::DOUBLE_UNDERLINE, Styles::CROSSED_OUT];
 
 try {
     perform(new ConsoleColor());
@@ -23,21 +26,21 @@ try {
 function perform(ConsoleColor $colour): void
 {
     echo '[' . get_class($colour) . ']' . PHP_EOL;
-    echo 'Colors are supported: ' . ($colour->isSupported() ? 'Yes' : 'No') . PHP_EOL;
+    echo 'Colors are supported: ' . ($colour->isSupported() ? YES : NO) . PHP_EOL;
     if ($colour->isSupported()) {
         echo 'Regular colors...' . PHP_EOL;
 
         foreach ($colour->getPossibleStyles() as $style) {
             $name = Styles::NAMES[$style];
-            if (\in_array($style, UNSUPPORTED, true)) {
-                $name .=  $colour->apply(Effect::DARK, ' (Not widely supported)')  ;
+            if (\in_array($style, RARELY_SUPPORTED, true)) {
+                $name .=  $colour->apply(Effect::DARK, NOT_WIDELY_SUPPORTED)  ;
             }
             echo
                 ' ' . $colour->apply($style, TEXT) . ' ' . $name . PHP_EOL;
         }
 
         echo PHP_EOL;
-        echo '256 colors are supported: ' . ($colour->are256ColorsSupported() ? 'Yes' : 'No') . PHP_EOL;
+        echo '256 colors are supported: ' . ($colour->are256ColorsSupported() ? YES : NO) . PHP_EOL;
         if ($colour->are256ColorsSupported()) {
             echo 'Foreground colors:' . PHP_EOL;
             display($colour);
