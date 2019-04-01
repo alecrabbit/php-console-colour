@@ -1,8 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour\Themes;
+namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\BG;
 use AlecRabbit\ConsoleColour\Contracts\Color;
 use AlecRabbit\ConsoleColour\Contracts\Effect;
 use AlecRabbit\ConsoleColour\Core\AbstractThemes;

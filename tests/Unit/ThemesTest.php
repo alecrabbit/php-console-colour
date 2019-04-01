@@ -4,7 +4,7 @@ namespace AlecRabbit\Tests\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\ConsoleColour\Themes\Themes;
+use AlecRabbit\ConsoleColour\Themes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 
@@ -45,9 +45,9 @@ class ThemesTest extends TestCase
         'crossed' => self::ESC . '[9m',
     ];
 
-    /** @var \AlecRabbit\ConsoleColour\Themes\Themes */
+    /** @var \AlecRabbit\ConsoleColour\Themes */
     private $colorized;
-    /** @var \AlecRabbit\ConsoleColour\Themes\Themes */
+    /** @var \AlecRabbit\ConsoleColour\Themes */
     private $nonColorized;
 
     /** @test */
@@ -55,7 +55,7 @@ class ThemesTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\BadMethodCallException::class);
-        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Themes\Themes::unknownMethod].');
+        $this->expectExceptionMessage('Unknown method call [AlecRabbit\ConsoleColour\Themes::unknownMethod].');
         $this->assertEquals($text, $this->nonColorized->unknownMethod($text));
     }
 
@@ -64,7 +64,7 @@ class ThemesTest extends TestCase
     {
         $text = 'sample';
         $this->expectException(\ArgumentCountError::class);
-        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Themes\Themes::red] accepts only one argument.');
+        $this->expectExceptionMessage('Method [AlecRabbit\ConsoleColour\Themes::red] accepts only one argument.');
         $this->assertEquals($text, $this->nonColorized->red($text, $text));
     }
 

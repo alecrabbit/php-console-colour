@@ -3,7 +3,7 @@
 namespace AlecRabbit\Tests;
 
 use AlecRabbit\ConsoleColour\Contracts\Styles as Style;
-use AlecRabbit\ConsoleColour\Themes\Themes;
+use AlecRabbit\ConsoleColour\Themes;
 
 /**
  * @method fire(string $text)
