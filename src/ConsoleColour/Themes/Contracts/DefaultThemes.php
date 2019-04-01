@@ -2,11 +2,10 @@
 
 namespace AlecRabbit\ConsoleColour\Themes\Contracts;
 
-use AlecRabbit\ConsoleColour\Contracts\Styles as Style;
-
 interface DefaultThemes
 {
     // These strings are used as methods names
+    public const DEBUG = 'debug';
     public const COMMENT = 'comment';
     public const INFO = 'info';
     public const ERROR = 'error';
@@ -26,27 +25,4 @@ interface DefaultThemes
     public const UNDERLINED = 'underlined';
     public const UNDERLINED_BOLD = 'underlinedBold';
     public const UNDERLINED_ITALIC = 'underlinedItalic';
-
-    public const THEMES = [
-        // name => [styles],
-        self::COMMENT => Style::YELLOW,
-        self::ERROR => [Style::WHITE, Style::BOLD, Style::BG_RED],
-        self::INFO => Style::GREEN,
-
-        self::YELLOW => Style::YELLOW,
-        self::GREEN => Style::GREEN,
-        self::RED => Style::RED,
-        self::CYAN => Style::CYAN,
-        self::MAGENTA => Style::MAGENTA,
-
-        self::ITALIC => Style::ITALIC,
-        self::BOLD => Style::BOLD,
-        self::DARK => Style::DARK,
-        self::DARK_ITALIC => [Style::DARK, Style::ITALIC],
-        self::WHITE => Style::WHITE,
-        self::WHITE_BOLD => [Style::WHITE, Style::BOLD],
-        self::UNDERLINED => [Style::UNDERLINE],
-        self::UNDERLINED_BOLD => [Style::UNDERLINE, Style::BOLD],
-        self::UNDERLINED_ITALIC => [Style::UNDERLINE, Style::ITALIC],
-    ];
 }
