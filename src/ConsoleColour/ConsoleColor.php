@@ -30,7 +30,7 @@ class ConsoleColor implements ConsoleColorInterface
     public function __construct(?bool $force = null, bool $force256Colors = false)
     {
         $this->setColorSupport($force ?? false, $force256Colors);
-        $this->setForced($force ?? false);
+        $this->forced = $force ?? false;
     }
 
     protected function setColorSupport(bool $force, bool $force256Colors): void
@@ -210,11 +210,6 @@ class ConsoleColor implements ConsoleColorInterface
     public function isForced(): bool
     {
         return $this->forced;
-    }
-
-    protected function setForced(bool $forced): void
-    {
-        $this->forced = $forced;
     }
 
     /** {@inheritdoc} */
