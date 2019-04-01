@@ -31,11 +31,6 @@ interface ConsoleColorInterface extends Styles
     public function are256ColorsSupported(): bool;
 
     /**
-     * @param bool $forceStyle
-     */
-    public function force(bool $forceStyle): void;
-
-    /**
      * @return array
      */
     public function getThemes(): array;

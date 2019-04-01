@@ -218,12 +218,6 @@ class ConsoleColor implements ConsoleColorInterface
     }
 
     /** {@inheritdoc} */
-    public function force(bool $force): void
-    {
-        $this->force = $force;
-    }
-
-    /** {@inheritdoc} */
     public function getThemes(): array
     {
         return $this->themes;
