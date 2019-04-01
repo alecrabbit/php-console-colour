@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour;
+namespace AlecRabbit\ConsoleColour\Themes;
 
-use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
+use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Themes\Contracts\DefaultThemes;
 
 /**
  * @method comment(string $text)

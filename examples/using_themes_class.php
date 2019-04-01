@@ -6,7 +6,7 @@ use AlecRabbit\ConsoleColour\Contracts\BG;
 use AlecRabbit\ConsoleColour\Contracts\Color;
 use AlecRabbit\ConsoleColour\Contracts\Effect;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
-use AlecRabbit\ConsoleColour\Themes;
+use AlecRabbit\ConsoleColour\Themes\Themes;
 
 /**
  * @method fire(string $text)
