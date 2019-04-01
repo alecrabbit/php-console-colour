@@ -28,6 +28,21 @@ class ThemesTest extends TestCase
         'underlined' => self::ESC . '[4m',
         'underlinedBold' => self::ESC . '[4;1m',
         'underlinedItalic' => self::ESC . '[4;3m',
+
+        'debug' => self::ESC . '[2m',
+        'cyan' => self::ESC . '[36m',
+        'magenta' => self::ESC . '[35m',
+        'black' => self::ESC . '[30m',
+        'blue' => self::ESC . '[34m',
+        'lightGray' => self::ESC . '[37m',
+        'darkGray' => self::ESC . '[90m',
+        'lightRed' => self::ESC . '[4;1m',
+        'lightGreen' => self::ESC . '[4;3m',
+        'lightYellow' => self::ESC . '[3m',
+        'lightBlue' => self::ESC . '[2m',
+        'lightMagenta' => self::ESC . '[1m',
+        'lightCyan' => self::ESC . '[2;3m',
+        'crossed' => self::ESC . '[32m',
     ];
 
     /** @var \AlecRabbit\ConsoleColour\Themes\Themes */
@@ -64,7 +79,9 @@ class ThemesTest extends TestCase
         foreach (self::THEMES as $methodName => $theme) {
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
-                Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
+                Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m',
+                Helper::stripEscape($result),
+                $methodName
             );
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
         }

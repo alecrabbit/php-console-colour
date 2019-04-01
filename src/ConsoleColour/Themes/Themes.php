@@ -2,9 +2,11 @@
 
 namespace AlecRabbit\ConsoleColour\Themes;
 
+use AlecRabbit\ConsoleColour\Contracts\BG;
+use AlecRabbit\ConsoleColour\Contracts\Color;
+use AlecRabbit\ConsoleColour\Contracts\Effect;
 use AlecRabbit\ConsoleColour\Core\AbstractThemes;
 use AlecRabbit\ConsoleColour\Themes\Contracts\DefaultThemes;
-use AlecRabbit\ConsoleColour\Contracts\Styles as Style;
 
 /**
  * @method comment(string $text)
@@ -30,29 +32,44 @@ use AlecRabbit\ConsoleColour\Contracts\Styles as Style;
 class Themes extends AbstractThemes implements DefaultThemes
 {
     public const ACTIONS = [
-        self::DEBUG => Style::DARK,
-        self::COMMENT => Style::YELLOW,
-        self::ERROR => [Style::WHITE, Style::BOLD, Style::BG_RED],
-        self::INFO => Style::GREEN,
+        self::DEBUG => Effect::DARK,
+        self::COMMENT => Color::YELLOW,
+        self::ERROR => [Color::WHITE, Effect::BOLD, BG::RED],
+        self::INFO => Color::GREEN,
     ];
 
-    public const COLOR = [
-        self::YELLOW => Style::YELLOW,
-        self::GREEN => Style::GREEN,
-        self::RED => Style::RED,
-        self::CYAN => Style::CYAN,
-        self::MAGENTA => Style::MAGENTA,
+    public const COLORS = [
+        self::BLACK => Color::BLACK,
+        self::YELLOW => Color::YELLOW,
+        self::GREEN => Color::GREEN,
+        self::RED => Color::RED,
+        self::CYAN => Color::CYAN,
+        self::MAGENTA => Color::MAGENTA,
+        self::BLUE => Color::BLUE,
+        self::LIGHT_GRAY => Color::LIGHT_GRAY,
+        self::DARK_GRAY => Color::DARK_GRAY,
+        self::LIGHT_RED => Color::LIGHT_RED,
+        self::LIGHT_GREEN => Color::LIGHT_GREEN,
+        self::LIGHT_YELLOW => Color::LIGHT_YELLOW,
+        self::LIGHT_BLUE => Color::LIGHT_BLUE,
+        self::LIGHT_MAGENTA => Color::LIGHT_MAGENTA,
+        self::LIGHT_CYAN => Color::LIGHT_CYAN,
+        self::WHITE => Color::WHITE,
     ];
+
+    public const EFFECTS = [
+        self::ITALIC => Effect::ITALIC,
+        self::BOLD => Effect::BOLD,
+        self::DARK => Effect::DARK,
+        self::UNDERLINED => [Effect::UNDERLINE],
+        self::CROSSED => [Effect::CROSSED_OUT],
+    ];
+
     public const THEMES = [
-        self::ITALIC => Style::ITALIC,
-        self::BOLD => Style::BOLD,
-        self::DARK => Style::DARK,
-        self::DARK_ITALIC => [Style::DARK, Style::ITALIC],
-        self::WHITE => Style::WHITE,
-        self::WHITE_BOLD => [Style::WHITE, Style::BOLD],
-        self::UNDERLINED => [Style::UNDERLINE],
-        self::UNDERLINED_BOLD => [Style::UNDERLINE, Style::BOLD],
-        self::UNDERLINED_ITALIC => [Style::UNDERLINE, Style::ITALIC],
+        self::DARK_ITALIC => [Effect::DARK, Effect::ITALIC],
+        self::WHITE_BOLD => [Color::WHITE, Effect::BOLD],
+        self::UNDERLINED_BOLD => [Effect::UNDERLINE, Effect::BOLD],
+        self::UNDERLINED_ITALIC => [Effect::UNDERLINE, Effect::ITALIC],
     ];
 
     /**
@@ -60,6 +77,6 @@ class Themes extends AbstractThemes implements DefaultThemes
      */
     protected function prepareThemes(): array
     {
-        return \array_merge(static::ACTIONS, static::COLOR, static::THEMES);
+        return \array_merge(static::ACTIONS, static::COLORS,static::EFFECTS, static::THEMES);
     }
 }
