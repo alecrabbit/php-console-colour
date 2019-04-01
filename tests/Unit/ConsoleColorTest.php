@@ -330,8 +330,8 @@ class ConsoleColorTest extends TestCase
             $this->cTT->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
         );
 
-//        $this->expectException(\RuntimeException::class);
-//        $this->expectExceptionMessage('Theme [' . self::BOLD_DARK . '] is already set.');
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Theme [' . self::BOLD_DARK . '] is already set.');
         $this->cFF->addTheme(self::BOLD_DARK, self::THEME_STYLES);
     }
 

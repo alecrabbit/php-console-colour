@@ -8,6 +8,7 @@ use AlecRabbit\ConsoleColour\Themes\Themes;
 /**
  * @method fire(string $text)
  * @method new(string $text)
+ * @method error(string $text) Redefining theme
  */
 class ExtendedThemes extends Themes
 {
@@ -19,6 +20,7 @@ class ExtendedThemes extends Themes
         // name => [styles],
         self::FIRE => [Style::LIGHT_RED, Style::BOLD, Style::BG_WHITE, Style::ITALIC],
         self::NEW => [Style::LIGHT_CYAN, Style::BG_BLACK, Style::UNDERLINE],
+        self::ERROR => [Style::RED, Style::BG_WHITE, Style::UNDERLINE],
     ];
 
     /**
