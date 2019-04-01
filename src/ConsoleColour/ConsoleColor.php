@@ -179,7 +179,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function assertStyles($styles): void
     {
         if (!\is_array($styles)) {
-            throw new \InvalidArgumentException('Styles must be int, string or array.');
+            throw new \InvalidArgumentException('Styles must be type of int, string or array.');
         }
     }
 
