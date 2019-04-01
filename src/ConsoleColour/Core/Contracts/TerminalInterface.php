@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour\Contracts;
+namespace AlecRabbit\ConsoleColour\Core\Contracts;
 
 /**
  * Interface TerminalInterface

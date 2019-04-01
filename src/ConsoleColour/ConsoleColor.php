@@ -2,8 +2,8 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
+use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 class ConsoleColor implements ConsoleColorInterface

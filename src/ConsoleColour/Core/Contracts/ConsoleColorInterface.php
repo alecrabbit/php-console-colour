@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour\Contracts;
+namespace AlecRabbit\ConsoleColour\Core\Contracts;
 
+use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 interface ConsoleColorInterface extends Styles
