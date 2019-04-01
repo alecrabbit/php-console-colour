@@ -14,7 +14,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected $supported;
 
     /** @var bool */
-    protected $force;
+    protected $forced;
 
     /** @var array */
     protected $themes = [];
@@ -29,32 +29,23 @@ class ConsoleColor implements ConsoleColorInterface
      */
     public function __construct(?bool $force = null, bool $force256Colors = false)
     {
-        $this->force = $force ?? false;
-        $this->setColorSupport($force256Colors);
+        $this->setColorSupport($force ?? false, $force256Colors);
+        $this->setForced($force ?? false);
     }
 
-    protected function setColorSupport(bool $force256Colors): void
+    protected function setColorSupport(bool $force, bool $force256Colors): void
     {
         $terminal = new Terminal();
-        $this->supported = $this->isForced() || $terminal->supportsColor();
-        $this->are256ColorsSupported = $this->isSupported() && ($force256Colors || $terminal->supports256Color());
-    }
-
-    /** {@inheritdoc} */
-    public function isForced(): bool
-    {
-        return $this->force;
+        $this->supported = $force || $terminal->supportsColor();
+        $this->are256ColorsSupported = $this->supported && ($force256Colors || $terminal->supports256Color());
     }
 
     /** {@inheritdoc} */
     public function apply($styles, $text): string
     {
-        if (!$this->isForced() && !$this->isSupported()) {
+        if (!$this->isSupported()) {
             return $text;
         }
-//        if (!$this->isForced() && !$this->isSupported()) {
-//            return $text;
-//        }
 
         $sequences =
             $this->getSequencesFrom(
@@ -93,7 +84,7 @@ class ConsoleColor implements ConsoleColorInterface
             }
         }
 
-        $sequences =
+        return
             array_filter(
                 array_merge(...$sequences),
                 /**
@@ -105,8 +96,6 @@ class ConsoleColor implements ConsoleColorInterface
                     return $val !== null;
                 }
             );
-
-        return $sequences;
     }
 
     /**
@@ -215,6 +204,17 @@ class ConsoleColor implements ConsoleColorInterface
     {
         return
             static::ESC_CHAR . '[' . $value . 'm';
+    }
+
+    /** {@inheritdoc} */
+    public function isForced(): bool
+    {
+        return $this->forced;
+    }
+
+    protected function setForced(bool $forced): void
+    {
+        $this->forced = $forced;
     }
 
     /** {@inheritdoc} */

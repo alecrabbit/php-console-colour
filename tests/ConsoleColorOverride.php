@@ -6,9 +6,9 @@ use AlecRabbit\ConsoleColour\ConsoleColor;
 
 class ConsoleColorOverride extends ConsoleColor
 {
-    protected function setColorSupport(bool $force256Colors): void
+    protected function setColorSupport(bool $force, bool $force256Colors): void
     {
-        $this->supported = $this->isForced();
+        $this->supported = $force;
         $this->are256ColorsSupported = $this->supported && $force256Colors;
     }
 }
