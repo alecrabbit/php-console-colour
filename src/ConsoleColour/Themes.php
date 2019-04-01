@@ -14,6 +14,7 @@ use AlecRabbit\ConsoleColour\Themes\Contracts\EffectsThemes;
  * @method comment(string $text)
  * @method info(string $text)
  * @method error(string $text)
+ * @method warning(string $text)
  * @method yellow(string $text)
  * @method green(string $text)
  * @method red(string $text)
