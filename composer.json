@@ -6,6 +6,7 @@
     "console",
     "color",
     "colour",
+    "ansi",
     "terminal",
     "width",
     "height",
@@ -24,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\ConsoleColour\\": "src\\ConsoleColour"
+      "AlecRabbit\\": "src"
     }
   },
   "autoload-dev": {

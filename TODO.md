@@ -1,4 +1,4 @@
- - [ ] split `Theme::class`
+ - [ ] split `Themes::class`
  - [ ] simplify adding new theme
  
  - [x] ~~simplify `ConsoleColour` class~~ removed

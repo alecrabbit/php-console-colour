@@ -5,6 +5,7 @@ namespace AlecRabbit\ConsoleColour\Themes;
 use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\ConsoleColour\Themes\Contracts\DefaultThemes;
+use AlecRabbit\ConsoleColour\Core\AbstractThemes;
 
 /**
  * @method comment(string $text)
@@ -27,7 +28,7 @@ use AlecRabbit\ConsoleColour\Themes\Contracts\DefaultThemes;
  * @method underlinedBold(string $text)
  * @method underlinedItalic(string $text)
  */
-class Themes implements DefaultThemes
+class Themes extends AbstractThemes implements DefaultThemes
 {
     /** @var array */
     protected $definedThemes;
