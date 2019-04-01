@@ -24,12 +24,12 @@ class ConsoleColor implements ConsoleColorInterface
 
     /**
      * ConsoleColor constructor.
-     * @param bool $force
+     * @param null|bool $force
      * @param bool $force256Colors
      */
-    public function __construct(bool $force = false, bool $force256Colors = false)
+    public function __construct(?bool $force = null, bool $force256Colors = false)
     {
-        $this->force = $force;
+        $this->force = $force ?? false;
         $this->setColorSupport($force256Colors);
     }
 
@@ -37,7 +37,7 @@ class ConsoleColor implements ConsoleColorInterface
     {
         $terminal = new Terminal();
         $this->supported = $this->isForced() || $terminal->supportsColor();
-        $this->are256ColorsSupported = $force256Colors || $terminal->supports256Color();
+        $this->are256ColorsSupported = $this->isSupported() && ($force256Colors || $terminal->supports256Color());
     }
 
     /** {@inheritdoc} */

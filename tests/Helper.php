@@ -2,6 +2,8 @@
 
 namespace AlecRabbit\Tests;
 
+use AlecRabbit\ConsoleColour\ConsoleColor;
+
 class Helper
 {
     /**
@@ -10,6 +12,6 @@ class Helper
      */
     public static function stripEscape(string $str)
     {
-        return str_replace("\033", '\033', $str);
+        return str_replace(ConsoleColor::ESC_CHAR, '\033', $str);
     }
 }

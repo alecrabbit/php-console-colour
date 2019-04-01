@@ -9,6 +9,6 @@ class ConsoleColorOverride extends ConsoleColor
     protected function setColorSupport(bool $force256Colors): void
     {
         $this->supported = $this->isForced();
-        $this->are256ColorsSupported = $force256Colors;
+        $this->are256ColorsSupported = $this->supported && $force256Colors;
     }
 }
