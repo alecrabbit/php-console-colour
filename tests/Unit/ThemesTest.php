@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Tests\ConsoleColour;
 
+use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\ConsoleColour\Themes\Themes;
 use AlecRabbit\Tests\Helper;
@@ -9,22 +10,24 @@ use PHPUnit\Framework\TestCase;
 
 class ThemesTest extends TestCase
 {
+    public const ESC = ConsoleColor::ESC_CHAR;
+
     public const THEMES = [
-        'italic' => "\033[3m",
-        'dark' => "\033[2m",
-        'bold' => "\033[1m",
-        'darkItalic' => "\033[2;3m",
-        'white' => "\033[97m",
-        'whiteBold' => "\033[97;1m",
-        'comment' => "\033[33m",
-        'yellow' => "\033[33m",
-        'green' => "\033[32m",
-        'error' => "\033[97;1;41m",
-        'red' => "\033[31m",
-        'info' => "\033[32m",
-        'underlined' => "\033[4m",
-        'underlinedBold' => "\033[4;1m",
-        'underlinedItalic' => "\033[4;3m",
+        'italic' => self::ESC . '[3m',
+        'dark' => self::ESC . '[2m',
+        'bold' => self::ESC . '[1m',
+        'darkItalic' => self::ESC . '[2;3m',
+        'white' => self::ESC . '[97m',
+        'whiteBold' => self::ESC . '[97;1m',
+        'comment' => self::ESC . '[33m',
+        'yellow' => self::ESC . '[33m',
+        'green' => self::ESC . '[32m',
+        'error' => self::ESC . '[97;1;41m',
+        'red' => self::ESC . '[31m',
+        'info' => self::ESC . '[32m',
+        'underlined' => self::ESC . '[4m',
+        'underlinedBold' => self::ESC . '[4;1m',
+        'underlinedItalic' => self::ESC . '[4;3m',
     ];
 
     /** @var \AlecRabbit\ConsoleColour\Themes\Themes */
