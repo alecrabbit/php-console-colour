@@ -11,11 +11,16 @@ use PHPUnit\Framework\TestCase;
 class ConsoleColorTest extends TestCase
 {
 
-    public const TEXT = 'Text to apply style to.';
-    public const ESC_CHAR = ConsoleColor::ESC_CHAR;
     public const STYLES_COUNT = 45;
+    public const TEXT = 'Text to apply style to.';
+
     public const COLOR_2156 = 'color_2156';
     public const INVALID = 'invalid';
+    public const BOLD_DARK = 'bold_dark';
+    public const THEMES = [self::BOLD_DARK => self::THEME_STYLES];
+    public const THEME_STYLES = [Styles::BOLD, Styles::DARK];
+
+    public const ESC_CHAR = ConsoleColor::ESC_CHAR;
 
     /** @var ConsoleColorOverride */
     private $cFF;
@@ -154,7 +159,7 @@ class ConsoleColorTest extends TestCase
     }
 
     /** @test */
-    public function GetPossibleStyles(): void
+    public function getPossibleStyles(): void
     {
         $this->helperCheckPossibleStyles($this->cFF->getPossibleStyles());
         $this->helperCheckPossibleStyles($this->cFT->getPossibleStyles());
@@ -176,7 +181,7 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ThemeInvalidStyleCFF(): void
+    public function themeInvalidStyleCFF(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cFF->addTheme(self::INVALID, [self::INVALID]);
@@ -186,7 +191,7 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ThemeInvalidStyleCFT(): void
+    public function themeInvalidStyleCFT(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cFT->addTheme(self::INVALID, [self::INVALID]);
@@ -196,7 +201,7 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ThemeInvalidStyleCTF(): void
+    public function themeInvalidStyleCTF(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cTF->addTheme(self::INVALID, [self::INVALID]);
@@ -206,7 +211,7 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ThemeInvalidStyleCTT(): void
+    public function themeInvalidStyleCTT(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cTT->addTheme(self::INVALID, [self::INVALID]);
@@ -216,32 +221,16 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidArgumentCFF(): void
+    public function applyInvalidArgument(): void
     {
         $this->assertSame(
             self::TEXT,
             $this->cFF->apply(new \stdClass(), self::TEXT)
         );
-    }
-
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidArgumentCFT(): void
-    {
         $this->assertSame(
             self::TEXT,
             $this->cFT->apply(new \stdClass(), self::TEXT)
         );
-    }
-
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidArgumentCTF(): void
-    {
         $this->expectException(\InvalidArgumentException::class);
         $this->cTF->apply(new \stdClass(), self::TEXT);
     }
@@ -250,7 +239,7 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidArgumentCTT(): void
+    public function applyInvalidArgumentCTT(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->cTT->apply(new \stdClass(), self::TEXT);
@@ -260,32 +249,16 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidStyleCFF(): void
+    public function applyInvalidStyle(): void
     {
         $this->assertSame(
             self::TEXT,
             $this->cFF->apply(self::INVALID, self::TEXT)
         );
-    }
-
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidStyleCFT(): void
-    {
         $this->assertSame(
             self::TEXT,
             $this->cFT->apply(self::INVALID, self::TEXT)
         );
-    }
-
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidStyleCTF(): void
-    {
         $this->expectException(InvalidStyleException::class);
         $this->cTF->apply(self::INVALID, self::TEXT);
     }
@@ -294,41 +267,27 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidStyleCTT(): void
+    public function applyInvalidStyleCTT(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cTT->apply(self::INVALID, self::TEXT);
     }
+
     /**
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidColor256CFF(): void
+    public function applyInvalidColor256(): void
     {
         $this->assertSame(
             self::TEXT,
             $this->cFF->apply(self::COLOR_2156, self::TEXT)
         );
-    }
-
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidColor256CFT(): void
-    {
         $this->assertSame(
             self::TEXT,
             $this->cFT->apply(self::COLOR_2156, self::TEXT)
         );
-    }
 
-    /**
-     * @test
-     * @throws InvalidStyleException
-     */
-    public function ApplyInvalidColor256CTF(): void
-    {
         $this->expectException(InvalidStyleException::class);
         $this->cTF->apply(self::COLOR_2156, self::TEXT);
     }
@@ -337,11 +296,100 @@ class ConsoleColorTest extends TestCase
      * @test
      * @throws InvalidStyleException
      */
-    public function ApplyInvalidColor256CTT(): void
+    public function applyInvalidColor256CTT(): void
     {
         $this->expectException(InvalidStyleException::class);
         $this->cTT->apply(self::COLOR_2156, self::TEXT);
     }
+
+    /**
+     * @test
+     * @throws InvalidStyleException
+     */
+    public function ownThemeWithAdditionalStyle(): void
+    {
+        $this->cFF->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cFT->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cTF->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cTT->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->assertSame(
+            self::TEXT,
+            $this->cFF->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            self::TEXT,
+            $this->cFT->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            $this->helperGetColorStr([1, 2, 3]),
+            $this->cTF->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            $this->helperGetColorStr([1, 2, 3]),
+            $this->cTT->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+    }
+
+    /**
+     * @test
+     * @throws InvalidStyleException
+     */
+    public function setOwnTheme(): void
+    {
+        $this->cFF->setThemes(self::THEMES);
+        $this->cFT->setThemes(self::THEMES);
+        $this->cTF->setThemes(self::THEMES);
+        $this->cTT->setThemes(self::THEMES);
+        $this->assertSame(
+            self::TEXT,
+            $this->cFF->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            self::TEXT,
+            $this->cFT->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            $this->helperGetColorStr([1, 2, 3]),
+            $this->cTF->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+        $this->assertSame(
+            $this->helperGetColorStr([1, 2, 3]),
+            $this->cTT->apply([self::BOLD_DARK, Styles::ITALIC], self::TEXT)
+        );
+    }
+
+    /**
+     * @test
+     * @throws InvalidStyleException
+     */
+    public function hasThemeAddThemeRemoveTheme(): void
+    {
+        $this->assertFalse($this->cFF->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cFT->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cTF->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cTT->hasTheme(self::BOLD_DARK));
+
+        $this->cFF->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cFT->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cTF->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+        $this->cTT->addTheme(self::BOLD_DARK, self::THEME_STYLES);
+
+        $this->assertTrue($this->cFF->hasTheme(self::BOLD_DARK));
+        $this->assertTrue($this->cFT->hasTheme(self::BOLD_DARK));
+        $this->assertTrue($this->cTF->hasTheme(self::BOLD_DARK));
+        $this->assertTrue($this->cTT->hasTheme(self::BOLD_DARK));
+
+        $this->cFF->removeTheme(self::BOLD_DARK);
+        $this->cFT->removeTheme(self::BOLD_DARK);
+        $this->cTF->removeTheme(self::BOLD_DARK);
+        $this->cTT->removeTheme(self::BOLD_DARK);
+
+        $this->assertFalse($this->cFF->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cFT->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cTF->hasTheme(self::BOLD_DARK));
+        $this->assertFalse($this->cTT->hasTheme(self::BOLD_DARK));
+    }
+
 
     protected function setUp(): void
     {
