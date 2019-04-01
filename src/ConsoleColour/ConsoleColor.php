@@ -233,7 +233,7 @@ class ConsoleColor implements ConsoleColorInterface
     }
 
     /** {@inheritdoc} */
-    public function addTheme($name, $styles): void
+    public function addTheme($name, $styles, bool $override = false): void
     {
         $styles = $this->refineStyles($styles);
 

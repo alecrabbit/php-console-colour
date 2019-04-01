@@ -4,7 +4,7 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 use AlecRabbit\ConsoleColour\Contracts\Styles as Style;
 
-interface DefaultStyles
+interface DefaultThemes
 {
     // These strings are used as methods names
     public const COMMENT = 'comment';
@@ -27,7 +27,7 @@ interface DefaultStyles
     public const UNDERLINED_BOLD = 'underlinedBold';
     public const UNDERLINED_ITALIC = 'underlinedItalic';
 
-    public const STYLES = [
+    public const THEMES = [
         // name => [styles],
         self::COMMENT => Style::YELLOW,
         self::ERROR => [Style::WHITE, Style::BOLD, Style::BG_RED],

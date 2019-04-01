@@ -2,7 +2,7 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\DefaultStyles;
+use AlecRabbit\ConsoleColour\Contracts\DefaultThemes;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 /**
@@ -26,10 +26,10 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
  * @method underlinedBold(string $text)
  * @method underlinedItalic(string $text)
  */
-class Themes implements DefaultStyles
+class Themes implements DefaultThemes
 {
     /** @var array */
-    protected $definedStyles;
+    protected $definedThemes;
 
     /** @var bool */
     protected $doColorize = false;
@@ -64,12 +64,13 @@ class Themes implements DefaultStyles
     }
 
     /**
+     * @param bool $override
      * @throws InvalidStyleException
      */
-    protected function setThemes(): void
+    protected function setThemes(bool $override = false): void
     {
         foreach ($this->getThemes() as $name => $styles) {
-            $this->color->addTheme($name, $styles);
+            $this->color->addTheme($name, $styles, $override);
         }
     }
 
@@ -80,11 +81,11 @@ class Themes implements DefaultStyles
      */
     public function getThemes(): array
     {
-        if (null !== $this->definedStyles) {
-            return $this->definedStyles;
+        if (null !== $this->definedThemes) {
+            return $this->definedThemes;
         }
         return
-            $this->definedStyles = $this->prepareThemes();
+            $this->definedThemes = $this->prepareThemes();
     }
 
     /**
@@ -92,7 +93,7 @@ class Themes implements DefaultStyles
      */
     protected function prepareThemes(): array
     {
-        return static::STYLES;
+        return static::THEMES;
     }
 
     /**
@@ -107,7 +108,7 @@ class Themes implements DefaultStyles
         $this->assertArgs($name, $arguments);
 
         return
-            $this->apply($this->definedStyles[$name], $arguments[0]);
+            $this->apply($this->definedThemes[$name], $arguments[0]);
     }
 
     /**
@@ -115,7 +116,7 @@ class Themes implements DefaultStyles
      */
     protected function assertMethodName(string $name): void
     {
-        if (!\array_key_exists($name, $this->definedStyles)) {
+        if (!\array_key_exists($name, $this->definedThemes)) {
             throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
         }
     }

@@ -45,10 +45,11 @@ interface ConsoleColorInterface extends Styles
     /**
      * @param string $name
      * @param int|string|array $styles
+     * @param bool $override
      * @throws \InvalidArgumentException
      * @throws InvalidStyleException
      */
-    public function addTheme($name, $styles): void;
+    public function addTheme($name, $styles, bool $override = false): void;
 
     /**
      * @param string $name
