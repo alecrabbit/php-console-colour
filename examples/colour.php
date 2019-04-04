@@ -33,10 +33,11 @@ function perform(ConsoleColor $colour): void
         foreach ($colour->getPossibleStyles() as $style) {
             $name = Styles::NAMES[$style];
             if (\in_array($style, RARELY_SUPPORTED, true)) {
-                $name .=  $colour->apply(Effect::DARK, NOT_WIDELY_SUPPORTED)  ;
+                $name .= $colour->apply(Effect::DARK, NOT_WIDELY_SUPPORTED);
             }
+            $styleStr = ' [' . str_pad($style, 3, ' ', STR_PAD_LEFT) . '] ';
             echo
-                ' ' . $colour->apply($style, TEXT) . ' ' . $name . PHP_EOL;
+                ' ' . $colour->apply($style, TEXT) . $styleStr . $name . PHP_EOL;
         }
 
         echo PHP_EOL;
