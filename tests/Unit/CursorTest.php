@@ -11,19 +11,10 @@ use PHPUnit\Framework\TestCase;
 
 class CursorTest extends TestCase
 {
-    /** @var Cursor */
-    protected $cursor;
-
     /** @test */
     public function values(): void
     {
-        $this->assertEquals("\033[?25h\033[?0c", $this->cursor->show());
-        $this->assertEquals("\033[?25l",$this->cursor->hide());
+        $this->assertEquals("\033[?25h\033[?0c", Cursor::show());
+        $this->assertEquals("\033[?25l",Cursor::hide());
     }
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->cursor = new Cursor();
-    }
-
 }
