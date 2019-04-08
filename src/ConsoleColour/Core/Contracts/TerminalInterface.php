@@ -22,12 +22,14 @@ interface TerminalInterface
     public function height(bool $recheck = false): int;
 
     /**
+     * @param bool $recheck
      * @return bool
      */
-    public function supports256Color(): bool;
+    public function supports256Color(bool $recheck = false): bool;
 
     /**
+     * @param bool $recheck
      * @return bool
      */
-    public function supportsColor(): bool;
+    public function supportsColor(bool $recheck = false): bool;
 }
