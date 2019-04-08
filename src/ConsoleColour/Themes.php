@@ -55,6 +55,11 @@ class Themes extends AbstractThemes implements EffectsThemes, ActionsThemes, Col
         self::UNDERLINED_ITALIC => [Effect::UNDERLINE, Effect::ITALIC],
     ];
 
+    public function none(string $text):string
+    {
+        return $text;
+    }
+
     /**
      * @return array
      */

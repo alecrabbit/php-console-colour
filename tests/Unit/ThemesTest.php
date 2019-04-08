@@ -61,6 +61,14 @@ class ThemesTest extends TestCase
     }
 
     /** @test */
+    public function none(): void
+    {
+        $text = 'sample';
+        $this->assertEquals($text, $this->nonColorized->none($text));
+        $this->assertEquals($text, $this->colorized->none($text));
+    }
+
+    /** @test */
     public function wrongArgumentCount(): void
     {
         $text = 'sample';

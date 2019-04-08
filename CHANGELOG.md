@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2019-04-08
+### Added
+ -  method `none(string $text)` in`AlecRabbit\ConsoleColour\Theme::class` 
+ 
 ## [0.2.2] - 2019-04-08
 ### Fixed
  - minor `TerminalInterface` fix
@@ -41,6 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  
 ## [0.0.4] - 2019-03-19
 
-[Unreleased]: https://github.com/alecrabbit/php-console-colour/compare/0.2.2...HEAD
+[Unreleased]: https://github.com/alecrabbit/php-console-colour/compare/0.2.3...HEAD
+[0.2.3]: https://github.com/alecrabbit/php-console-colour/compare/0.2.2...0.2.3
+[0.2.2]: https://github.com/alecrabbit/php-console-colour/compare/0.2.0-BETA.1...0.2.2
 [0.2.0]: https://github.com/alecrabbit/php-console-colour/compare/0.0.4-RC2...0.2.0-BETA.1
 [0.0.4]: https://github.com/alecrabbit/php-console-colour/compare/0.0.3...0.0.4-RC2
