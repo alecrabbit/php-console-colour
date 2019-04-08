@@ -112,4 +112,3 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
 * [colour.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/colour.php)
  
 ![example](https://raw.githubusercontent.com/alecrabbit/php-console-colour/master/docs/images/example_colour_output.png)
-https://raw.githubusercontent.com/alecrabbit/php-console-spinner/master/docs/images/Screenshot%20from%202019-04-05%2016-00-47.png
