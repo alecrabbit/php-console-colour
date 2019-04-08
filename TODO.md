@@ -1,5 +1,5 @@
  - [ ] split `Themes::class`
- - [ ] simplify adding new theme
+ - [ ] simplify adding new theme?
  
  - [x] ~~simplify `ConsoleColour` class~~ removed
  - [x] unify tests
