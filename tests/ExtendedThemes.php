@@ -20,7 +20,7 @@ class ExtendedThemes extends Themes
         // name => [styles],
         self::FIRE => [Style::LIGHT_RED, Style::BOLD, Style::BG_WHITE, Style::ITALIC],
         self::NEW => [Style::LIGHT_CYAN, Style::BG_BLACK, Style::UNDERLINE],
-        self::ERROR => [Style::RED, Style::BG_WHITE, Style::UNDERLINE],
+        self::ERROR => [Style::RED, Style::BG_WHITE, Style::UNDERLINE], // Overwriting existing
     ];
 
     /**
