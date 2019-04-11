@@ -1,3 +1,4 @@
+ - [ ] function setTitle should work only in xterm - add checks
  - [ ] split `Themes::class`
  - [ ] simplify adding new theme?
  
