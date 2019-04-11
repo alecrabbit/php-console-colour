@@ -4,6 +4,7 @@ namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Core\AbstractColorSupportingTerminal;
 use AlecRabbit\ConsoleColour\Core\Contracts\TerminalInterface;
+use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * Class Terminal
@@ -56,9 +57,8 @@ class Terminal extends AbstractColorSupportingTerminal implements TerminalInterf
     /** {@inheritdoc} */
     public function setTitle(string $title): void
     {
-        echo "\033]0;{$title}\007"; // bash echo -e "\033]0;$@\007"
+        if ($this->isXterm()) {
+            echo "\033]0;{$title}\007"; // bash echo -e "\033]0;$@\007"
+        }
     }
 }
-
-
-

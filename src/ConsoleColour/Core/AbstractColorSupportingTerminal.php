@@ -9,12 +9,16 @@ abstract class AbstractColorSupportingTerminal extends AbstractTerminal
     protected const ENV_DOCKER_TERM = 'DOCKER_TERM';
     protected const COLOR_NEEDLE = '256color';
     protected const ENV_TERM_PROGRAM = 'TERM_PROGRAM';
+    protected const XTERM = 'xterm';
 
     /** @var null|bool */
     protected static $supports256Color;
 
     /** @var null|bool */
     protected static $supportsColor;
+
+    /** @var null|bool */
+    protected static $isXterm;
 
     /**
      * Returns true if the stream supports colorization.
@@ -88,6 +92,20 @@ abstract class AbstractColorSupportingTerminal extends AbstractTerminal
     }
 
     /**
+     * @param string $varName
+     * @param string $checkFor
+     * @return bool
+     */
+    protected function checkEnvVariable(string $varName, string $checkFor): bool
+    {
+        if ($t = getenv($varName)) {
+            return
+                false !== strpos($t, $checkFor);
+        }
+        return false;
+    }
+
+    /**
      * @return bool
      * @codeCoverageIgnore
      */
@@ -97,7 +115,7 @@ abstract class AbstractColorSupportingTerminal extends AbstractTerminal
                 && @sapi_windows_vt100_support(STDOUT))
             || false !== getenv(static::ENV_ANSICON)
             || 'ON' === getenv(static::ENV_CON_EMU_ANSI)
-            || 'xterm' === getenv(static::ENV_TERM);
+            || self::XTERM === getenv(static::ENV_TERM);
     }
 
     /**
@@ -109,5 +127,27 @@ abstract class AbstractColorSupportingTerminal extends AbstractTerminal
         $stat = @fstat(STDOUT);
         // Check if formatted mode is S_IFCHR
         return $stat ? 0020000 === ($stat['mode'] & 0170000) : false;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isXterm():bool
+    {
+        if (null !== static::$isXterm) {
+            return static::$isXterm;
+        }
+        return
+            static::$isXterm = $this->isXtermTerminal();
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isXtermTerminal():bool
+    {
+        return
+            $this->checkEnvVariable(static::ENV_TERM, self::XTERM) ||
+            $this->checkEnvVariable(static::ENV_DOCKER_TERM, self::XTERM);
     }
 }
