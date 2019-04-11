@@ -2,89 +2,62 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\DefaultStyles;
-use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
+use AlecRabbit\ConsoleColour\Contracts\Color;
+use AlecRabbit\ConsoleColour\Contracts\Effect;
+use AlecRabbit\ConsoleColour\Core\AbstractThemes;
+use AlecRabbit\ConsoleColour\Themes\Contracts\ActionsThemes;
+use AlecRabbit\ConsoleColour\Themes\Contracts\ColorsThemes;
+use AlecRabbit\ConsoleColour\Themes\Contracts\EffectsThemes;
 
 /**
+ * @method debug(string $text)
  * @method comment(string $text)
- * @method error(string $text)
  * @method info(string $text)
- *
+ * @method error(string $text)
+ * @method warning(string $text)
  * @method yellow(string $text)
- * @method red(string $text)
  * @method green(string $text)
+ * @method red(string $text)
  * @method cyan(string $text)
  * @method magenta(string $text)
-
+ * @method black(string $text)
+ * @method blue(string $text)
+ * @method lightGray(string $text)
+ * @method darkGray(string $text)
+ * @method lightRed(string $text)
+ * @method lightGreen(string $text)
+ * @method lightYellow(string $text)
+ * @method lightBlue(string $text)
+ * @method lightMagenta(string $text)
+ * @method lightCyan(string $text)
+ * @method white(string $text)
  * @method italic(string $text)
  * @method bold(string $text)
  * @method dark(string $text)
+ * @method crossed(string $text)
  * @method darkItalic(string $text)
- * @method white(string $text)
  * @method whiteBold(string $text)
  * @method underlined(string $text)
  * @method underlinedBold(string $text)
  * @method underlinedItalic(string $text)
  */
-class Themes implements DefaultStyles
+class Themes extends AbstractThemes implements EffectsThemes, ActionsThemes, ColorsThemes
 {
-    /** @var array */
-    protected $definedStyles;
+    public const DARK_ITALIC = 'darkItalic';
+    public const WHITE_BOLD = 'whiteBold';
+    public const UNDERLINED_BOLD = 'underlinedBold';
+    public const UNDERLINED_ITALIC = 'underlinedItalic';
 
-    /** @var bool */
-    protected $doColorize = false;
+    public const THEMES = [
+        self::DARK_ITALIC => [Effect::DARK, Effect::ITALIC],
+        self::WHITE_BOLD => [Color::WHITE, Effect::BOLD],
+        self::UNDERLINED_BOLD => [Effect::UNDERLINE, Effect::BOLD],
+        self::UNDERLINED_ITALIC => [Effect::UNDERLINE, Effect::ITALIC],
+    ];
 
-    /** @var ConsoleColor */
-    protected $color;
-
-    /**
-     * Themed constructor.
-     * @param null|bool $colorize
-     * @throws InvalidStyleException
-     */
-    public function __construct(?bool $colorize = null)
+    public function none(string $text):string
     {
-        $this->color = new ConsoleColor();
-        $this->doColorize = $this->refineColorize($colorize);
-        $this->setThemes();
-    }
-
-    /**
-     * @param null|bool $colorize
-     * @return bool
-     */
-    protected function refineColorize(?bool $colorize): bool
-    {
-        if ($supported = $this->color->isSupported()) {
-            return $colorize ?? $supported;
-        }
-        // @codeCoverageIgnoreStart
-        return false;
-        // @codeCoverageIgnoreEnd
-    }
-
-    /**
-     * @throws InvalidStyleException
-     */
-    protected function setThemes(): void
-    {
-        foreach ($this->getThemes() as $name => $styles) {
-            $this->color->addTheme($name, $styles);
-        }
-    }
-
-    /**
-     * @return array
-     *
-     * @psalm-suppress RedundantConditionGivenDocblockType
-     */
-    public function getThemes(): array
-    {
-        if (null !== $this->definedStyles) {
-            return $this->definedStyles;
-        }
-        return
-            $this->definedStyles = $this->prepareThemes();
+        return $text;
     }
 
     /**
@@ -92,56 +65,6 @@ class Themes implements DefaultStyles
      */
     protected function prepareThemes(): array
     {
-        return static::STYLES;
-    }
-
-    /**
-     * @param string $name
-     * @param array $arguments
-     * @return string
-     * @throws \Throwable
-     */
-    public function __call(string $name, array $arguments): string
-    {
-        $this->assertMethodName($name);
-        $this->assertArgs($name, $arguments);
-
-        return
-            $this->apply($this->definedStyles[$name], $arguments[0]);
-    }
-
-    /**
-     * @param string $name
-     */
-    protected function assertMethodName(string $name): void
-    {
-        if (!\array_key_exists($name, $this->definedStyles)) {
-            throw new \BadMethodCallException('Unknown method call [' . static::class . '::' . $name . '].');
-        }
-    }
-
-    /**
-     * @param string $name
-     * @param array $arguments
-     */
-    protected function assertArgs(string $name, array $arguments): void
-    {
-        if (1 !== \count($arguments)) {
-            throw new \ArgumentCountError(
-                'Method [' . static::class . '::' . $name . '] accepts only one argument.'
-            );
-        }
-    }
-
-    /**
-     * @param array|string $style
-     * @param string $text
-     * @return string
-     * @throws \Throwable
-     */
-    protected function apply($style, $text): string
-    {
-        return
-            $this->doColorize ? $this->color->apply($style, $text) : $text;
+        return \array_merge(static::ACTIONS, static::COLORS, static::EFFECTS, static::THEMES);
     }
 }

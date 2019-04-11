@@ -1,5 +1,7 @@
- - [ ] unify tests
- - [ ] simplify `ConsoleColour::class`
- - [ ] simplify adding new theme
+ - [ ] function setTitle should work only in xterm - add checks
+ - [ ] split `Themes::class`
+ - [ ] simplify adding new theme?
  
+ - [x] ~~simplify `ConsoleColour` class~~ removed
+ - [x] unify tests
  - [x] ~~consider removing unnecessary `DOCKER_TERM` var~~ still needed

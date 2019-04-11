@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour\Contracts;
+namespace AlecRabbit\ConsoleColour\Core\Contracts;
 
+use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 interface ConsoleColorInterface extends Styles
@@ -45,10 +46,11 @@ interface ConsoleColorInterface extends Styles
     /**
      * @param string $name
      * @param int|string|array $styles
+     * @param bool $override
      * @throws \InvalidArgumentException
      * @throws InvalidStyleException
      */
-    public function addTheme($name, $styles): void;
+    public function addTheme($name, $styles, bool $override = false): void;
 
     /**
      * @param string $name

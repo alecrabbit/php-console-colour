@@ -2,8 +2,8 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
+use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 
 class ConsoleColor implements ConsoleColorInterface
@@ -30,7 +30,7 @@ class ConsoleColor implements ConsoleColorInterface
     public function __construct(?bool $force = null, bool $force256Colors = false)
     {
         $this->setColorSupport($force ?? false, $force256Colors);
-        $this->setForced($force ?? false);
+        $this->forced = $force ?? false;
     }
 
     protected function setColorSupport(bool $force, bool $force256Colors): void
@@ -212,11 +212,6 @@ class ConsoleColor implements ConsoleColorInterface
         return $this->forced;
     }
 
-    protected function setForced(bool $forced): void
-    {
-        $this->forced = $forced;
-    }
-
     /** {@inheritdoc} */
     public function getThemes(): array
     {
@@ -233,7 +228,7 @@ class ConsoleColor implements ConsoleColorInterface
     }
 
     /** {@inheritdoc} */
-    public function addTheme($name, $styles): void
+    public function addTheme($name, $styles, bool $override = false): void
     {
         $styles = $this->refineStyles($styles);
 
@@ -242,7 +237,9 @@ class ConsoleColor implements ConsoleColorInterface
                 throw new InvalidStyleException($style);
             }
         }
-
+        if (\array_key_exists($name, $this->themes) && false === $override) {
+            throw new \RuntimeException('Theme [' . $name . '] is already set.');
+        }
         $this->themes[$name] = $styles;
     }
 

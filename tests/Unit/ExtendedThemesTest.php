@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\Tests\ConsoleColour;
 
+use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
@@ -9,9 +10,11 @@ use PHPUnit\Framework\TestCase;
 
 class ExtendedThemesTest extends TestCase
 {
+    public const ESC = ConsoleColor::ESC_CHAR;
     public const STYLES = [
-        'fire' => "\033[91;1;107;3m",
-        'new' => "\033[96;40;4m",
+        'fire' => self::ESC . '[91;1;107;3m',
+        'new' => self::ESC . '[96;40;4m',
+        'error' => self::ESC . '[97;1;41m',
     ];
 
     /** @var ExtendedThemes */

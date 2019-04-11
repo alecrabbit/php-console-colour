@@ -103,4 +103,12 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
 
 ##### Define your own themes
  * [How to extend `Theme::class`?](docs/howToExtendThemeClass.md)
+ 
+### Examples
+ * [using_themes_class.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/using_themes_class.php)
+ 
+![example](https://raw.githubusercontent.com/alecrabbit/php-console-colour/master/docs/images/example_using_themes_class_output.png)
 
+* [colour.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/colour.php)
+ 
+![example](https://raw.githubusercontent.com/alecrabbit/php-console-colour/master/docs/images/example_colour_output.png)
