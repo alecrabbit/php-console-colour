@@ -34,7 +34,10 @@ interface TerminalInterface
     public function supportsColor(bool $recheck = false): bool;
 
     /**
+     * Returns set title ESC sequence
+     *
      * @param string $title
+     * @return string
      */
-    public function setTitle(string $title): void;
+    public function setTitle(string $title): string;
 }

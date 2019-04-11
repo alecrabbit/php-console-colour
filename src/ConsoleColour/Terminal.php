@@ -55,10 +55,11 @@ class Terminal extends AbstractColorSupportingTerminal implements TerminalInterf
     }
 
     /** {@inheritdoc} */
-    public function setTitle(string $title): void
+    public function setTitle(string $title): string
     {
         if ($this->isXterm()) {
-            echo "\033]0;{$title}\007"; // bash echo -e "\033]0;$@\007"
+            return "\033]0;{$title}\007";
         }
+        return (string)null;
     }
 }
