@@ -32,4 +32,9 @@ interface TerminalInterface
      * @return bool
      */
     public function supportsColor(bool $recheck = false): bool;
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title): void;
 }

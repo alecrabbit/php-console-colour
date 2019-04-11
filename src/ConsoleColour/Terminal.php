@@ -52,4 +52,13 @@ class Terminal extends AbstractColorSupportingTerminal implements TerminalInterf
         return
             static::$supportsColor = $this->hasColorSupport();
     }
+
+    /** {@inheritdoc} */
+    public function setTitle(string $title): void
+    {
+        echo "\033]0;{$title}\007"; // bash echo -e "\033]0;$@\007"
+    }
 }
+
+
+
