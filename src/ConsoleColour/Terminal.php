@@ -41,7 +41,7 @@ class Terminal extends AbstractColorSupportingTerminal implements TerminalInterf
             return static::$supports256Color;
         }
         return
-            static::$supports256Color = $this->check256ColorSupport();
+            static::$supports256Color = $this->has256ColorSupport();
     }
 
     /** {@inheritdoc} */

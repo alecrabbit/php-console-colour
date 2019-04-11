@@ -45,12 +45,13 @@ class TerminalTest extends TestCase
         $terminal = new Terminal();
 
         $this->assertTrue($terminal->supportsColor());
-        if ($this->checkTermVarFor256ColorSupport('TERM') || $this->checkTermVarFor256ColorSupport('DOCKER_TERM')) {
+        if ($this->checkTermVarFor256ColorSupport('TERM') ||
+            $this->checkTermVarFor256ColorSupport('DOCKER_TERM')) {
             $this->assertTrue($terminal->supports256Color());
         } else {
             $this->assertFalse($terminal->supports256Color());
         }
-        $this->assertFalse(callMethod($terminal, 'checkFor256ColorSupport', 'UNKNOWN_VAR'));
+        $this->assertFalse(callMethod($terminal, 'checkEnvVariable', 'UNKNOWN_VAR', 'value'));
     }
 
     /**

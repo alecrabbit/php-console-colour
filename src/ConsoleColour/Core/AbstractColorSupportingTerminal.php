@@ -69,26 +69,13 @@ abstract class AbstractColorSupportingTerminal extends AbstractTerminal
     /**
      * @return bool
      */
-    protected function check256ColorSupport(): bool
+    protected function has256ColorSupport(): bool
     {
         return
             $this->supportsColor() ?
-                $this->checkFor256ColorSupport(static::ENV_TERM) ||
-                $this->checkFor256ColorSupport(static::ENV_DOCKER_TERM) :
+                $this->checkEnvVariable(static::ENV_TERM, static::COLOR_NEEDLE) ||
+                $this->checkEnvVariable(static::ENV_DOCKER_TERM, static::COLOR_NEEDLE) :
                 false;
-    }
-
-    /**
-     * @param string $varName
-     * @return bool
-     */
-    protected function checkFor256ColorSupport(string $varName): bool
-    {
-        if ($t = getenv($varName)) {
-            return
-                false !== strpos($t, static::COLOR_NEEDLE);
-        }
-        return false;
     }
 
     /**
