@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour;
+namespace AlecRabbit\Control;
 
-use AlecRabbit\ConsoleColour\Core\AbstractColorSupportingTerminal;
-use AlecRabbit\ConsoleColour\Core\Contracts\TerminalInterface;
+use AlecRabbit\Control\Core\AbstractColorSupportingTerminal;
+use AlecRabbit\Control\Core\Contracts\TerminalInterface;
 
 /**
  * Class Terminal
@@ -59,6 +59,8 @@ class Terminal extends AbstractColorSupportingTerminal implements TerminalInterf
         if ($this->isXterm()) {
             return "\033]0;{$title}\007";
         }
+        // @codeCoverageIgnoreStart
         return (string)null;
+        // @codeCoverageIgnoreEnd
     }
 }

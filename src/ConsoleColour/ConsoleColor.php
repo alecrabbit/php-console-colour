@@ -5,6 +5,7 @@ namespace AlecRabbit\ConsoleColour;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
+use AlecRabbit\Control\Terminal;
 
 class ConsoleColor implements ConsoleColorInterface
 {

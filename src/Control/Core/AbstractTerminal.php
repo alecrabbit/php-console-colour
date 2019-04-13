@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AlecRabbit\ConsoleColour\Core;
+namespace AlecRabbit\Control\Core;
 
 /**
  * Class Terminal
