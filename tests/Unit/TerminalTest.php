@@ -3,6 +3,7 @@
 namespace AlecRabbit\Tests\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Terminal;
+use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
 use function AlecRabbit\Helpers\callMethod;
 
@@ -52,6 +53,22 @@ class TerminalTest extends TestCase
             $this->assertFalse($terminal->supports256Color());
         }
         $this->assertFalse(callMethod($terminal, 'checkEnvVariable', 'UNKNOWN_VAR', 'value'));
+    }
+
+    /** @test */
+    public function setTitle(): void
+    {
+        $terminal = new Terminal();
+
+        $title = 'Title';
+        $this->assertEquals(
+            Helper::stripEscape("\033]0;{$title}\007"),
+            Helper::stripEscape($terminal->setTitle($title))
+        );
+        $this->assertEquals(
+            "\033]0;{$title}\007",
+            $terminal->setTitle($title)
+        );
     }
 
     /**

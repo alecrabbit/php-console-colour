@@ -4,7 +4,6 @@ namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\ConsoleColour\Core\AbstractColorSupportingTerminal;
 use AlecRabbit\ConsoleColour\Core\Contracts\TerminalInterface;
-use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * Class Terminal
