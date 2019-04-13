@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2019-04-13
+### Changed
+ - namespace of `Terminal::class` to `AlecRabbit\Control`
+ - namespace of `Cursor::class` to `AlecRabbit\Control`
+
+## [0.3.0] - 2019-04-08
+### Added
+ - `Cursor::class`
 ## [0.2.3] - 2019-04-08
 ### Added
  -  method `none(string $text)` in`AlecRabbit\ConsoleColour\Theme::class` 
