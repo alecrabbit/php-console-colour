@@ -29,13 +29,15 @@ function perform(ConsoleColor $colour): void
     echo 'Colors are supported: ' . ($colour->isSupported() ? YES : NO) . PHP_EOL;
     if ($colour->isSupported()) {
         echo 'Regular colors...' . PHP_EOL;
+        echo shift() . 'ANSI' . PHP_EOL;
+        echo shift() . 'Code' . PHP_EOL;
 
         foreach ($colour->getPossibleStyles() as $style) {
             $name = Styles::NAMES[$style];
             if (\in_array($style, RARELY_SUPPORTED, true)) {
                 $name .= $colour->apply(Effect::DARK, NOT_WIDELY_SUPPORTED);
             }
-            $styleStr = ' [' . str_pad($style, 3, ' ', STR_PAD_LEFT) . '] ';
+            $styleStr = ' [' . str_pad($style, 4, ' ', STR_PAD_LEFT) . '] ';
             echo
                 ' ' . $colour->apply($style, TEXT) . $styleStr . $name . PHP_EOL;
         }
@@ -50,6 +52,14 @@ function perform(ConsoleColor $colour): void
             echo PHP_EOL;
         }
     }
+}
+
+/**
+ * @return string
+ */
+function shift(): string
+{
+    return str_repeat(' ', strlen(TEXT) + 3);
 }
 
 /**
