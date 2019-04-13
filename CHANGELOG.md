@@ -10,11 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.0] - 2019-04-13
 ### Changed
  - namespace of `Terminal::class` to `AlecRabbit\Control`
- - namespace of `Cursor::class` to `AlecRabbit\Control`
 
 ## [0.3.0] - 2019-04-08
 ### Added
  - `Cursor::class`
+### Changed
+ - namespace of `Cursor::class` to `AlecRabbit\Control`
+ 
 ## [0.2.3] - 2019-04-08
 ### Added
  -  method `none(string $text)` in`AlecRabbit\ConsoleColour\Theme::class` 
@@ -53,7 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  
 ## [0.0.4] - 2019-03-19
 
-[Unreleased]: https://github.com/alecrabbit/php-console-colour/compare/0.2.3...HEAD
+[Unreleased]: https://github.com/alecrabbit/php-console-colour/compare/0.4.0...HEAD
 [0.2.3]: https://github.com/alecrabbit/php-console-colour/compare/0.2.2...0.2.3
 [0.2.2]: https://github.com/alecrabbit/php-console-colour/compare/0.2.0-BETA.1...0.2.2
 [0.2.0]: https://github.com/alecrabbit/php-console-colour/compare/0.0.4-RC2...0.2.0-BETA.1
