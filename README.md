@@ -24,7 +24,11 @@ composer require alecrabbit/php-console-colour
 
 // TODO 
 
+### Cursor::class
+> To be moved to separate package
+
 ### Terminal::class
+> To be moved to separate package
 ##### Usage 
 ```php
 $term = new Terminal();
