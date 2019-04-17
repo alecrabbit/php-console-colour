@@ -1,3 +1,4 @@
+ - [ ] move `AlecRabbit\Control` to separate lib
  - [ ] make `Terminal::setTitle` static
     - [ ] make `Terminal::isXterm` static
     - [ ] make `Terminal::isXtermTerminal` static
