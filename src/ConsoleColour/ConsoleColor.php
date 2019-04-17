@@ -2,15 +2,16 @@
 
 namespace AlecRabbit\ConsoleColour;
 
+use AlecRabbit\Cli\Tools\Terminal;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use AlecRabbit\Control\Terminal;
+use const AlecRabbit\COLOR256_TERMINAL;
+use const AlecRabbit\COLOR_TERMINAL;
+use const AlecRabbit\ESC;
 
 class ConsoleColor implements ConsoleColorInterface
 {
-    public const ESC_CHAR = "\033"; // "\e" or "\x01b"
-
     /** @var bool */
     protected $supported;
 
@@ -37,8 +38,8 @@ class ConsoleColor implements ConsoleColorInterface
     protected function setColorSupport(bool $force, bool $force256Colors): void
     {
         $terminal = new Terminal();
-        $this->supported = $force || $terminal->supportsColor();
-        $this->are256ColorsSupported = $this->supported && ($force256Colors || $terminal->supports256Color());
+        $this->supported = $force || ($terminal->color() >= COLOR_TERMINAL);
+        $this->are256ColorsSupported = $this->supported && ($force256Colors || $terminal->color() >= COLOR256_TERMINAL);
     }
 
     /** {@inheritdoc} */
@@ -204,7 +205,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function escSequence(string $value): string
     {
         return
-            static::ESC_CHAR . '[' . $value . 'm';
+            ESC . '[' . $value . 'm';
     }
 
     /** {@inheritdoc} */

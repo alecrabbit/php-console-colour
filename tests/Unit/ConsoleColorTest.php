@@ -7,6 +7,7 @@ use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColorOverride;
 use PHPUnit\Framework\TestCase;
+use const AlecRabbit\ESC;
 
 class ConsoleColorTest extends TestCase
 {
@@ -19,8 +20,6 @@ class ConsoleColorTest extends TestCase
     public const BOLD_DARK = 'bold_dark';
     public const THEMES = [self::BOLD_DARK => self::THEME_STYLES];
     public const THEME_STYLES = [Styles::BOLD, Styles::DARK];
-
-    public const ESC_CHAR = ConsoleColor::ESC_CHAR;
 
     /** @var ConsoleColorOverride */
     private $cFF;
@@ -155,7 +154,7 @@ class ConsoleColorTest extends TestCase
      */
     protected function helperGetColorStr(array $styles): string
     {
-        return self::ESC_CHAR . '[' . implode(';', $styles) . 'm' . self::TEXT . self::ESC_CHAR . '[0m';
+        return ESC . '[' . implode(';', $styles) . 'm' . self::TEXT . ESC . '[0m';
     }
 
     /** @test */
