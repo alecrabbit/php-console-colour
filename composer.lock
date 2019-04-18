@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "025d078a388252a101104e92dbd16d39",
+    "content-hash": "fb51b737c2b0bdc36ff8379b6c479a19",
     "packages": [
         {
             "name": "alecrabbit/php-cli-tools",
@@ -54,54 +54,6 @@
                 "width"
             ],
             "time": "2019-04-17T10:15:51+00:00"
-        },
-        {
-            "name": "alecrabbit/php-traits",
-            "version": "0.2.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/alecrabbit/php-traits.git",
-                "reference": "e1febf03405a50f1cbf4a0359094cd2284f73b61"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-traits/zipball/e1febf03405a50f1cbf4a0359094cd2284f73b61",
-                "reference": "e1febf03405a50f1cbf4a0359094cd2284f73b61",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2"
-            },
-            "require-dev": {
-                "kylekatarnls/multi-tester": "^1.1",
-                "nunomaduro/collision": "^3.0",
-                "phpunit/phpunit": "^8.0",
-                "symfony/var-dumper": "^4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AlecRabbit\\": "src"
-                },
-                "files": [
-                    "src/Traits/Constants.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHP traits to use in every project :)",
-            "keywords": [
-                "name",
-                "php",
-                "private",
-                "start",
-                "stop",
-                "trait",
-                "traits"
-            ],
-            "time": "2019-04-08T13:57:14+00:00"
         }
     ],
     "packages-dev": [
@@ -479,16 +431,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.16.3",
+            "version": "2.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "373d9f0d58651af366435148c39beb702c2b7ef4"
+                "reference": "9b49d637ad009e5e211142bc7492adcb19dbd645"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/373d9f0d58651af366435148c39beb702c2b7ef4",
-                "reference": "373d9f0d58651af366435148c39beb702c2b7ef4",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/9b49d637ad009e5e211142bc7492adcb19dbd645",
+                "reference": "9b49d637ad009e5e211142bc7492adcb19dbd645",
                 "shasum": ""
             },
             "require": {
@@ -498,9 +450,9 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.14 || ^3.0",
-                "kylekatarnls/multi-tester": "^0.1",
+                "kylekatarnls/multi-tester": "^1.1",
                 "phpmd/phpmd": "^2.6",
-                "phpstan/phpstan": "^0.10.8",
+                "phpstan/phpstan": "^0.11",
                 "phpunit/phpunit": "^7.5 || ^8.0",
                 "squizlabs/php_codesniffer": "^3.4"
             },
@@ -535,7 +487,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-04-06T17:09:23+00:00"
+            "time": "2019-04-17T08:51:36+00:00"
         },
         {
             "name": "nunomaduro/collision",
@@ -1870,7 +1822,7 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.2.6",
+            "version": "v4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
@@ -2240,7 +2192,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v4.2.6",
+            "version": "v4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -2315,16 +2267,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.2.6",
+            "version": "v4.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f42850fa32b8d7a35a75510810f6ef597674be74"
+                "reference": "e760a38e12b15032325e64be63f7ffc1817af617"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f42850fa32b8d7a35a75510810f6ef597674be74",
-                "reference": "f42850fa32b8d7a35a75510810f6ef597674be74",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/e760a38e12b15032325e64be63f7ffc1817af617",
+                "reference": "e760a38e12b15032325e64be63f7ffc1817af617",
                 "shasum": ""
             },
             "require": {
@@ -2387,7 +2339,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2019-04-11T11:27:41+00:00"
+            "time": "2019-04-17T14:57:01+00:00"
         },
         {
             "name": "theseer/tokenizer",
