@@ -232,15 +232,15 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function addTheme($name, $styles, bool $override = false): void
     {
+        if (\array_key_exists($name, $this->themes) && false === $override) {
+            throw new \RuntimeException('Theme [' . $name . '] is already set.');
+        }
         $styles = $this->refineStyles($styles);
 
         foreach ($styles as $style) {
             if (!$this->isValid($style)) {
                 throw new InvalidStyleException($style);
             }
-        }
-        if (\array_key_exists($name, $this->themes) && false === $override) {
-            throw new \RuntimeException('Theme [' . $name . '] is already set.');
         }
         $this->themes[$name] = $styles;
     }
