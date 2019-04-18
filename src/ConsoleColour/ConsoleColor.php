@@ -235,6 +235,7 @@ class ConsoleColor implements ConsoleColorInterface
         if (\array_key_exists($name, $this->themes) && false === $override) {
             throw new \RuntimeException('Theme [' . $name . '] is already set.');
         }
+        
         $styles = $this->refineStyles($styles);
 
         foreach ($styles as $style) {
