@@ -24,49 +24,6 @@ composer require alecrabbit/php-console-colour
 
 // TODO 
 
-### Cursor::class
-> To be moved to separate package
-
-### Terminal::class
-> To be moved to separate package
-##### Usage 
-```php
-$term = new Terminal();
-$width = $term->width(); 
-```
-This class is used by `ConsoleColor::class` to determine color support, also it can be used to determine width and height of terminal window.
-Checks performed on first call, if you want to check again use `$recheck` parameter. 
-> Note: Creating new instance of terminal object does not change width and height values(they are static). If you want to know resized terminal dimensions use `$recheck` parameter.
-> ```php
-> $term = new Terminal();
-> $width = $term->width(); // width (e.g. 80)
-> 
->    /* terminal resized by user */
-> 
-> $term2 = new Terminal();
-> $width = $term2->width(); // same width value (80)
-> $width = $term2->width(true); // new width value (e.g. 120)
-> ``` 
-> Same with color support but probability of changing it in runtime is practically zero.
-
-Class methods:
-```php
-public function supportsColor(bool $recheck = false): bool;
-
-public function supports256Color(bool $recheck = false): bool;
-
-public function width(bool $recheck = false): int;
-
-public function height(bool $recheck = false): int;
-```
-##### Notes on Docker environment
-To ensure color support you can pass one(or both) env variables to container
-```dockerfile
-environment:
-  TERM: "xterm"  # standard color support
-  DOCKER_TERM: "xterm-256color"  # 256 color support
-```
-> Example: [docker-compose.yml](docker-compose.yml)
 ### Theme::class
 ##### Usage 
 ```php
