@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fb51b737c2b0bdc36ff8379b6c479a19",
+    "content-hash": "53d63934b9f35685ee11b38e17d1a72b",
     "packages": [
         {
             "name": "alecrabbit/php-cli-tools",
-            "version": "0.0.1",
+            "version": "0.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-cli-tools.git",
-                "reference": "ec7c8831baa3ce608f75d2ea1c2d13f5f20c33b3"
+                "reference": "fbbffce4646ee40e10bb8f3dfb795edd57fbcac3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-cli-tools/zipball/ec7c8831baa3ce608f75d2ea1c2d13f5f20c33b3",
-                "reference": "ec7c8831baa3ce608f75d2ea1c2d13f5f20c33b3",
+                "url": "https://api.github.com/repos/alecrabbit/php-cli-tools/zipball/fbbffce4646ee40e10bb8f3dfb795edd57fbcac3",
+                "reference": "fbbffce4646ee40e10bb8f3dfb795edd57fbcac3",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2"
             },
             "require-dev": {
-                "alecrabbit/php-helpers": "^0.5.2",
+                "alecrabbit/php-helpers": "^0.5",
                 "nunomaduro/collision": "^3.0",
                 "phpunit/phpunit": "^8.0",
                 "symfony/var-dumper": "^4.2"
@@ -53,7 +53,7 @@
                 "title",
                 "width"
             ],
-            "time": "2019-04-17T10:15:51+00:00"
+            "time": "2019-04-19T12:51:51+00:00"
         }
     ],
     "packages-dev": [

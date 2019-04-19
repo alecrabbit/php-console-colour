@@ -15,7 +15,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
-    "alecrabbit/php-cli-tools": "^0.0.1"
+    "alecrabbit/php-cli-tools": "^0.0.2"
   },
   "require-dev": {
     "nunomaduro/collision": "^3.0",
