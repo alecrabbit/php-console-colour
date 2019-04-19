@@ -59,16 +59,16 @@
     "packages-dev": [
         {
             "name": "alecrabbit/php-helpers",
-            "version": "0.5.5",
+            "version": "0.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-helpers.git",
-                "reference": "d9f124559a40df56c6852c24e60bc40b77d6bd54"
+                "reference": "3d50c5c7944d44029212443f9ced61214e9f31f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-helpers/zipball/d9f124559a40df56c6852c24e60bc40b77d6bd54",
-                "reference": "d9f124559a40df56c6852c24e60bc40b77d6bd54",
+                "url": "https://api.github.com/repos/alecrabbit/php-helpers/zipball/3d50c5c7944d44029212443f9ced61214e9f31f7",
+                "reference": "3d50c5c7944d44029212443f9ced61214e9f31f7",
                 "shasum": ""
             },
             "require": {
@@ -117,7 +117,7 @@
                 "wrap",
                 "zeros"
             ],
-            "time": "2019-04-17T12:46:58+00:00"
+            "time": "2019-04-19T11:49:04+00:00"
         },
         {
             "name": "doctrine/instantiator",
