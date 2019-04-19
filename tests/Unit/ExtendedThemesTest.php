@@ -2,12 +2,11 @@
 
 namespace AlecRabbit\Tests\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
-use const AlecRabbit\ESC;
 use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
+use const AlecRabbit\ESC;
 
 class ExtendedThemesTest extends TestCase
 {
