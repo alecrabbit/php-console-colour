@@ -20,7 +20,7 @@ inspired by [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP
 ```bash
 composer require alecrabbit/php-console-colour
 ```
-### Theme::class
+### Themes::class
 ##### Usage 
 ```php
 $theme = new Theme();
@@ -61,7 +61,7 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
 > Note: new methods will be added. Pull requests are welcomed.
 
 ##### Define your own themes
- * `Theme::class` [How to extend?](docs/howToExtendThemeClass.md)
+ * `Themes::class` [How to extend?](docs/howToExtendThemeClass.md)
 
 ### ConsoleColor::class
  

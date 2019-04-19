@@ -1,4 +1,4 @@
-### How to extend `Theme::class`
+### How to extend `Themes::class`
 If you want to add theme methods you need to create your own class `MyTheme` or whatever name you want.
 
 Let's say you want to add `fire`, `lagoon`, `blink` and `alert` themes
