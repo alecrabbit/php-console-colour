@@ -57,6 +57,7 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
  */
 ```
 > Note: not all methods could be listed.
+
 > Note: new methods will be added. Pull requests are welcomed.
 
 ##### Define your own themes
