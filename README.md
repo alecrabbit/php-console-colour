@@ -23,16 +23,18 @@ composer require alecrabbit/php-console-colour
 ### Themes::class
 ##### Usage 
 ```php
-$theme = new Theme();
-echo $theme->red('This text is red.') . PHP_EOL;
-echo $theme->underlinedBold('This text is underlined and bold.') . PHP_EOL;
+$themes = new Themes();
+echo $themes->red('This text is red.') . PHP_EOL;
+echo $themes->underlinedBold('This text is underlined and bold.') . PHP_EOL;
 ```
 Basically methods of this class just applying corresponding escape sequences to `$text`
 ```php
 // "\033[2;3mThis text is dark and italic.\033[0m"
-$colorized = $theme->darkItalic('This text is dark and italic.')
+$colorized = $themes->darkItalic('This text is dark and italic.')
 ```
 ##### Methods
+> Note: not all methods could be listed.
+
 ```php
 /**
  * @method comment(string $text)
@@ -56,8 +58,6 @@ $colorized = $theme->darkItalic('This text is dark and italic.')
  * @method underlinedItalic(string $text)
  */
 ```
-> Note: not all methods could be listed.
-
 > Note: new methods will be added. Pull requests are welcomed.
 
 ##### Define your own themes

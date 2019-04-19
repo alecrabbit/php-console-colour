@@ -68,10 +68,6 @@ class ConsoleColorTest extends TestCase
     public function multi(array $expected, $styles): void
     {
         [$cFF, $cFT, $cTF, $cTT] = $expected;
-//        dump(Helper::stripEscape($this->cFF->apply($styles, self::TEXT)));
-//        dump(Helper::stripEscape($this->cFT->apply($styles, self::TEXT)));
-//        dump(Helper::stripEscape($this->cTF->apply($styles, self::TEXT)));
-//        dump(Helper::stripEscape($this->cTT->apply($styles, self::TEXT)));
         $this->assertSame($cFF, $this->cFF->apply($styles, self::TEXT));
         $this->assertSame($cFT, $this->cFT->apply($styles, self::TEXT));
         $this->assertSame($cTF, $this->cTF->apply($styles, self::TEXT));
