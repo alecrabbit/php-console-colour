@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53d63934b9f35685ee11b38e17d1a72b",
+    "content-hash": "a7fdf0414baabf0143b6f04f9affdc89",
     "packages": [
         {
             "name": "alecrabbit/php-cli-tools",
-            "version": "0.0.2",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alecrabbit/php-cli-tools.git",
-                "reference": "fbbffce4646ee40e10bb8f3dfb795edd57fbcac3"
+                "reference": "6f40fb61b95d5cb16c48a2ec492caf161ba1d210"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alecrabbit/php-cli-tools/zipball/fbbffce4646ee40e10bb8f3dfb795edd57fbcac3",
-                "reference": "fbbffce4646ee40e10bb8f3dfb795edd57fbcac3",
+                "url": "https://api.github.com/repos/alecrabbit/php-cli-tools/zipball/6f40fb61b95d5cb16c48a2ec492caf161ba1d210",
+                "reference": "6f40fb61b95d5cb16c48a2ec492caf161ba1d210",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": ">=7.2"
             },
             "require-dev": {
-                "alecrabbit/php-helpers": "^0.5",
+                "alecrabbit/php-helpers": "^0.6",
                 "nunomaduro/collision": "^3.0",
                 "phpunit/phpunit": "^8.0",
                 "symfony/var-dumper": "^4.2"
@@ -53,7 +53,7 @@
                 "title",
                 "width"
             ],
-            "time": "2019-04-19T12:51:51+00:00"
+            "time": "2019-06-03T14:54:05+00:00"
         }
     ],
     "packages-dev": [
@@ -2005,7 +2005,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
