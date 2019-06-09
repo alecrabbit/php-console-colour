@@ -5,3 +5,4 @@
 /tests/report.html
 /.dockerignore
 /.phpunit.result.cache
+/composer.lock

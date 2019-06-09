@@ -2,7 +2,6 @@
 
 namespace AlecRabbit\Tests\ConsoleColour;
 
-use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ConsoleColorOverride;
