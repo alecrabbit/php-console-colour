@@ -18,10 +18,10 @@
     "alecrabbit/php-cli-tools": "^0.1"
   },
   "require-dev": {
+    "alecrabbit/php-helpers": "^0.5 || ^0.6",
     "nunomaduro/collision": "^3.0",
     "phpunit/phpunit": "^8.0",
-    "symfony/var-dumper": "^4.2",
-    "alecrabbit/php-helpers": "^0.5 || ^0.6"
+    "symfony/var-dumper": "^4.2"
   },
   "autoload": {
     "psr-4": {
