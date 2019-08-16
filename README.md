@@ -78,4 +78,7 @@ $colorized = $themes->darkItalic('This text is dark and italic.')
 
 > Note: actual colors depend on your terminal color scheme
 
-[xterm-256-color Chart](https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg)
+### Links
+
+- [xterm-256-color Chart](https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg)
+- [256 COLORS - CHEAT SHEET](https://jonasjacek.github.io/colors/)
