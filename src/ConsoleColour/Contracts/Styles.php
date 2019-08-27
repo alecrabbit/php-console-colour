@@ -128,7 +128,7 @@ interface Styles
             self::CONCEALED => 'CONCEALED',
             self::CROSSED_OUT => 'CROSSED_OUT',
             self::DOUBLE_UNDERLINE => 'DOUBLE_UNDERLINE',
-            self::DEFAULT_COLOR => 'DEFAULT',
+            self::DEFAULT_COLOR => 'DEFAULT_COLOR',
             self::BLACK => 'BLACK',
             self::RED => 'RED',
             self::GREEN => 'GREEN',
