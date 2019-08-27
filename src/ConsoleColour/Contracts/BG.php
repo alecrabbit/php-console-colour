@@ -4,7 +4,7 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 interface BG
 {
-    public const DEFAULT = 49;
+    public const DEFAULT_BG = 49;
     public const BLACK = 40;
     public const RED = 41;
     public const GREEN = 42;

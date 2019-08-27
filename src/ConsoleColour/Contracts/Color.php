@@ -4,7 +4,7 @@ namespace AlecRabbit\ConsoleColour\Contracts;
 
 interface Color
 {
-    public const DEFAULT = 39;
+    public const DEFAULT_COLOR = 39;
     public const BLACK = 30;
     public const RED = 31;
     public const GREEN = 32;

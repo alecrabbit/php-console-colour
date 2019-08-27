@@ -23,7 +23,7 @@ interface Styles
     public const CROSSED_OUT = Effect::CROSSED_OUT;
     public const DOUBLE_UNDERLINE = Effect::DOUBLE_UNDERLINE;
 
-    public const DEFAULT = Color::DEFAULT;
+    public const DEFAULT_COLOR = Color::DEFAULT_COLOR;
     public const BLACK = Color::BLACK;
     public const RED = Color::RED;
     public const GREEN = Color::GREEN;
@@ -42,7 +42,7 @@ interface Styles
     public const LIGHT_CYAN = Color::LIGHT_CYAN;
     public const WHITE = Color::WHITE;
 
-    public const BG_DEFAULT = BG::DEFAULT;
+    public const BG_DEFAULT = BG::DEFAULT_BG;
     public const BG_BLACK = BG::BLACK;
     public const BG_RED = BG::RED;
     public const BG_GREEN = BG::GREEN;
@@ -84,7 +84,7 @@ interface Styles
             self::MAGENTA => '35',
             self::CYAN => '36',
             self::LIGHT_GRAY => '37',
-            self::DEFAULT => '39',
+            self::DEFAULT_COLOR => '39',
 
             self::DARK_GRAY => '90',
             self::LIGHT_RED => '91',
@@ -128,7 +128,7 @@ interface Styles
             self::CONCEALED => 'CONCEALED',
             self::CROSSED_OUT => 'CROSSED_OUT',
             self::DOUBLE_UNDERLINE => 'DOUBLE_UNDERLINE',
-            self::DEFAULT => 'DEFAULT',
+            self::DEFAULT_COLOR => 'DEFAULT',
             self::BLACK => 'BLACK',
             self::RED => 'RED',
             self::GREEN => 'GREEN',

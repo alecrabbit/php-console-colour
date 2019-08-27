@@ -7,6 +7,9 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 
+<a name="0.5.5"></a>
+## [0.5.5] - 2019-08-15
+
 <a name="0.5.4"></a>
 ## [0.5.4] - 2019-06-10
 ### Changed
@@ -100,7 +103,8 @@ All notable changes to this project will be documented in this file.
 <a name="0.0.1"></a>
 ## 0.0.1 - 2018-10-16
 
-[Unreleased]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.4...HEAD
+[Unreleased]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.5...HEAD
+[0.5.5]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.4...0.5.5
 [0.5.4]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.3...0.5.4
 [0.5.3]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.2...0.5.3
 [0.5.2]: https://github.com/alecrabbit/php-console-colour.git/compare/0.5.1...0.5.2

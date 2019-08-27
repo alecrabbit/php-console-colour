@@ -4,5 +4,6 @@
 /tests/tmp/
 /tests/report.html
 /.dockerignore
-/.phpunit.result.cache
+/*.cache
 /composer.lock
+/build/
