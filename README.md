@@ -67,9 +67,16 @@ $colorized = $themes->darkItalic('This text is dark and italic.')
  
  // TODO 
 
-### Examples
- * [using_themes_class.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/using_themes_class.php)
+### XTerm 256 Colors Table
+
+ * [xterm-colors.php](examples/xterm-colors.php)
  
+![example](docs/images/xterm-colors.png)
+
+### Examples
+
+* [using_themes_class.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/using_themes_class.php)
+
 ![example](https://raw.githubusercontent.com/alecrabbit/php-console-colour/master/docs/images/example_using_themes_class_output.png)
 
 * [colour.php](https://github.com/alecrabbit/php-console-colour/blob/master/examples/colour.php)
