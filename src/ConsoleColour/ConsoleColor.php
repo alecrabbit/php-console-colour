@@ -2,6 +2,7 @@
 
 namespace AlecRabbit\ConsoleColour;
 
+use AlecRabbit\Cli\Tools\Core\TerminalStatic;
 use AlecRabbit\Cli\Tools\Terminal;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
@@ -40,6 +41,20 @@ class ConsoleColor implements ConsoleColorInterface
         $terminal = new Terminal();
         $this->supported = $force || ($terminal->color() >= COLOR_TERMINAL);
         $this->are256ColorsSupported = $this->supported && ($force256Colors || $terminal->color() >= COLOR256_TERMINAL);
+    }
+
+    /**
+     * @param null|bool|resource $stream
+     * @param null|bool $force
+     * @param bool $force256Colors
+     */
+    public function setStream($stream = null, ?bool $force = null, bool $force256Colors = false): void
+    {
+        if (\is_resource($stream)) {
+            $colorSupport = TerminalStatic::colorSupport($stream);
+            $this->supported = $force || ($colorSupport >= COLOR_TERMINAL);
+            $this->are256ColorsSupported = $this->supported && ($force256Colors || $colorSupport >= COLOR256_TERMINAL);
+        }
     }
 
     /** {@inheritdoc} */
@@ -163,7 +178,7 @@ class ConsoleColor implements ConsoleColorInterface
     }
 
     /**
-     * @param int|string|array $styles
+     * @param mixed $styles
      * @return array
      */
     protected function refineStyles($styles): array
@@ -235,7 +250,7 @@ class ConsoleColor implements ConsoleColorInterface
         if (\array_key_exists($name, $this->themes) && false === $override) {
             throw new \RuntimeException('Theme [' . $name . '] is already set.');
         }
-        
+
         $styles = $this->refineStyles($styles);
 
         foreach ($styles as $style) {

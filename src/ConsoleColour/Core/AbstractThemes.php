@@ -4,6 +4,7 @@ namespace AlecRabbit\ConsoleColour\Core;
 
 use AlecRabbit\ConsoleColour\ConsoleColor;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
+use Symfony\Component\Console\Exception\InvalidArgumentException;
 
 abstract class AbstractThemes
 {
@@ -19,11 +20,13 @@ abstract class AbstractThemes
     /**
      * Themed constructor.
      * @param null|bool $colorize
+     * @param null|bool|resource $stream
      * @throws InvalidStyleException
      */
-    public function __construct(?bool $colorize = null)
+    public function __construct(?bool $colorize = null, $stream = null)
     {
         $this->color = new ConsoleColor();
+        $this->color->setStream($stream);
         $this->doColorize = $this->refineColorize($colorize);
         $this->setThemes();
     }
