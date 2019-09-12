@@ -11,7 +11,7 @@ services:
     - /etc/passwd:/etc/passwd:ro
     - /etc/group:/etc/group:ro
     - ./:/var/www
-    - ./../../libraries:/var/packages
     environment:
-      DOCKER_TERM: "$TERM" # passed host $TERM variable
+      DOCKER_TERM: "${TERM:-}"      # pass host $TERM variable
+      COLORTERM: "${COLORTERM:-}"   # pass host $COLORTERM variable
     command: keep-alive.sh
