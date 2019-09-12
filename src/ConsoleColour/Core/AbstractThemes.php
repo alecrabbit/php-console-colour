@@ -36,8 +36,8 @@ abstract class AbstractThemes
      */
     protected function refineEnabled(?bool $colorize): bool
     {
-        if ($supported = $this->color->isSupported()) {
-            return $colorize ?? $supported;
+        if ($applicable = $this->color->isApplicable()) {
+            return $colorize ?? $applicable;
         }
         // @codeCoverageIgnoreStart
         return false;
