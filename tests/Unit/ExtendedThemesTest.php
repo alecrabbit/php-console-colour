@@ -44,6 +44,7 @@ class ExtendedThemesTest extends TestCase
     /** @test */
     public function multi(): void
     {
+        dump($this->colorized);
         $text = 'SmPlTxT';
         $this->assertInstanceOf(ExtendedThemes::class, $this->colorized);
         $this->assertInstanceOf(ExtendedThemes::class, $this->nonColorized);
