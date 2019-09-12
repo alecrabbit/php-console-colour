@@ -6,6 +6,7 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
+use const AlecRabbit\COLOR256_TERMINAL;
 use const AlecRabbit\ESC;
 
 class ExtendedThemesTest extends TestCase
@@ -61,8 +62,8 @@ class ExtendedThemesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new ExtendedThemes(null, null, true);
-        $this->nonColorized = new ExtendedThemes(null, null, false);
+        $this->colorized = new ExtendedThemes(null, COLOR256_TERMINAL, true);
+        $this->nonColorized = new ExtendedThemes(null, COLOR256_TERMINAL, false);
     }
 
 }
