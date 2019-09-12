@@ -3,6 +3,7 @@
 namespace AlecRabbit\ConsoleColour;
 
 use AlecRabbit\Cli\Tools\Core\TerminalStatic;
+use AlecRabbit\Cli\Tools\Stream;
 use AlecRabbit\Cli\Tools\Terminal;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
@@ -10,51 +11,41 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use const AlecRabbit\COLOR256_TERMINAL;
 use const AlecRabbit\COLOR_TERMINAL;
 use const AlecRabbit\ESC;
+use const AlecRabbit\NO_COLOR_TERMINAL;
 
 class ConsoleColor implements ConsoleColorInterface
 {
     /** @var bool */
     protected $supported;
-
     /** @var bool */
     protected $forced;
-
     /** @var array */
     protected $themes = [];
-
-    /** @var bool */
-    protected $are256ColorsSupported;
+    /** @var null|int */
+    protected $colorLevel;
 
     /**
      * ConsoleColor constructor.
-     * @param null|bool $force
-     * @param bool $force256Colors
+     * @param null|bool|resource $stream
+     * @param null|int $colorLevel
      */
-    public function __construct(?bool $force = null, bool $force256Colors = false)
+    public function __construct($stream = null, ?int $colorLevel = null)
     {
-        $this->setColorSupport($force ?? false, $force256Colors);
-        $this->forced = $force ?? false;
-    }
+        $this->colorLevel = $this->refineColorLevel($colorLevel);
 
-    protected function setColorSupport(bool $force, bool $force256Colors): void
-    {
-        $terminal = new Terminal();
-        $this->supported = $force || ($terminal->color() >= COLOR_TERMINAL);
-        $this->are256ColorsSupported = $this->supported && ($force256Colors || $terminal->color() >= COLOR256_TERMINAL);
+        $colorSupport = Stream::hasColorSupport($stream);
+        $this->supported = $colorSupport >= $this->colorLevel;
+        $this->forced = $colorSupport < $this->colorLevel;
     }
 
     /**
-     * @param null|bool|resource $stream
-     * @param null|bool $force
-     * @param bool $force256Colors
+     * @param null|int $colorLevel
+     * @return int
      */
-    public function setStream($stream = null, ?bool $force = null, bool $force256Colors = false): void
+    protected function refineColorLevel(?int $colorLevel): int
     {
-        if (\is_resource($stream)) {
-            $colorSupport = TerminalStatic::colorSupport($stream);
-            $this->supported = $force || ($colorSupport >= COLOR_TERMINAL);
-            $this->are256ColorsSupported = $this->supported && ($force256Colors || $colorSupport >= COLOR256_TERMINAL);
-        }
+        $colorLevel = $colorLevel ?? NO_COLOR_TERMINAL;
+        return $colorLevel;
     }
 
     /** {@inheritdoc} */

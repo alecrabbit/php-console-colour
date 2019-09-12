@@ -15,7 +15,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.2",
-    "alecrabbit/php-cli-tools": "^0.2"
+    "alecrabbit/php-cli-tools": "dev-master"
   },
   "require-dev": {
     "alecrabbit/php-helpers": "^0.5 || ^0.6",
