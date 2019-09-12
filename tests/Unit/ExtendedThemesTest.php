@@ -61,8 +61,8 @@ class ExtendedThemesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new ExtendedThemes(true);
-        $this->nonColorized = new ExtendedThemes(false);
+        $this->colorized = new ExtendedThemes(null, null, true);
+        $this->nonColorized = new ExtendedThemes(null, null, false);
     }
 
 }

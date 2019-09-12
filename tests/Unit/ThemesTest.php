@@ -101,8 +101,8 @@ class ThemesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new Themes(true);
-        $this->nonColorized = new Themes(false);
+        $this->colorized = new Themes(null, null, true);
+        $this->nonColorized = new Themes(null, null, false);
     }
 
 }

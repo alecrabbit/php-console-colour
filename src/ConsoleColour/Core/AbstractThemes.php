@@ -12,23 +12,26 @@ abstract class AbstractThemes
     protected $definedThemes;
 
     /** @var bool */
-    protected $doColorize = false;
+    protected $enabled = false;
 
     /** @var ConsoleColor */
     protected $color;
+    protected $colorLevel;
 
     /**
      * Themed constructor.
-     * @param null|bool $colorize
      * @param null|bool|resource $stream
+     * @param $colorLevel
+     * @param null|bool $colorize
      * @throws InvalidStyleException
      */
-    public function __construct(?bool $colorize = null, $stream = null)
+    public function __construct($stream = null, ?int $colorLevel = null, ?bool $colorize = null)
     {
         $this->color = new ConsoleColor();
         $this->color->setStream($stream);
-        $this->doColorize = $this->refineColorize($colorize);
+        $this->enabled = $this->refineColorize($colorize);
         $this->setThemes();
+        $this->colorLevel = $colorLevel;
     }
 
     /**
@@ -122,6 +125,6 @@ abstract class AbstractThemes
     protected function apply($style, $text): string
     {
         return
-            $this->doColorize ? $this->color->apply($style, $text) : $text;
+            $this->enabled ? $this->color->apply($style, $text) : $text;
     }
 }
