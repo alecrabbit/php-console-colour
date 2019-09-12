@@ -24,7 +24,7 @@ interface ConsoleColorInterface extends Styles
     /**
      * @return bool
      */
-    public function isSupported(): bool;
+    public function isApplicable(): bool;
 
     /**
      * @return bool

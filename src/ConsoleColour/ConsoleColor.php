@@ -10,8 +10,10 @@ use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use const AlecRabbit\COLOR256_TERMINAL;
 use const AlecRabbit\COLOR_TERMINAL;
+use const AlecRabbit\CSI;
 use const AlecRabbit\ESC;
 use const AlecRabbit\NO_COLOR_TERMINAL;
+use const AlecRabbit\TRUECOLOR_TERMINAL;
 
 class ConsoleColor implements ConsoleColorInterface
 {
@@ -31,11 +33,11 @@ class ConsoleColor implements ConsoleColorInterface
      */
     public function __construct($stream = null, ?int $colorLevel = null)
     {
-        $this->colorLevel = $this->refineColorLevel($colorLevel);
+        $colorLevel = $this->refineColorLevel($colorLevel);
 
-        $colorSupport = Stream::hasColorSupport($stream);
-        $this->supported = $colorSupport >= $this->colorLevel;
-        $this->forced = $colorSupport < $this->colorLevel;
+        $this->colorLevel = TerminalStatic::colorSupport($stream);
+        $this->supported = $this->colorLevel >= $colorLevel;
+        $this->forced = $this->colorLevel < $colorLevel;
     }
 
     /**
@@ -51,7 +53,7 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function apply($styles, $text): string
     {
-        if (!$this->isSupported()) {
+        if (!$this->isApplicable()) {
             return $text;
         }
 
@@ -68,11 +70,17 @@ class ConsoleColor implements ConsoleColorInterface
     }
 
     /** {@inheritdoc} */
-    public function isSupported(): bool
+    public function isApplicable(): bool
     {
-        return $this->supported;
+        return $this->supported || $this->forced;
     }
 
+//    /** {@inheritdoc} */
+//    public function isSupported(?int $colorLevel = null): bool
+//    {
+//        return $this->supported || $this->forced;
+//    }
+//
     /**
      * @param array $styles
      * @return array
@@ -140,7 +148,13 @@ class ConsoleColor implements ConsoleColorInterface
     /** {@inheritdoc} */
     public function are256ColorsSupported(): bool
     {
-        return $this->are256ColorsSupported;
+        return $this->colorLevel >= COLOR256_TERMINAL;
+    }
+
+    /** {@inheritdoc} */
+    public function isTrueColorSupported(): bool
+    {
+        return $this->colorLevel >= TRUECOLOR_TERMINAL;
     }
 
     /**
@@ -211,7 +225,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function escSequence(string $value): string
     {
         return
-            ESC . '[' . $value . 'm';
+            CSI . $value . 'm';
     }
 
     /** {@inheritdoc} */

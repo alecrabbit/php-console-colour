@@ -16,9 +16,6 @@ abstract class AbstractThemes
     /** @var ConsoleColor */
     protected $color;
 
-    /** @var null|int */
-    protected $colorLevel;
-
     /**
      * Themed constructor.
      * @param null|bool|resource $stream
@@ -30,8 +27,7 @@ abstract class AbstractThemes
     {
         $this->color = new ConsoleColor($stream, $colorLevel);
         $this->enabled = $this->refineEnabled($enabled);
-        $this->setThemes();
-        $this->colorLevel = $colorLevel;
+        $this->initializeThemes();
     }
 
     /**
@@ -40,7 +36,7 @@ abstract class AbstractThemes
      */
     protected function refineEnabled(?bool $colorize): bool
     {
-        if ($supported = $this->color->isSupported()) {
+        if ($supported = $this->color->isApplicable()) {
             return $colorize ?? $supported;
         }
         // @codeCoverageIgnoreStart
@@ -52,13 +48,25 @@ abstract class AbstractThemes
      * @param bool $override
      * @throws InvalidStyleException
      */
-    protected function setThemes(bool $override = false): void
+    protected function initializeThemes(bool $override = false): void
     {
         foreach ($this->getThemes() as $name => $styles) {
             $this->color->addTheme($name, $styles, $override);
         }
     }
 
+//    /**
+//     * @param array $themes
+//     * @param bool $override
+//     * @throws InvalidStyleException
+//     */
+//    public function setThemes(array $themes, bool $override = true): void {
+//        foreach ($themes as $name => $styles) {
+//            $this->color->addTheme($name, $styles, $override);
+//        }
+//        $this->definedThemes = $themes;
+//    }
+//
     /**
      * @return array
      *

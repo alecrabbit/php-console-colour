@@ -26,8 +26,8 @@ try {
 function perform(ConsoleColor $colour): void
 {
     echo '[' . get_class($colour) . ']' . PHP_EOL;
-    echo 'Colors are supported: ' . ($colour->isSupported() ? YES : NO) . PHP_EOL;
-    if ($colour->isSupported()) {
+    echo 'Colors are supported: ' . ($colour->isApplicable() ? YES : NO) . PHP_EOL;
+    if ($colour->isApplicable()) {
         echo 'Regular colors...' . PHP_EOL;
         echo shift() . 'ANSI' . PHP_EOL;
         echo shift() . 'Code' . PHP_EOL;
@@ -43,12 +43,20 @@ function perform(ConsoleColor $colour): void
         }
 
         echo PHP_EOL;
-        echo '256 colors are supported: ' . ($colour->are256ColorsSupported() ? YES : NO) . PHP_EOL;
-        if ($colour->are256ColorsSupported()) {
+        $are256ColorsSupported = $colour->are256ColorsSupported();
+        echo '256 colors are supported: ' . ($are256ColorsSupported ? YES : NO) . PHP_EOL;
+        if ($are256ColorsSupported) {
             echo 'Foreground colors:' . PHP_EOL;
             display($colour);
             echo PHP_EOL . 'Background colors:' . PHP_EOL;
             display($colour, 'bg_');
+            echo PHP_EOL;
+        }
+        $isTrueColorSupported = $colour->isTrueColorSupported();
+        echo 'Truecolor supported: ' . ($isTrueColorSupported ? YES : NO) . PHP_EOL;
+        if ($isTrueColorSupported) {
+            // TODO
+            echo '**** TODO Sample output ****' . PHP_EOL;
             echo PHP_EOL;
         }
     }
