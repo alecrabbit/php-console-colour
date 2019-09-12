@@ -2,9 +2,7 @@
 
 namespace AlecRabbit\ConsoleColour;
 
-use AlecRabbit\Cli\Tools\Core\TerminalStatic;
-use AlecRabbit\Cli\Tools\Stream;
-use AlecRabbit\Cli\Tools\Terminal;
+use AlecRabbit\Cli\Tools\Core\Terminal;
 use AlecRabbit\ConsoleColour\Contracts\Styles;
 use AlecRabbit\ConsoleColour\Core\Contracts\ConsoleColorInterface;
 use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
@@ -35,7 +33,7 @@ class ConsoleColor implements ConsoleColorInterface
     {
         $colorLevel = $this->refineColorLevel($colorLevel);
 
-        $this->colorLevel = TerminalStatic::colorSupport($stream);
+        $this->colorLevel = Terminal::colorSupport($stream);
         $this->supported = $this->colorLevel >= $colorLevel;
         $this->forced = $this->colorLevel < $colorLevel;
     }
