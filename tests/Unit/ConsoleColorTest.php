@@ -23,12 +23,17 @@ class ConsoleColorTest extends TestCase
         $stream = STDOUT;
         $colorSupport = Terminal::colorSupport($stream);
         $c = new ConsoleColor($stream, $colorLevel);
-        $this->assertEquals($supported, $c->isSupported());
+        $this->assertEquals($supported, $c->isApplicable());
         $this->assertSame($colorLevel, $c->getColorLevel());
-        if ($colorSupport >= $colorLevel) {
+        if (NO_COLOR_TERMINAL === $colorLevel) {
             $this->assertFalse($c->isForced());
+            $this->assertFalse($c->isSupported());
+        } elseif ($colorSupport >= $colorLevel) {
+            $this->assertFalse($c->isForced());
+            $this->assertTrue($c->isSupported());
         } else {
             $this->assertTrue($c->isForced());
+            $this->assertFalse($c->isSupported());
         }
     }
 
