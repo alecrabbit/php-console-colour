@@ -52,10 +52,6 @@ class ExtendedThemesTest extends TestCase
         foreach (self::STYLES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
-            $enabled = getValue($this->colorized, 'enabled');
-            dump($enabled);
-//            $color = getValue($this->colorized, 'color');
-//            dump(callMethod($color, 'isApplicable'));
             $this->assertEquals(
                 Helper::stripEscape(self::STYLES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
             );
