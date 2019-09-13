@@ -41,6 +41,7 @@ class ConsoleColor implements ConsoleColorInterface
     protected function refineColorLevel($stream, ?int $colorLevel): int
     {
         $colorSupport = Terminal::colorSupport($stream);
+//        $colorSupport = NO_COLOR_TERMINAL;
         if (null === $colorLevel) {
             $this->supported = $colorSupport >= COLOR_TERMINAL;
             $this->forced = false;

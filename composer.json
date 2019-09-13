@@ -31,7 +31,10 @@
   "autoload-dev": {
     "psr-4": {
       "AlecRabbit\\Tests\\": "tests"
-    }
+    },
+    "files": [
+      "src/bootstrap.php"
+    ]
   },
   "minimum-stability": "alpha"
 }

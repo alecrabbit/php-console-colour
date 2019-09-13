@@ -6,6 +6,8 @@ use AlecRabbit\ConsoleColour\Exception\InvalidStyleException;
 use AlecRabbit\Tests\ExtendedThemes;
 use AlecRabbit\Tests\Helper;
 use PHPUnit\Framework\TestCase;
+use function AlecRabbit\Helpers\callMethod;
+use function AlecRabbit\Helpers\getValue;
 use const AlecRabbit\COLOR256_TERMINAL;
 use const AlecRabbit\ESC;
 
@@ -44,13 +46,16 @@ class ExtendedThemesTest extends TestCase
     /** @test */
     public function multi(): void
     {
-        dump($this->colorized);
         $text = 'SmPlTxT';
         $this->assertInstanceOf(ExtendedThemes::class, $this->colorized);
         $this->assertInstanceOf(ExtendedThemes::class, $this->nonColorized);
         foreach (self::STYLES as $methodName => $theme) {
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
+            $enabled = getValue($this->colorized, 'enabled');
+            dump($enabled);
+//            $color = getValue($this->colorized, 'color');
+//            dump(callMethod($color, 'isApplicable'));
             $this->assertEquals(
                 Helper::stripEscape(self::STYLES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
             );
@@ -63,7 +68,7 @@ class ExtendedThemesTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->colorized = new ExtendedThemes(null, COLOR256_TERMINAL, true);
+        $this->colorized =    new ExtendedThemes(null, COLOR256_TERMINAL, true);
         $this->nonColorized = new ExtendedThemes(null, COLOR256_TERMINAL, false);
     }
 
