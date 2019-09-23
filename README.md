@@ -1,4 +1,4 @@
-# PHP Console Colour
+# 🖍️ PHP Console Colour
 
 [![PHP Version](https://img.shields.io/packagist/php-v/alecrabbit/php-console-colour.svg)](https://php.net/)
 [![Build Status](https://travis-ci.com/alecrabbit/php-console-colour.svg?branch=master)](https://travis-ci.com/alecrabbit/php-console-colour)
