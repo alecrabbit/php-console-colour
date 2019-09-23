@@ -14,11 +14,13 @@ phpunit.xml export-ignore
 psalm.xml export-ignore
 /tests export-ignore
 /vendor export-ignore
+.appveyor.yml export-ignore
 /.chglog export-ignore
 /.eval export-ignore
 /.git export-ignore
 .gitattributes export-ignore
 .gitattributes.keep export-ignore
+/.github export-ignore
 .gitignore export-ignore
 /.idea export-ignore
 .phpunit.result.cache export-ignore
