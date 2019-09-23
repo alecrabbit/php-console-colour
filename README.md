@@ -14,8 +14,6 @@
 <!--[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/alecrabbit/php-console-colour.svg)](http://isitmaintained.com/project/alecrabbit/php-console-colour "Average time to resolve an issue")-->
 <!--[![Percentage of issues still open](http://isitmaintained.com/badge/open/alecrabbit/php-console-colour.svg)](http://isitmaintained.com/project/alecrabbit/php-console-colour "Percentage of issues still open")-->
 
-inspired by [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Console-Color)
-
 ### Installation 
 ```bash
 composer require alecrabbit/php-console-colour
@@ -90,3 +88,4 @@ $colorized = $themes->darkItalic('This text is dark and italic.')
 - [xterm-256-color Chart](https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg)
 - [256 COLORS - CHEAT SHEET](https://jonasjacek.github.io/colors/)
 - [XVilka/TrueColour.md](https://gist.github.com/XVilka/8346728)
+- inspired by [JakubOnderka/PHP-Console-Color](https://github.com/JakubOnderka/PHP-Console-Color)
