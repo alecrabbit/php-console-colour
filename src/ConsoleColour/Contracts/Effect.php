@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace AlecRabbit\ConsoleColour\Contracts;
 
@@ -16,4 +17,18 @@ interface Effect
     public const CROSSED_OUT = 9;
 
     public const DOUBLE_UNDERLINE = 21;
+
+    public const ALLOWED = [
+        self::NONE,
+        self::BOLD,
+        self::DARK,
+        self::ITALIC,
+        self::UNDERLINE,
+        self::BLINK,
+        self::BLINK_FAST,
+        self::REVERSE,
+        self::CONCEALED,
+        self::CROSSED_OUT,
+        self::DOUBLE_UNDERLINE,
+    ];
 }
