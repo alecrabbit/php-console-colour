@@ -40,8 +40,8 @@ class MyThemes extends Themes
     }
 }
 
-$base = new Themes(, null);
-$my = new MyThemes(, null);
+$base = new Themes();
+$my = new MyThemes();
 echoText($base->red('This text is red.'));
 echoText($base->comment('This is comment.'));
 echoText($base->underlinedBold('This text is underlined and bold.'));
