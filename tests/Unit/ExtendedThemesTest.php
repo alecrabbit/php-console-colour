@@ -53,7 +53,7 @@ class ExtendedThemesTest extends TestCase
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
-                Helper::stripEscape(self::STYLES[$methodName]) . $text . '\033[0m', Helper::stripEscape($result)
+                Helper::replaceEscape(self::STYLES[$methodName]) . $text . '\033[0m', Helper::replaceEscape($result)
             );
         }
     }

@@ -88,8 +88,8 @@ class ThemesTest extends TestCase
         foreach (self::THEMES as $methodName => $theme) {
             $result = $this->colorized->$methodName($text);
             $this->assertEquals(
-                Helper::stripEscape(self::THEMES[$methodName]) . $text . '\033[0m',
-                Helper::stripEscape($result),
+                Helper::replaceEscape(self::THEMES[$methodName]) . $text . '\033[0m',
+                Helper::replaceEscape($result),
                 $methodName
             );
             $this->assertEquals($text, $this->nonColorized->$methodName($text));
