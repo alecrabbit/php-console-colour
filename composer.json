@@ -25,7 +25,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AlecRabbit\\": "src"
+      "AlecRabbit\\ConsoleColour\\": "src\\ConsoleColour"
     }
   },
   "autoload-dev": {
