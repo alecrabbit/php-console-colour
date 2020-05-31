@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace AlecRabbit\Console\Color;
 
-final class Closest implements ClosestColor256Interface
+final class ClosestColor256 implements ClosestColor256Interface
 {
     private $colors;
 
     public function __construct()
     {
-        $this->colors = $this->parse(Core\Contracts\Tables::COLORS);
+        $this->colors = Core\Contracts\Tables::COLORS_8_TO_24_PARSED;
+//        $this->colors = $this->parse(Core\Contracts\Tables::COLORS_8_TO_24);
     }
 
     private function parse(array $colors): array
