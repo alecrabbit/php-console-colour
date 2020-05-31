@@ -15,7 +15,7 @@ final class Tables
 // Blue                  04      34      44       000080
 // Magenta               05      35      45       800080
 // Cyan                  06      36      46       008080
-// White                 07      37      47       c0c0c0  
+// White                 07      37      47       c0c0c0
 // Bright Black          08      90      100      808080
 // Bright Red            09      91      101      ff0000
 // Bright Green          10      92      102      00ff00
