@@ -4,17 +4,23 @@ declare(strict_types=1);
 
 use AlecRabbit\Console\Color\Color;
 use AlecRabbit\Console\Style\Style;
+use AlecRabbit\ConsoleColour\Contracts\Effect;
 use AlecRabbit\Tests\Helper;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/bootstrap.php';
 
 $color = new Color();
 
-$style = new Style(234, null, [3]);
+$effects = [
+    Effect::ITALIC,
+    Effect::BLINK,
+    Effect::CROSSED_OUT
+];
+$style = new Style(31, null, $effects);
 
 $result = $color->apply($style, 'TeXt');
 
-dump(Helper::stripEscape($result));
+dump(Helper::replaceEscape($result));
 echo $result;
 
 echo PHP_EOL;

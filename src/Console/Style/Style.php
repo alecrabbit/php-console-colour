@@ -6,18 +6,22 @@ namespace AlecRabbit\Console\Style;
 
 use AlecRabbit\Console\Color\Core\MultiColor;
 use AlecRabbit\Console\Color\Core\MultiColorFactory as Factory;
+use AlecRabbit\Console\Color\Core\TerminalColor;
 use AlecRabbit\ConsoleColour\Contracts\Effect;
+
+use const AlecRabbit\CSI;
 
 final class Style implements StyleInterface
 {
     public const EFFECT_IS_NOT_ALLOWED = 'Effect "%s" is not allowed';
+    public const RESET = '0';
 
     /** @var array<int> */
     private $effects = [];
     /** @var null|MultiColor */
-    private $background;
+    private $bgColor;
     /** @var null|MultiColor */
-    private $foreground;
+    private $fgColor;
 
     /**
      * Style constructor.
@@ -38,7 +42,7 @@ final class Style implements StyleInterface
      */
     private function setForegroundColor($color): self
     {
-        $this->foreground =
+        $this->fgColor =
             null === $color
                 ? null
                 : Factory::create($color);
@@ -51,7 +55,7 @@ final class Style implements StyleInterface
      */
     private function setBackgroundColor($color): self
     {
-        $this->background =
+        $this->bgColor =
             null === $color
                 ? null
                 : Factory::create($color);
@@ -97,8 +101,43 @@ final class Style implements StyleInterface
         $this->effects = array_unique($this->effects);
     }
 
-    public function render(string $string, int $terminalColor): string
+    public function render(string $string, TerminalColor $terminalColor): string
     {
-        return $string;
+        $effects = $this->escSequence(implode(';', $this->effects));
+        $bgColor =
+            $this->escSequence(
+                implode(
+                    ';',
+                    $this->bgColor instanceof MultiColor
+                        ? $this->bgColor->getSequence($terminalColor)
+                        : []
+                )
+            );
+        $fgColor =
+            $this->escSequence(
+                implode(
+                    ';',
+                    $this->fgColor instanceof MultiColor
+                        ? $this->fgColor->getSequence($terminalColor)
+                        : []
+                )
+            );
+        return
+            $effects
+            . $bgColor
+            . $fgColor
+            . $string
+            . $this->escSequence(self::RESET);
     }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    protected function escSequence(string $value): string
+    {
+        return
+            CSI . $value . 'm';
+    }
+
 }
