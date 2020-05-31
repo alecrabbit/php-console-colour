@@ -5,23 +5,24 @@ declare(strict_types=1);
 namespace AlecRabbit\Console\Style;
 
 use AlecRabbit\Console\Color\Core\MultiColor;
-use AlecRabbit\Console\Color\Core\MultiColorFactory as Factory;
-use AlecRabbit\Console\Color\Core\TerminalColor;
 use AlecRabbit\ConsoleColour\Contracts\Effect;
 
+use const AlecRabbit\COLOR256_TERMINAL;
+use const AlecRabbit\COLOR_TERMINAL;
 use const AlecRabbit\CSI;
+use const AlecRabbit\TRUECOLOR_TERMINAL;
 
 final class Style implements StyleInterface
 {
     public const EFFECT_IS_NOT_ALLOWED = 'Effect "%s" is not allowed';
     public const RESET = '0';
 
-    /** @var array<int> */
-    private $effects = [];
-    /** @var null|MultiColor */
-    private $bgColor;
-    /** @var null|MultiColor */
-    private $fgColor;
+    /** @var string */
+    private $truecolorTemplate;
+    /** @var string */
+    private $color256Template;
+    /** @var string */
+    private $color16Template;
 
     /**
      * Style constructor.
@@ -31,36 +32,42 @@ final class Style implements StyleInterface
      */
     public function __construct($foreground, $background, array $effects)
     {
-        $this->setForegroundColor($foreground);
-        $this->setBackgroundColor($background);
-        $this->setEffects($effects);
+        $this->prepareTemplates($foreground, $background, $effects);
     }
 
-    /**
-     * @param mixed $color
-     * @return self
-     */
-    private function setForegroundColor($color): self
+    private function prepareTemplates($f, $b, array $e): void
     {
-        $this->fgColor =
-            null === $color
-                ? null
-                : Factory::create($color);
-        return $this;
+        $this->color16Template = ColorTemplate::prepare($f, $b, $e, COLOR_TERMINAL);
+        $this->color256Template = ColorTemplate::prepare($f, $b, $e, COLOR256_TERMINAL);
+        $this->truecolorTemplate = ColorTemplate::prepare($f, $b, $e, TRUECOLOR_TERMINAL);
     }
 
-    /**
-     * @param mixed $color
-     * @return self
-     */
-    private function setBackgroundColor($color): self
-    {
-        $this->bgColor =
-            null === $color
-                ? null
-                : Factory::create($color);
-        return $this;
-    }
+
+//    /**
+//     * @param mixed $color
+//     * @return self
+//     */
+//    private function setForegroundColor($color): self
+//    {
+//        $this->fgColor =
+//            null === $color
+//                ? null
+//                : Factory::create($color);
+//        return $this;
+//    }
+//
+//    /**
+//     * @param mixed $color
+//     * @return self
+//     */
+//    private function setBackgroundColor($color): self
+//    {
+//        $this->bgColor =
+//            null === $color
+//                ? null
+//                : Factory::create($color);
+//        return $this;
+//    }
 
     /**
      * @param array<int> $effects
@@ -84,24 +91,13 @@ final class Style implements StyleInterface
         $this->effects[] = $effect;
     }
 
-    /**
-     * @param int $effect
-     */
-    private function assertEffect(int $effect): void
-    {
-        if (!\in_array($effect, Effect::ALLOWED)) {
-            throw new \InvalidArgumentException(
-                sprintf(self::EFFECT_IS_NOT_ALLOWED, $effect)
-            );
-        }
-    }
 
     private function uniqueEffects(): void
     {
         $this->effects = array_unique($this->effects);
     }
 
-    public function render(string $string, TerminalColor $terminalColor): string
+    public function render(string $string, int $level): string
     {
         $effects = $this->escSequence(implode(';', $this->effects));
         $bgColor =
@@ -130,14 +126,20 @@ final class Style implements StyleInterface
             . $this->escSequence(self::RESET);
     }
 
-    /**
-     * @param string $value
-     * @return string
-     */
-    protected function escSequence(string $value): string
+    public function templateFor(int $colorLevel): string
     {
-        return
-            CSI . $value . 'm';
+        switch($colorLevel) {
+            case TRUECOLOR_TERMINAL:
+                return $this->truecolorTemplate;
+                break;
+            case COLOR256_TERMINAL:
+                return $this->color256Template;
+                break;
+            case COLOR_TERMINAL:
+                return $this->color16Template;
+                break;
+        }
+        return '%s';
     }
 
 }

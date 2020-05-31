@@ -6,6 +6,8 @@ namespace AlecRabbit\Console\Color\Core\Contracts;
 
 final class Tables
 {
+    // https://en.wikipedia.org/wiki/X11_color_names#Clashes_between_web_and_X11_colors_in_the_CSS_color_scheme
+    // https://www.instructables.com/id/Beautiful-Arduino-Binary-Clock/
 // TODO convert table for 16colors to 256colors and truecolor
 //                       8bit    4bit    4bit     24bit
 // Black                 00      30      40       000000
@@ -24,6 +26,60 @@ final class Tables
 // Bright Magenta        13      95      105      ff00ff
 // Bright Cyan           14      96      106      00ffff
 // Bright White          15      97      107      ffffff
+
+//0	    Black (SYSTEM)	#000000	rgb(0,0,0)	hsl(0,0%,0%)
+//1	    Maroon (SYSTEM)	#800000	rgb(128,0,0)	hsl(0,100%,25%)
+//2	    Green (SYSTEM)	#008000	rgb(0,128,0)	hsl(120,100%,25%)
+//3	    Olive (SYSTEM)	#808000	rgb(128,128,0)	hsl(60,100%,25%)
+//4	    Navy (SYSTEM)	#000080	rgb(0,0,128)	hsl(240,100%,25%)
+//5	    Purple (SYSTEM)	#800080	rgb(128,0,128)	hsl(300,100%,25%)
+//6	    Teal (SYSTEM)	#008080	rgb(0,128,128)	hsl(180,100%,25%)
+//7	    Silver (SYSTEM)	#c0c0c0	rgb(192,192,192)	hsl(0,0%,75%)
+//8	    Grey (SYSTEM)	#808080	rgb(128,128,128)	hsl(0,0%,50%)
+//9	    Red (SYSTEM)	#ff0000	rgb(255,0,0)	hsl(0,100%,50%)
+//10	Lime (SYSTEM)	#00ff00	rgb(0,255,0)	hsl(120,100%,50%)
+//11	Yellow (SYSTEM)	#ffff00	rgb(255,255,0)	hsl(60,100%,50%)
+//12	Blue (SYSTEM)	#0000ff	rgb(0,0,255)	hsl(240,100%,50%)
+//13	Fuchsia (SYSTEM)	#ff00ff	rgb(255,0,255)	hsl(300,100%,50%)
+//14	Aqua (SYSTEM)	#00ffff	rgb(0,255,255)	hsl(180,100%,50%)
+//15	White (SYSTEM)	#ffffff	rgb(255,255,255)	hsl(0,0%,100%)
+
+
+    public const COLORS = [
+        // 8bit, fg4bit, bg4bit, truecolor
+        'black' =>
+            [0, 30, 40, '000000'],
+        'red' =>
+            [1, 31, 41, '800000'],
+        'green' =>
+            [2, 32, 42, '008000'],
+        'yellow' =>
+            [3, 33, 43, '808000'],
+        'blue' =>
+            [4, 34, 44, '000080'],
+        'magenta' =>
+            [5, 35, 45, '800080'],
+        'cyan' =>
+            [6, 36, 46, '008080'],
+        'white' =>
+            [7, 37, 47, 'c0c0c0'],
+        'brightblack' =>
+            [8, 90, 100, '808080'],
+        'brightred' =>
+            [9, 91, 101, 'ff0000'],
+        'brightgreen' =>
+            [10, 92, 102, '00ff00'],
+        'brightyellow' =>
+            [11, 93, 103, 'ffff00'],
+        'brightblue' =>
+            [12, 94, 104, '0000ff'],
+        'brightmagenta' =>
+            [13, 95, 105, 'ff00ff'],
+        'brightcyan' =>
+            [14, 96, 106, '00ffff'],
+        'brightwhite' =>
+            [15, 97, 107, 'ffffff'],
+    ];
 
     public const COLORS_8_TO_24 = [
         0 => '000000',
